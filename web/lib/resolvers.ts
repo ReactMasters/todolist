@@ -1,5 +1,5 @@
 import { QueryResolvers, MutationResolvers } from './type-defs.graphqls'
-import { ResolverContext } from './apollo'
+import { ResolverContext } from './apollo/client'
 
 const userProfile = {
   id: String(1),
