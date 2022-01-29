@@ -1,5 +1,5 @@
 {
-  "private": true,
+  "name": "@todolist/web",
   "scripts": {
     "codegen": "graphql-let",
     "dev": "yarn codegen && next",
