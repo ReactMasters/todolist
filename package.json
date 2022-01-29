@@ -4,8 +4,8 @@
   "license": "MIT",
   "packageManager": "yarn@3.1.1",
   "workspaces": [
-    "@todolist/frontend",
-    "@todolist/backend",
+    "@todolist/web",
+    "@todolist/api",
     "@todolist/constant",
     "@todolist/locale"
   ]

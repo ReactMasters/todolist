@@ -1,6 +1,5 @@
 {
-  "name": "@todolist/frontend",
-  "private": true,
+  "name": "@todolist/web",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
