@@ -7,7 +7,9 @@
   "packageManager": "yarn@3.1.1",
   "workspaces": [
     "frontend",
-    "backend"
+    "backend",
+    "constant",
+    "locale"
   ],
   "dependencies": {
     "apollo-server": "^3.5.0",
