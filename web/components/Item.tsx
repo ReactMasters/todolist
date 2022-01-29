@@ -1,4 +1,5 @@
 import styles from './Item.module.scss'
+
 interface Props {
   name: string
 }

@@ -1,9 +1,10 @@
 import React, { useCallback, useState } from 'react'
 
 import { useReactiveVar } from '@apollo/client'
+import localStates from '@web/lib/apollo/localStates'
 
-import localStates from '../lib/apollo/localStates'
 import styles from './AddItem.module.scss'
+
 const AddItem = () => {
   const [name, setName] = useState('')
   const selectedItems = useReactiveVar(localStates.selectedItems)

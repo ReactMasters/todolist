@@ -1,6 +1,6 @@
 import { useReactiveVar } from '@apollo/client'
+import localStates from '@web/lib/apollo/localStates'
 
-import localStates from '../lib/apollo/localStates'
 import Item from './Item'
 
 const ItemList = () => {

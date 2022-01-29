@@ -1,4 +1,4 @@
-import { QueryResolvers, MutationResolvers } from './type-defs.graphqls'
+import { MutationResolvers, QueryResolvers } from '@web/__generated__/__types__'
 import { ResolverContext } from './client'
 
 const userProfile = {
