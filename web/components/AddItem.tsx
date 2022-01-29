@@ -3,7 +3,7 @@ import React, { useCallback, useState } from 'react'
 import { useReactiveVar } from '@apollo/client'
 
 import localStates from '../lib/apollo/localStates'
-
+import styles from './AddItem.module.scss'
 const AddItem = () => {
   const [name, setName] = useState('')
   const selectedItems = useReactiveVar(localStates.selectedItems)
@@ -17,9 +17,16 @@ const AddItem = () => {
     setName('')
   }
   return (
-    <form onSubmit={handleAddItem}>
-      <input type="text" value={name} onChange={handleNameChange} />
-      <button type="submit">추가</button>
+    <form className={styles.form} onSubmit={handleAddItem}>
+      <input
+        className={styles.input}
+        type="text"
+        value={name}
+        onChange={handleNameChange}
+      />
+      <button className={styles.button} type="submit">
+        추가
+      </button>
     </form>
   )
 }

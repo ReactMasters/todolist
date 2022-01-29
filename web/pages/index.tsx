@@ -2,12 +2,12 @@ import AddItem from '../components/AddItem'
 import ItemList from '../components/ItemList'
 import { initializeApollo } from '../lib/apollo/client'
 import { ViewerDocument } from '../lib/viewer.graphql'
-
+import styles from './index.module.scss'
 const Index = () => {
   return (
-    <div>
-      <ItemList />
+    <div className={styles.wrapper}>
       <AddItem />
+      <ItemList />
     </div>
   )
 }

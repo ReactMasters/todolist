@@ -3941,6 +3941,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react", "npm:17.0.2"],
             ["react-dom", "virtual:b08bcb538f392f6e10fbbc2dad655f996b233e45d8b35c296a51685b0f0b330830454d29e7facfa190e5261472574e8ee07b8beb7bade7f611f5fa4b64c523f6#npm:17.0.2"],
             ["react-test-renderer", "virtual:b08bcb538f392f6e10fbbc2dad655f996b233e45d8b35c296a51685b0f0b330830454d29e7facfa190e5261472574e8ee07b8beb7bade7f611f5fa4b64c523f6#npm:17.0.2"],
+            ["sass", "npm:1.49.0"],
             ["typescript", "patch:typescript@npm%3A4.5.5#~builtin<compat/typescript>::version=4.5.5&hash=493e53"],
             ["yaml-loader", "npm:0.6.0"]
           ],
@@ -8626,6 +8627,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["immutable", "npm:3.7.6"]
           ],
           "linkType": "HARD",
+        }],
+        ["npm:4.0.0", {
+          "packageLocation": "./.yarn/cache/immutable-npm-4.0.0-74b844f82e-4b5e9181e4.zip/node_modules/immutable/",
+          "packageDependencies": [
+            ["immutable", "npm:4.0.0"]
+          ],
+          "linkType": "HARD",
         }]
       ]],
       ["import-fresh", [
@@ -11046,7 +11054,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["postcss", "npm:8.4.5"],
             ["react", "npm:17.0.2"],
             ["react-dom", "virtual:b08bcb538f392f6e10fbbc2dad655f996b233e45d8b35c296a51685b0f0b330830454d29e7facfa190e5261472574e8ee07b8beb7bade7f611f5fa4b64c523f6#npm:17.0.2"],
-            ["sass", null],
+            ["sass", "npm:1.49.0"],
             ["styled-jsx", "virtual:0491606364a534a102fb19769005e59298ec3a5bdeaeede6fcec1d73183b9e7bfd8bf0e864a9c8216dac00156dd583bfef0f980c9ed9c0fb32b2ff861dc43fcc#npm:5.0.0"],
             ["use-subscription", "virtual:0491606364a534a102fb19769005e59298ec3a5bdeaeede6fcec1d73183b9e7bfd8bf0e864a9c8216dac00156dd583bfef0f980c9ed9c0fb32b2ff861dc43fcc#npm:1.5.1"]
           ],
@@ -12488,6 +12496,18 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["micromatch", "npm:3.1.10"],
             ["minimist", "npm:1.2.5"],
             ["walker", "npm:1.0.8"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["sass", [
+        ["npm:1.49.0", {
+          "packageLocation": "./.yarn/cache/sass-npm-1.49.0-5b92035d24-7cd6086859.zip/node_modules/sass/",
+          "packageDependencies": [
+            ["sass", "npm:1.49.0"],
+            ["chokidar", "npm:3.5.3"],
+            ["immutable", "npm:4.0.0"],
+            ["source-map-js", "npm:1.0.2"]
           ],
           "linkType": "HARD",
         }]
