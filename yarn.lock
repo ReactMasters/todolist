@@ -2290,9 +2290,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@todolist/api@workspace:api":
+"@todolist/api@workspace:packages/api":
   version: 0.0.0-use.local
-  resolution: "@todolist/api@workspace:api"
+  resolution: "@todolist/api@workspace:packages/api"
   dependencies:
     apollo-server: ^3.5.0
     graphql: ^16.1.0
@@ -2300,21 +2300,21 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@todolist/constant@workspace:constant":
+"@todolist/constant@workspace:packages/constant":
   version: 0.0.0-use.local
-  resolution: "@todolist/constant@workspace:constant"
+  resolution: "@todolist/constant@workspace:packages/constant"
   languageName: unknown
   linkType: soft
 
-"@todolist/locale@workspace:locale":
+"@todolist/locale@workspace:packages/locale":
   version: 0.0.0-use.local
-  resolution: "@todolist/locale@workspace:locale"
+  resolution: "@todolist/locale@workspace:packages/locale"
   languageName: unknown
   linkType: soft
 
-"@todolist/web@workspace:web":
+"@todolist/web@workspace:packages/web":
   version: 0.0.0-use.local
-  resolution: "@todolist/web@workspace:web"
+  resolution: "@todolist/web@workspace:packages/web"
   dependencies:
     "@apollo/client": ^3.1.3
     "@babel/runtime": ^7.16.7
