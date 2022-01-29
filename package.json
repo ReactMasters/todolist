@@ -1,19 +1,12 @@
 {
   "private": true,
   "name": "todolist",
-  "version": "1.0.0",
-  "main": "index.js",
   "license": "MIT",
   "packageManager": "yarn@3.1.1",
   "workspaces": [
-    "frontend",
-    "backend",
-    "constant",
-    "locale"
-  ],
-  "dependencies": {
-    "apollo-server": "^3.5.0",
-    "graphql": "^16.1.0",
-    "typescript": "^4.5.3"
-  }
+    "@todolist/frontend",
+    "@todolist/backend",
+    "@todolist/constant",
+    "@todolist/locale"
+  ]
 }

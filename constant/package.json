@@ -1,5 +1,5 @@
 {
-  "name": "@felabs/constant",
+  "name": "@todolist/constant",
   "packageManager": "yarn@3.1.1",
   "main": "index.ts"
 }
