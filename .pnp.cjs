@@ -55,6 +55,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {
           "packageLocation": "./",
           "packageDependencies": [
+            ["typescript", "patch:typescript@npm%3A4.5.5#~builtin<compat/typescript>::version=4.5.5&hash=493e53"]
           ],
           "linkType": "SOFT",
         }]
@@ -3940,7 +3941,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react", "npm:17.0.2"],
             ["react-dom", "virtual:b08bcb538f392f6e10fbbc2dad655f996b233e45d8b35c296a51685b0f0b330830454d29e7facfa190e5261472574e8ee07b8beb7bade7f611f5fa4b64c523f6#npm:17.0.2"],
             ["react-test-renderer", "virtual:b08bcb538f392f6e10fbbc2dad655f996b233e45d8b35c296a51685b0f0b330830454d29e7facfa190e5261472574e8ee07b8beb7bade7f611f5fa4b64c523f6#npm:17.0.2"],
-            ["typescript", "patch:typescript@npm%3A3.9.10#~builtin<compat/typescript>::version=3.9.10&hash=493e53"],
+            ["typescript", "patch:typescript@npm%3A4.5.5#~builtin<compat/typescript>::version=4.5.5&hash=493e53"],
             ["yaml-loader", "npm:0.6.0"]
           ],
           "linkType": "SOFT",
@@ -8156,7 +8157,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["schema-utils", "npm:3.0.0"],
             ["slash", "npm:3.0.0"],
             ["string-env-interpolation", "npm:1.0.1"],
-            ["typescript", "patch:typescript@npm%3A3.9.10#~builtin<compat/typescript>::version=3.9.10&hash=493e53"],
+            ["typescript", "patch:typescript@npm%3A4.5.5#~builtin<compat/typescript>::version=4.5.5&hash=493e53"],
             ["yaml", "npm:1.10.2"]
           ],
           "packagePeers": [
@@ -13506,7 +13507,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         ["workspace:.", {
           "packageLocation": "./",
           "packageDependencies": [
-            ["todolist", "workspace:."]
+            ["todolist", "workspace:."],
+            ["typescript", "patch:typescript@npm%3A4.5.5#~builtin<compat/typescript>::version=4.5.5&hash=493e53"]
           ],
           "linkType": "SOFT",
         }]
@@ -13705,13 +13707,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["typescript", [
-        ["patch:typescript@npm%3A3.9.10#~builtin<compat/typescript>::version=3.9.10&hash=493e53", {
-          "packageLocation": "./.yarn/cache/typescript-patch-a97ba7bf0c-dc7141ab55.zip/node_modules/typescript/",
-          "packageDependencies": [
-            ["typescript", "patch:typescript@npm%3A3.9.10#~builtin<compat/typescript>::version=3.9.10&hash=493e53"]
-          ],
-          "linkType": "HARD",
-        }],
         ["patch:typescript@npm%3A4.5.5#~builtin<compat/typescript>::version=4.5.5&hash=493e53", {
           "packageLocation": "./.yarn/cache/typescript-patch-3020d8933d-c05c318d79.zip/node_modules/typescript/",
           "packageDependencies": [
