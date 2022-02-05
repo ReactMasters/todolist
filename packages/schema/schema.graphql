@@ -1,0 +1,95 @@
+scalar Timestamp
+scalar DateTime
+
+interface Auditable {
+    createdAt: Timestamp!
+    updatedAt: Timestamp
+    deletedAt: Timestamp
+}
+
+enum TodoStatus {
+    inProgress
+    completed
+}
+
+type User implements Auditable {
+    id: ID!
+    username: String!
+    password: String!
+    lastLoginAt: Timestamp!
+    todoGroups: [TodoGroup!]!
+
+    # Audit
+    createdAt: Timestamp!
+    updatedAt: Timestamp
+    deletedAt: Timestamp
+}
+
+type Tag implements Auditable {
+    id: ID!
+    name: String!
+    # Audit
+    createdAt: Timestamp!
+    updatedAt: Timestamp
+    deletedAt: Timestamp
+}
+
+type TodoGroup implements Auditable {
+    id: ID!
+    name: String
+    todos: [Todo!]!
+    owners: [User]
+
+    # Audit
+    createdAt: Timestamp!
+    updatedAt: Timestamp
+    deletedAt: Timestamp
+}
+
+type Todo implements Auditable {
+    id: ID!
+    content: String!
+    status: TodoStatus
+    tags: [Tag!]! # empty array is allowed but individual tags cannot be null
+    dueDateTime: DateTime
+    order: Int!
+
+    # Audit
+    createdAt: Timestamp!
+    updatedAt: Timestamp
+    deletedAt: Timestamp
+}
+
+type Query {
+    getUser(id: ID!): User
+
+    getTodo(id: ID!): Todo
+    getTodoList: [Todo!]!
+    
+    getTodoGroup(id: ID!): TodoGroup
+    getTodoGroupList: [TodoGroup!]!
+}
+
+input CreateUserInput {
+    username: String!
+    password: String!
+}
+
+input CreateTodoGroupInput {
+    name: String
+    owners: [ID!]
+}
+
+input CreateTodoInput {
+    todoGroupId: ID!
+    content: String
+    dueDateTime: DateTime
+}
+
+type Mutation {
+    createUser(createUserInput: CreateUserInput): ID
+
+    createTodoGroup(createTodoGroupInput: CreateTodoGroupInput): TodoGroup
+
+    createTodo(createTodoInput: CreateTodoInput): ID
+}
