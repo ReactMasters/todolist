@@ -1,15 +1,8 @@
----
-name: Pull request
-about: PR을 만듭니다.
-title: '[패키지명] 제목'
-labels: ''
-assignees: ''
----
-
 ## Related issues
 
 <!-- PR이 머지되면, 자동으로 close될 이슈 번호 -->
-<!-- Resolves # -->
+
+Resolves #
 
 ## Description
 
