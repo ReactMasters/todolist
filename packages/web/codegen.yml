@@ -1,0 +1,20 @@
+overwrite: true
+schema:
+  - ../api/src/schema.gql
+generates:
+  lib/graphql.ts:
+    plugins:
+      - typescript
+  './':
+    documents:
+      - './(pages|components)/**/!(*.generated).{ts,tsx}'
+    preset: near-operation-file
+    presetConfig:
+      extension: .generated.ts
+      baseTypesPath: lib/graphql.ts
+    plugins:
+      - typescript-operations
+      - typescript-react-apollo
+hooks:
+  afterAllFileWrite:
+    - prettier --write

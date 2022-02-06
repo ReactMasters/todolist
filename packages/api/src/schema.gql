@@ -25,14 +25,10 @@ type Mutation {
 }
 
 input CreateUserInput {
-  """
-  user email
-  """
+  """user email"""
   email: String!
 
-  """
-  user password
-  """
+  """user password"""
   password: String!
 }
 

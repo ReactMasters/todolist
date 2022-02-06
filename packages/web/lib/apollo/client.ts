@@ -14,17 +14,11 @@ export type ResolverContext = {
 }
 
 function createIsomorphLink(context: ResolverContext = {}) {
-  if (typeof window === 'undefined') {
-    const { SchemaLink } = require('@apollo/client/link/schema')
-    const { schema } = require('./schema')
-    return new SchemaLink({ schema, context })
-  } else {
-    const { HttpLink } = require('@apollo/client')
-    return new HttpLink({
-      uri: '/api/graphql',
-      credentials: 'same-origin',
-    })
-  }
+  const { HttpLink } = require('@apollo/client')
+  return new HttpLink({
+    uri: process.env.GRAPHQL_URL,
+    credentials: 'same-origin',
+  })
 }
 
 function createApolloClient(context?: ResolverContext) {
@@ -42,7 +36,10 @@ interface InitializeApolloOption {
   context?: ResolverContext
 }
 
-export function initializeApollo({context,initialState}:InitializeApolloOption = {}) {
+export function initializeApollo({
+  context,
+  initialState,
+}: InitializeApolloOption = {}) {
   const _apolloClient = apolloClient ?? createApolloClient(context)
 
   // If your page has Next.js data fetching methods that use Apollo Client, the initial state
@@ -59,6 +56,9 @@ export function initializeApollo({context,initialState}:InitializeApolloOption =
 }
 
 export function useApollo(initialState?: NormalizedCacheObject) {
-  const store = useMemo(() => initializeApollo({initialState}), [initialState])
+  const store = useMemo(
+    () => initializeApollo({ initialState }),
+    [initialState]
+  )
   return store
 }
