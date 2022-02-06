@@ -1,9 +1,8 @@
 # todolist
 
-## Pre-requisite
+## 실행 방법
 
 - node@16.13.2
-- yarn@3.1.1
 
 1. nvm을 설치합니다.(nvm으로 node를 설치가 필수입니다.)
 2. 해당 레포를 내려 받은 뒤 터미널에서 node 버전을 세팅해줍니다.
@@ -11,16 +10,18 @@
    nvm install 16.13.2
    nvm use
    ```
-3. yarn v2+를 사용하기 위해 corepack을 enable 해줍니다.
+3. 의존성 패키지를 설치해줍니다
    ```sh
-   corepack enable
+   yarn insall
    ```
-4. [vscode extension ZipFS](https://marketplace.visualstudio.com/items?itemName=arcanis.vscode-zipfs)를 설치합니다
-5. vscode sdk를 설치합니다.
+4. `packages/api/.env` 에 mongodb connection url(\*secret)을 넣어줍시다.
+   ```
+   MONGODB_URL={secret-connection-url}
+   ```
+5. 프로젝트 루트에서 `yarn dev`로 api와 web을 동시 실행합니다.
    ```sh
-   yarn dlx @yarnpkg/sdks vscode
+   yarn dev
    ```
-6. Show All Commands(cmd+shift+p) 로 타입스크립트 버전을 워크스페이스의 버전으로 사용합니다.
 
 ## 협업 방식
 
