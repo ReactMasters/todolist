@@ -10,7 +10,7 @@ import { User, UserDocument } from './entities/user.entity'
 @Injectable()
 export class UserService {
   constructor(
-    @InjectModel(User.name) private readonly userModel: Model<UserDocument>,
+    @InjectModel(User.name) private readonly userModel: Model<UserDocument>
   ) {}
 
   async create({ email, password }: CreateUserInput): Promise<User> {
