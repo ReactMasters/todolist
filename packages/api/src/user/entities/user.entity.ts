@@ -1,6 +1,6 @@
 import { Document } from 'mongoose'
 
-import { Field, ObjectType } from '@nestjs/graphql'
+import { Field, ID, Int, ObjectType } from '@nestjs/graphql'
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 
 export type UserDocument = User & Document
@@ -8,7 +8,7 @@ export type UserDocument = User & Document
 @ObjectType()
 @Schema()
 export class User {
-  @Field()
+  @Field(() => ID)
   _id: string
 
   @Field()
@@ -18,11 +18,9 @@ export class User {
   @Prop({ required: true })
   password: string
 
-  // @Field()
-  // createdAt: Date;
-
-  // @Field()
-  // updatedAt: Date;
+  @Prop({ type: Date })
+  @Field(() => Int)
+  lastLoginAt: Date
 }
 
 export const UserSchema = SchemaFactory.createForClass(User)
