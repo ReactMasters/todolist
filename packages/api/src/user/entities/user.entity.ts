@@ -20,8 +20,8 @@ export class User extends Auditable {
   password: string
 
   @Prop({ type: Date })
-  @Field(() => Int)
-  lastLoginAt: Date
+  @Field(() => Int, { nullable: true })
+  lastLoginAt: Date | null
 }
 
 export const UserSchema = SchemaFactory.createForClass(User)
