@@ -159,8 +159,9 @@ export enum TodoStatus {
 }
 
 export type UpdateUserInput = {
-  email: Scalars['String']
-  password: Scalars['String']
+  email?: Maybe<Scalars['String']>
+  /** user password */
+  password?: Maybe<Scalars['String']>
   id: Scalars['String']
 }
 

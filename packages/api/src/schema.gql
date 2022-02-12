@@ -105,8 +105,10 @@ input CreateUserInput {
 }
 
 input UpdateUserInput {
-  email: String!
-  password: String!
+  email: String
+
+  """user password"""
+  password: String
   id: String!
 }
 
