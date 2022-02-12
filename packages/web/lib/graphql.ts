@@ -169,7 +169,7 @@ export type User = {
   createdAt: Scalars['DateTime']
   updatedAt: Scalars['DateTime']
   deletedAt?: Maybe<Scalars['DateTime']>
-  _id: Scalars['ID']
+  id: Scalars['ID']
   email: Scalars['String']
   lastLoginAt?: Maybe<Scalars['DateTime']>
 }

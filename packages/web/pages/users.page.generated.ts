@@ -6,14 +6,22 @@ const defaultOptions = {}
 export type UsersPageQueryVariables = Types.Exact<{ [key: string]: never }>
 
 export type UsersPageQuery = { __typename?: 'Query' } & {
-  users: Array<{ __typename?: 'User' } & Pick<Types.User, '_id' | 'email'>>
+  users: Array<
+    { __typename?: 'User' } & Pick<
+      Types.User,
+      'id' | 'email' | 'createdAt' | 'updatedAt' | 'lastLoginAt'
+    >
+  >
 }
 
 export const UsersPageDocument = gql`
   query UsersPage {
     users {
-      _id
+      id
       email
+      createdAt
+      updatedAt
+      lastLoginAt
     }
   }
 `

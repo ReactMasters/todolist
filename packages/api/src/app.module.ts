@@ -26,9 +26,9 @@ import { TodoGroupModule } from './todo-group/todo-group.module'
     UserModule,
     TagModule,
     TodoModule,
-    TodoGroupModule
+    TodoGroupModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}
