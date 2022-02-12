@@ -5,11 +5,9 @@ import { Prop, Schema } from '@nestjs/mongoose'
 @Schema()
 export abstract class Auditable {
   @Field()
-  @Prop({ type: Date, required: true, default: () => new Date() })
   createdAt: Date
 
   @Field()
-  @Prop({ type: Date, required: true, default: () => new Date() })
   updatedAt: Date
 
   @Field({ nullable: true })

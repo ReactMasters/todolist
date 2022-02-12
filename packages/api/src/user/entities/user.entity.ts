@@ -7,7 +7,7 @@ import { Auditable } from 'src/types/auditable/auditable.entity'
 export type UserDocument = User & Document
 
 @ObjectType()
-@Schema({ toObject: { virtuals: true } })
+@Schema({ toObject: { virtuals: true }, timestamps: true })
 export class User extends Auditable {
   @Field(() => ID)
   id: string
