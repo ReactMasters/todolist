@@ -1,4 +1,5 @@
 import { Field, InputType, ObjectType, PickType } from '@nestjs/graphql'
+import { Output } from 'src/types/output/output.entity'
 
 import { User } from '../entities/user.entity'
 
@@ -15,11 +16,7 @@ export class CreateUserInput extends PickType(User, [
 }
 
 @ObjectType()
-export class CreateUserOutput {
-  @Field()
-  success: boolean
-  @Field({ nullable: true })
-  message?: string
+export class CreateUserOutput extends Output {
   @Field(() => User, { nullable: true })
   user?: User
 }
