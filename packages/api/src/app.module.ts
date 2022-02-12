@@ -8,6 +8,9 @@ import { MongooseModule } from '@nestjs/mongoose'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { UserModule } from './user/user.module'
+import { TodoModule } from './todo/todo.module'
+import { TagModule } from './tag/tag.module'
+import { TodoGroupModule } from './todo-group/todo-group.module'
 
 @Module({
   imports: [
@@ -21,8 +24,11 @@ import { UserModule } from './user/user.module'
       playground: process.env.NODE_ENV !== 'production',
     }),
     UserModule,
+    TagModule,
+    TodoModule,
+    TodoGroupModule
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
