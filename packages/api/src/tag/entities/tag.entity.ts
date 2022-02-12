@@ -18,7 +18,7 @@ export class Tag extends Auditable {
     name: string
 
     @Field(() => User)
-    @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User', index: true, unique: true })
+    @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User', unique: true })
     owner: User
 }
 

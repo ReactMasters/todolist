@@ -18,11 +18,11 @@ export class TodoGroup extends Auditable {
     name: string
 
     @Field(() => [Todo])
-    @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Todo', index: true, unique: true }] })
+    @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Todo', unique: true }] })
     todos: Todo[]
 
     @Field(() => [User])
-    @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User', index: true, unique: true }] })
+    @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User', unique: true }] })
     owners: User[]
 }
 
