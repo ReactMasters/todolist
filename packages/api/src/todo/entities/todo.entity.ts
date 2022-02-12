@@ -27,7 +27,7 @@ export class Todo extends Auditable {
   })
   tags: Tag[]
 
-  @Field(() => Date, { nullable: true })
+  @Field({ nullable: true })
   @Prop({ type: Date })
   dueDateTime: Date | null
 }

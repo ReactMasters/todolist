@@ -20,7 +20,7 @@ export class User extends Auditable {
   password: string
 
   @Prop({ type: Date })
-  @Field(() => Date, { nullable: true })
+  @Field({ nullable: true })
   lastLoginAt: Date | null
 }
 
