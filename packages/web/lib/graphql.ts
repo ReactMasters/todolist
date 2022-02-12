@@ -123,7 +123,7 @@ export type QueryUserArgs = {
 export type Tag = {
   __typename?: 'Tag'
   createdAt: Scalars['DateTime']
-  updatedAt?: Maybe<Scalars['DateTime']>
+  updatedAt: Scalars['DateTime']
   deletedAt?: Maybe<Scalars['DateTime']>
   _id: Scalars['ID']
   name: Scalars['String']
@@ -133,7 +133,7 @@ export type Tag = {
 export type Todo = {
   __typename?: 'Todo'
   createdAt: Scalars['DateTime']
-  updatedAt?: Maybe<Scalars['DateTime']>
+  updatedAt: Scalars['DateTime']
   deletedAt?: Maybe<Scalars['DateTime']>
   _id: Scalars['ID']
   content: Scalars['String']
@@ -145,7 +145,7 @@ export type Todo = {
 export type TodoGroup = {
   __typename?: 'TodoGroup'
   createdAt: Scalars['DateTime']
-  updatedAt?: Maybe<Scalars['DateTime']>
+  updatedAt: Scalars['DateTime']
   deletedAt?: Maybe<Scalars['DateTime']>
   _id: Scalars['ID']
   name: Scalars['String']
@@ -167,7 +167,7 @@ export type UpdateUserInput = {
 export type User = {
   __typename?: 'User'
   createdAt: Scalars['DateTime']
-  updatedAt?: Maybe<Scalars['DateTime']>
+  updatedAt: Scalars['DateTime']
   deletedAt?: Maybe<Scalars['DateTime']>
   _id: Scalars['ID']
   email: Scalars['String']
