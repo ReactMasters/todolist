@@ -22,11 +22,14 @@ import { TodoGroupModule } from './todo-group/todo-group.module'
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       debug: process.env.NODE_ENV !== 'production',
       playground: process.env.NODE_ENV !== 'production',
+      buildSchemaOptions: {
+        dateScalarMode: 'isoDate',
+      },
     }),
     UserModule,
     TagModule,
     TodoModule,
-    TodoGroupModule
+    TodoGroupModule,
   ],
   controllers: [AppController],
   providers: [AppService],

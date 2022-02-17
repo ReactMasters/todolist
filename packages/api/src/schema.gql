@@ -4,11 +4,11 @@
 
 type User {
   createdAt: DateTime!
-  updatedAt: DateTime
+  updatedAt: DateTime!
   deletedAt: DateTime
-  _id: ID!
+  id: ID!
   email: String!
-  lastLoginAt: Int!
+  lastLoginAt: DateTime
 }
 
 """
@@ -24,7 +24,7 @@ type CreateUserOutput {
 
 type Tag {
   createdAt: DateTime!
-  updatedAt: DateTime
+  updatedAt: DateTime!
   deletedAt: DateTime
   _id: ID!
   name: String!
@@ -33,7 +33,7 @@ type Tag {
 
 type Todo {
   createdAt: DateTime!
-  updatedAt: DateTime
+  updatedAt: DateTime!
   deletedAt: DateTime
   _id: ID!
   content: String!
@@ -67,7 +67,7 @@ type ListTagsOutput {
 
 type TodoGroup {
   createdAt: DateTime!
-  updatedAt: DateTime
+  updatedAt: DateTime!
   deletedAt: DateTime
   _id: ID!
   name: String!
@@ -105,8 +105,10 @@ input CreateUserInput {
 }
 
 input UpdateUserInput {
-  email: String!
-  password: String!
+  email: String
+
+  """user password"""
+  password: String
   id: String!
 }
 
