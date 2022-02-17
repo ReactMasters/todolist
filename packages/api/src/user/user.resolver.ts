@@ -1,6 +1,6 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql'
-
-import { CreateUserInput, CreateUserOutput } from './dto/create-user.input'
+import { CreateUserInput } from './dto/create-user.input'
+import { CreateUserOutput } from './dto/create-user.output'
 import { UpdateUserInput } from './dto/update-user.input'
 import { User } from './entities/user.entity'
 import { UserService } from './user.service'
