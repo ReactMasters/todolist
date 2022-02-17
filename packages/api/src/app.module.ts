@@ -34,4 +34,4 @@ import { TodoGroupModule } from './todo-group/todo-group.module'
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
