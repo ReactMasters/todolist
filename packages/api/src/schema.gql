@@ -26,7 +26,7 @@ type Tag {
   createdAt: DateTime!
   updatedAt: DateTime!
   deletedAt: DateTime
-  _id: ID!
+  id: ID!
   name: String!
   owner: User!
 }
@@ -35,7 +35,7 @@ type Todo {
   createdAt: DateTime!
   updatedAt: DateTime!
   deletedAt: DateTime
-  _id: ID!
+  id: ID!
   content: String!
   todoStatus: TodoStatus!
   tags: [Tag!]!
@@ -69,7 +69,7 @@ type TodoGroup {
   createdAt: DateTime!
   updatedAt: DateTime!
   deletedAt: DateTime
-  _id: ID!
+  id: ID!
   name: String!
   todos: [Todo!]!
   owners: [User!]!
