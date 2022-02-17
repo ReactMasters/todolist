@@ -5,8 +5,11 @@ import { useUsersPageQuery } from './users.page.generated'
 export const query = gql`
   query UsersPage {
     users {
-      _id
+      id
       email
+      createdAt
+      updatedAt
+      lastLoginAt
     }
   }
 `
@@ -16,10 +19,13 @@ const UsersPage = () => {
   if (!data || error) return <div>에러!</div>
   return (
     <div>
-      {data.users.map(({ _id, email }) => (
-        <div key={_id}>
-          <span>{_id}</span>
+      {data.users.map(({ id, email, createdAt, updatedAt, lastLoginAt }) => (
+        <div key={id}>
+          <span>{id}</span>
           <span>{email}</span>
+          <span>{createdAt}</span>
+          <span>{updatedAt}</span>
+          <span>{lastLoginAt}</span>
         </div>
       ))}
     </div>

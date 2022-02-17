@@ -7,10 +7,10 @@ import { Auditable } from 'src/types/auditable/auditable.entity'
 export type UserDocument = User & Document
 
 @ObjectType()
-@Schema()
+@Schema({ toObject: { virtuals: true }, timestamps: true })
 export class User extends Auditable {
   @Field(() => ID)
-  _id: string
+  id: string
 
   @Field()
   @Prop({ required: true })
@@ -20,8 +20,8 @@ export class User extends Auditable {
   password: string
 
   @Prop({ type: Date })
-  @Field(() => Int)
-  lastLoginAt: Date
+  @Field({ nullable: true })
+  lastLoginAt: Date | null
 }
 
 export const UserSchema = SchemaFactory.createForClass(User)

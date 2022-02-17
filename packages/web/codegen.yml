@@ -3,6 +3,9 @@ schema:
   - ../api/src/schema.gql
 generates:
   lib/graphql.ts:
+    config:
+      scalars:
+        DateTime: string
     plugins:
       - typescript
   './':

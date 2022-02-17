@@ -6,10 +6,4 @@ import { CreateUserInput } from './create-user.input'
 export class UpdateUserInput extends PartialType(CreateUserInput) {
   @Field()
   id: string
-
-  @Field()
-  email: string
-
-  @Field()
-  password: string
 }
