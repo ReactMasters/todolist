@@ -1,4 +1,5 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
+echo '👉 2/2 커밋 컨벤션 체크'
 yarn commitlint --edit $1
