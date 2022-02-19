@@ -3,10 +3,10 @@
 # ------------------------------------------------------
 
 type User {
+  id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
   deletedAt: DateTime
-  id: ID!
   email: String!
   lastLoginAt: DateTime
 }
@@ -23,19 +23,19 @@ type CreateUserOutput {
 }
 
 type Tag {
+  id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
   deletedAt: DateTime
-  _id: ID!
   name: String!
   owner: User!
 }
 
 type Todo {
+  id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
   deletedAt: DateTime
-  _id: ID!
   content: String!
   todoStatus: TodoStatus!
   tags: [Tag!]!
@@ -66,10 +66,10 @@ type ListTagsOutput {
 }
 
 type TodoGroup {
+  id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
   deletedAt: DateTime
-  _id: ID!
   name: String!
   todos: [Todo!]!
   owners: [User!]!

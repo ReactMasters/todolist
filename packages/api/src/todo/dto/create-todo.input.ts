@@ -1,12 +1,9 @@
-import { Field, InputType, ObjectType, OmitType, PartialType } from '@nestjs/graphql'
-import { Tag } from 'src/tag/entities/tag.entity'
-import { Output } from 'src/types/output/output.entity'
+import { Field, InputType, OmitType, PartialType } from '@nestjs/graphql'
 import { TodoStatus } from 'src/types/todo-status/todo-status.entity'
 import { Todo } from '../entities/todo.entity'
 
-
 @InputType()
-export class CreateTodoInput extends OmitType(PartialType(Todo), ['_id']) {
+export class CreateTodoInput extends OmitType(PartialType(Todo), ['id']) {
   @Field()
   content: string
 
@@ -17,11 +14,5 @@ export class CreateTodoInput extends OmitType(PartialType(Todo), ['_id']) {
   // tagNames?: String[];
 
   @Field({ nullable: true })
-  dueDateTime: Date;
-}
-
-@ObjectType()
-export class CreateTodoOutput extends Output {
-  @Field(() => Todo, { nullable: true })
-  todo?: Todo
+  dueDateTime: Date
 }

@@ -1,7 +1,6 @@
-import { Document } from 'mongoose'
-
-import { Field, ID, Int, ObjectType } from '@nestjs/graphql'
+import { Field, ObjectType } from '@nestjs/graphql'
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
+import { Document } from 'mongoose'
 import { Auditable } from 'src/types/auditable/auditable.entity'
 
 export type UserDocument = User & Document
@@ -9,9 +8,6 @@ export type UserDocument = User & Document
 @ObjectType()
 @Schema({ toObject: { virtuals: true }, timestamps: true })
 export class User extends Auditable {
-  @Field(() => ID)
-  id: string
-
   @Field()
   @Prop({ required: true })
   email: string
