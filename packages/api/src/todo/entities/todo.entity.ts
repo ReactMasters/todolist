@@ -20,7 +20,7 @@ export class Todo extends Auditable {
 
   @Field(() => [Tag])
   @Prop({
-    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Tag', unique: true }],
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Tag', index: true }],
   })
   tags: Tag[]
 
