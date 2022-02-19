@@ -1,4 +1,4 @@
-import { Field, ID, ObjectType } from '@nestjs/graphql'
+import { Field, ObjectType } from '@nestjs/graphql'
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import * as mongoose from 'mongoose'
 import { Todo } from 'src/todo/entities/todo.entity'
@@ -10,10 +10,6 @@ export type TodoGroupDocument = TodoGroup & mongoose.Document
 @ObjectType()
 @Schema()
 export class TodoGroup extends Auditable {
-  @Field(() => ID)
-  @Prop({ id: true })
-  id: string
-
   @Field(() => String)
   @Prop()
   name: string
