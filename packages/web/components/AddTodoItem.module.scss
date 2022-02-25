@@ -1,0 +1,11 @@
+.addTodoItem {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  justify-content: flex-start;
+  padding: 15px 10px;
+  .addTodoItemText {
+    margin-left: 10px;
+  }
+}
