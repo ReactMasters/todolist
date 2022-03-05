@@ -1,7 +1,7 @@
 import React from 'react'
 import { Html, Head, Main, NextScript } from 'next/document'
 import createEmotionServer from '@emotion/server/create-instance'
-import createEmotionCache from '@web/utiils/createEmotionCache'
+import createEmotionCache from '@web/utils/createEmotionCache'
 
 function Document() {
   return (
