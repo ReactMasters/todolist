@@ -1,3 +1,4 @@
+const nextTranslate = require('next-translate')
 module.exports = {
   webpack(config, options) {
     return config
@@ -6,4 +7,5 @@ module.exports = {
   env: {
     GRAPHQL_URL: 'http://localhost:4000/graphql',
   },
+  ...nextTranslate(),
 }
