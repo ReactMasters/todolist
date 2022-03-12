@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose'
 import { pbkdf2Sync, randomBytes } from 'crypto'
 import * as jwt from 'jsonwebtoken'
 import { Model } from 'mongoose'
-import { APP_SECRET, ISSUER, TIME } from 'src/constants'
+import { ISSUER, TIME } from 'src/constants'
 import { UserAuth } from 'src/types'
 import { CreateUserInput } from './dto/create-user.input'
 import { CreateUserSuccess } from './dto/create-user.output'
@@ -18,12 +18,20 @@ export class UserService {
     @InjectModel(User.name) private readonly userModel: Model<UserDocument>
   ) {}
 
+  getSecret(): string {
+    return process.env.APP_SECRET as string
+  }
+
   verifyToken(token: string): UserAuth | null {
-    const auth = jwt.verify(token, APP_SECRET) as Partial<UserAuth>
-    if (auth.iss !== ISSUER) return null
-    if (auth.exp < Date.now()) return null
-    if (!auth.uid) return null
-    return auth as UserAuth
+    try {
+      const auth = jwt.verify(token, this.getSecret()) as Partial<UserAuth>
+      if (auth.iss !== ISSUER) return null
+      if (auth.exp < Date.now()) return null
+      if (!auth.uid) return null
+      return auth as UserAuth
+    } catch (error) {
+      return null
+    }
   }
 
   validPassword(user: User, password: string): boolean {
@@ -51,7 +59,7 @@ export class UserService {
       uid: user.id,
     }
 
-    const token = jwt.sign(auth, APP_SECRET)
+    const token = jwt.sign(auth, this.getSecret())
 
     return token
   }
