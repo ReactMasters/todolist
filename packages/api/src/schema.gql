@@ -75,12 +75,6 @@ type CreateTodoListOutput {
   todoList: TodoList!
 }
 
-type CreateUserOutput {
-  success: Boolean!
-  message: String
-  user: User
-}
-
 type Query {
   users: [User!]!
   user(id: String!): User!
@@ -94,6 +88,16 @@ type Mutation {
   createTag(createTagInput: CreateTagInput!): CreateTagOutput!
   createTotoItem(createTodoItemInput: CreateTodoItemInput!): CreateTodoItemOutput!
   createTodoList(createTodoListInput: CreateTodoListInput!): CreateTodoListOutput!
+}
+
+union CreateUserOutput = CreateUserSuccess | CreateUserError
+
+type CreateUserSuccess {
+  user: User
+}
+
+type CreateUserError {
+  message: String!
 }
 
 input CreateUserInput {
