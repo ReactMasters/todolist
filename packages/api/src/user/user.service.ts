@@ -3,14 +3,14 @@ import { InjectModel } from '@nestjs/mongoose'
 import { pbkdf2Sync, randomBytes } from 'crypto'
 import * as jwt from 'jsonwebtoken'
 import { Model } from 'mongoose'
-import { ISSUER, TIME } from 'src/constants'
+import { APP_SECRET, ISSUER, TIME } from 'src/constants'
+import { UserAuth } from 'src/types'
 import { CreateUserInput } from './dto/create-user.input'
 import { CreateUserSuccess } from './dto/create-user.output'
 import { LoginInput } from './dto/login.input'
 import { LoginSuccess } from './dto/login.output'
 import { UpdateUserInput } from './dto/update-user.input'
 import { User, UserDocument } from './entities/user.entity'
-import { UserAuth } from './user.interface'
 
 @Injectable()
 export class UserService {
@@ -43,7 +43,7 @@ export class UserService {
       uid: user.id,
     }
 
-    const token = jwt.sign(auth, process.env.APP_SECRET as string)
+    const token = jwt.sign(auth, APP_SECRET)
 
     return token
   }
