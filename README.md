@@ -60,3 +60,5 @@ all/add-templates
 
 - master 로 merge할 땐 squash-merge 합니다.
 - feature 브랜치로 merge할 땐 merge a commit 합니다.
+- Merge commit의 header는 "[package] 내용"의 형식을 따릅니다.
+- Merge Request가 approve 되면 MR을 올린 개발자가 직접 merge, test 후 merge 된 브랜치는 삭제합니다.
