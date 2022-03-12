@@ -15,7 +15,7 @@ export const MeOutput = createUnionType({
   name: 'MeOutput',
   types: () => [MeSuccess, MeError],
   resolveType(value) {
-    if (value.token) return MeSuccess
+    if (value.user) return MeSuccess
     return MeError
   },
 })
