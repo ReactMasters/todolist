@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common'
-import { TodoService } from './todo.service'
-import { TodoResolver } from './todo.resolver'
 import { MongooseModule } from '@nestjs/mongoose'
 import { Todo, TodoSchema } from './entities/todo.entity'
+import { TodoResolver } from './todo.resolver'
+import { TodoService } from './todo.service'
 
 @Module({
   imports: [
@@ -10,4 +10,4 @@ import { Todo, TodoSchema } from './entities/todo.entity'
   ],
   providers: [TodoResolver, TodoService],
 })
-export class TodoModule { }
+export class TodoModule {}

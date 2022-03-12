@@ -1,15 +1,8 @@
-import { Field, InputType, ObjectType, PickType } from "@nestjs/graphql";
-import { Output } from "src/types/output/output.entity";
-import { Tag } from "../entities/tag.entity";
+import { Field, InputType, PickType } from '@nestjs/graphql'
+import { Tag } from '../entities/tag.entity'
 
 @InputType()
 export class CreateTagInput extends PickType(Tag, ['name']) {
-    @Field()
-    name: string
-}
-
-@ObjectType()
-export class CreateTagOutput extends Output {
-    @Field(() => Tag, { nullable: true })
-    tag?: Tag
+  @Field()
+  name: string
 }

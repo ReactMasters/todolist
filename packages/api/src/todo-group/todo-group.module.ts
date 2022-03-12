@@ -5,9 +5,11 @@ import { TodoGroupResolver } from './todo-group.resolver'
 import { TodoGroupService } from './todo-group.service'
 
 @Module({
-    imports: [
-        MongooseModule.forFeature([{ name: TodoGroup.name, schema: TodoGroupSchema }]),
-    ],
-    providers: [TodoGroupResolver, TodoGroupService],
+  imports: [
+    MongooseModule.forFeature([
+      { name: TodoGroup.name, schema: TodoGroupSchema },
+    ]),
+  ],
+  providers: [TodoGroupResolver, TodoGroupService],
 })
-export class TodoGroupModule { }
+export class TodoGroupModule {}
