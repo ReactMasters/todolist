@@ -93,7 +93,10 @@ type Mutation {
 union CreateUserOutput = CreateUserSuccess | CreateUserError
 
 type CreateUserSuccess {
-  user: User
+  user: User!
+
+  """JWT when create user success"""
+  token: String!
 }
 
 type CreateUserError {

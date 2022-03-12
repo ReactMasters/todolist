@@ -14,8 +14,8 @@ export class UserResolver {
     @Args('createUserInput') createUserInput: CreateUserInput
   ): Promise<typeof CreateUserOutput> {
     try {
-      const user = await this.userService.create(createUserInput)
-      return { user }
+      const { token, user } = await this.userService.create(createUserInput)
+      return { token, user }
     } catch (error) {
       return { message: error?.message ?? error }
     }
