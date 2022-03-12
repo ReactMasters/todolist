@@ -1,7 +1,7 @@
 import { useReactiveVar } from '@apollo/client'
 import localStates from '@web/lib/apollo/localStates'
 
-import Item from './Item'
+import TodoItem from '@web/components/TodoItem/TodoItem'
 
 const ItemList = () => {
   const selectedItems = useReactiveVar(localStates.selectedItems)
@@ -9,7 +9,7 @@ const ItemList = () => {
   return (
     <div>
       {selectedItems.map((name, index) => (
-        <Item key={index} name={name} />
+        <TodoItem key={index} name={name} />
       ))}
     </div>
   )
