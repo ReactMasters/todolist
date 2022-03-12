@@ -83,6 +83,7 @@ type Query {
 
 type Mutation {
   createUser(createUserInput: CreateUserInput!): CreateUserOutput!
+  login(loginInput: LoginInput!): LoginOutput!
   updateUser(updateUserInput: UpdateUserInput!): User!
   removeUser(id: String!): User!
   createTag(createTagInput: CreateTagInput!): CreateTagOutput!
@@ -104,6 +105,24 @@ type CreateUserError {
 }
 
 input CreateUserInput {
+  """user email"""
+  email: String!
+
+  """user password"""
+  password: String!
+}
+
+union LoginOutput = LoginSuccess | LoginError
+
+type LoginSuccess {
+  token: String!
+}
+
+type LoginError {
+  message: String!
+}
+
+input LoginInput {
   """user email"""
   email: String!
 
