@@ -1,16 +1,14 @@
-import { join } from 'path'
-
 import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
 import { GraphQLModule } from '@nestjs/graphql'
 import { MongooseModule } from '@nestjs/mongoose'
-
+import { join } from 'path'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
-import { UserModule } from './user/user.module'
-import { TodoModule } from './todo/todo.module'
 import { TagModule } from './tag/tag.module'
-import { TodoGroupModule } from './todo-group/todo-group.module'
+import { TodoItemModule } from './todo-item/todo-item.module'
+import { TodoListModule } from './todo-list/todo-list.module'
+import { UserModule } from './user/user.module'
 
 @Module({
   imports: [
@@ -28,10 +26,10 @@ import { TodoGroupModule } from './todo-group/todo-group.module'
     }),
     UserModule,
     TagModule,
-    TodoModule,
-    TodoGroupModule,
+    TodoItemModule,
+    TodoListModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}

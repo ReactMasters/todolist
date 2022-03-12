@@ -16,12 +16,6 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
-type CreateUserOutput {
-  success: Boolean!
-  message: String
-  user: User
-}
-
 type Tag {
   id: ID!
   createdAt: DateTime!
@@ -29,28 +23,6 @@ type Tag {
   deletedAt: DateTime
   name: String!
   owner: User!
-}
-
-type Todo {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  deletedAt: DateTime
-  content: String!
-  todoStatus: TodoStatus!
-  tags: [Tag!]!
-  dueDateTime: DateTime
-}
-
-enum TodoStatus {
-  IN_PROGRESS
-  COMPLETED
-}
-
-type CreateTodoOutput {
-  success: Boolean!
-  message: String
-  todo: Todo
 }
 
 type CreateTagOutput {
@@ -65,20 +37,48 @@ type ListTagsOutput {
   tags: [Tag!]!
 }
 
-type TodoGroup {
+type TodoItem {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+  content: String!
+  status: TodoStatus!
+  tags: [Tag!]!
+  dueDateTime: DateTime
+}
+
+enum TodoStatus {
+  IN_PROGRESS
+  COMPLETED
+}
+
+type CreateTodoItemOutput {
+  success: Boolean!
+  message: String
+  todoItem: TodoItem
+}
+
+type TodoList {
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
   deletedAt: DateTime
   name: String!
-  todos: [Todo!]!
+  todos: [TodoItem!]!
   owners: [User!]!
 }
 
-type CreateTodoGroupOutput {
+type CreateTodoListOutput {
   success: Boolean!
   message: String
-  todoGroup: TodoGroup!
+  todoList: TodoList!
+}
+
+type CreateUserOutput {
+  success: Boolean!
+  message: String
+  user: User
 }
 
 type Query {
@@ -92,8 +92,8 @@ type Mutation {
   updateUser(updateUserInput: UpdateUserInput!): User!
   removeUser(id: String!): User!
   createTag(createTagInput: CreateTagInput!): CreateTagOutput!
-  createTodo(createTodoInput: CreateTodoInput!): CreateTodoOutput!
-  createTodoGroup(createTodoGroupInput: CreateTodoGroupInput!): CreateTodoGroupOutput!
+  createTotoItem(createTodoItemInput: CreateTodoItemInput!): CreateTodoItemOutput!
+  createTodoList(createTodoListInput: CreateTodoListInput!): CreateTodoListOutput!
 }
 
 input CreateUserInput {
@@ -116,12 +116,12 @@ input CreateTagInput {
   name: String!
 }
 
-input CreateTodoInput {
+input CreateTodoItemInput {
   content: String!
-  todoStatus: String
+  status: String
   dueDateTime: DateTime
 }
 
-input CreateTodoGroupInput {
+input CreateTodoListInput {
   name: String!
 }
