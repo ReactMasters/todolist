@@ -2,7 +2,7 @@
   "name": "@todolist/web",
   "version": "1.0.0",
   "scripts": {
-    "gen:sass": "tsm \"./**/*.scss\"",
+    "gen:sass": "typed-scss-modules \"./**/*.scss\"",
     "watch:sass": "chokidar './**/*.scss' -c 'yarn gen:sass'",
     "gen:graphql": "graphql-codegen",
     "watch:graphql": "graphql-codegen --watch",
