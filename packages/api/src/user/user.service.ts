@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose'
 import { pbkdf2Sync, randomBytes } from 'crypto'
 import * as jwt from 'jsonwebtoken'
 import { Model } from 'mongoose'
-import { TIME } from 'src/constants'
+import { ISSUER, TIME } from 'src/constants'
 import { CreateUserInput } from './dto/create-user.input'
 import { CreateUserSuccess } from './dto/create-user.output'
 import { UpdateUserInput } from './dto/update-user.input'
@@ -36,7 +36,7 @@ export class UserService {
     const issuedAt = Date.now()
 
     const auth: UserAuth = {
-      iss: 'felabs',
+      iss: ISSUER,
       iat: issuedAt,
       exp: exp ?? issuedAt + TIME['1day'],
       uid: user.id,
