@@ -18,6 +18,14 @@ export class UserService {
     @InjectModel(User.name) private readonly userModel: Model<UserDocument>
   ) {}
 
+  verifyToken(token: string): UserAuth | null {
+    const auth = jwt.verify(token, APP_SECRET) as Partial<UserAuth>
+    if (auth.iss !== ISSUER) return null
+    if (auth.exp < Date.now()) return null
+    if (!auth.uid) return null
+    return auth as UserAuth
+  }
+
   validPassword(user: User, password: string): boolean {
     return user.password === this.hashPassword(user.salt, password)
   }
