@@ -1,21 +1,23 @@
-import React from 'react'
-import { Html, Head, Main, NextScript } from 'next/document'
+import * as React from 'react'
+import Document, { Html, Head, Main, NextScript } from 'next/document'
 import createEmotionServer from '@emotion/server/create-instance'
 import createEmotionCache from '@web/utils/createEmotionCache'
 
-function Document() {
-  return (
-    <Html lang="en">
-      <Head>{(this.props as any).emotionStyleTags}</Head>
-      <body>
-        <Main />
-        <NextScript />
-      </body>
-    </Html>
-  )
+export default class MyDocument extends Document {
+  render() {
+    return (
+      <Html lang="en">
+        <Head>{(this.props as any).emotionStyleTags}</Head>
+        <body>
+          <Main />
+          <NextScript />
+        </body>
+      </Html>
+    )
+  }
 }
 
-Document.getInitialProps = async (ctx) => {
+MyDocument.getInitialProps = async (ctx) => {
   const originalRenderPage = ctx.renderPage
 
   const cache = createEmotionCache()
@@ -44,5 +46,3 @@ Document.getInitialProps = async (ctx) => {
     emotionStyleTags,
   }
 }
-
-export default Document
