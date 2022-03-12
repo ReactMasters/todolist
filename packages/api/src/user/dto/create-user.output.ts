@@ -4,8 +4,11 @@ import { User } from '../entities/user.entity'
 
 @ObjectType()
 export class CreateUserSuccess {
-  @Field(() => User, { nullable: true })
-  user?: User
+  @Field(() => User)
+  user: User
+
+  @Field({ description: 'JWT when create user success' })
+  token: string
 }
 
 @ObjectType()
