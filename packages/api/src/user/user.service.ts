@@ -4,11 +4,13 @@ import { pbkdf2Sync, randomBytes } from 'crypto'
 import * as jwt from 'jsonwebtoken'
 import { Model } from 'mongoose'
 import { ISSUER, TIME } from 'src/constants'
+import { UserAuth } from 'src/types'
 import { CreateUserInput } from './dto/create-user.input'
 import { CreateUserSuccess } from './dto/create-user.output'
+import { LoginInput } from './dto/login.input'
+import { LoginSuccess } from './dto/login.output'
 import { UpdateUserInput } from './dto/update-user.input'
 import { User, UserDocument } from './entities/user.entity'
-import { UserAuth } from './user.interface'
 
 @Injectable()
 export class UserService {
@@ -16,8 +18,27 @@ export class UserService {
     @InjectModel(User.name) private readonly userModel: Model<UserDocument>
   ) {}
 
-  hashPassword(password: string): { salt: string; hashedPassword: string } {
-    const salt = randomBytes(16).toString('hex')
+  getSecret(): string {
+    return process.env.APP_SECRET as string
+  }
+
+  verifyToken(token: string): UserAuth | null {
+    try {
+      const auth = jwt.verify(token, this.getSecret()) as Partial<UserAuth>
+      if (auth.iss !== ISSUER) return null
+      if (auth.exp < Date.now()) return null
+      if (!auth.uid) return null
+      return auth as UserAuth
+    } catch (error) {
+      return null
+    }
+  }
+
+  validPassword(user: User, password: string): boolean {
+    return user.password === this.hashPassword(user.salt, password)
+  }
+
+  hashPassword(salt: string, password: string): string {
     const hashedPassword = pbkdf2Sync(
       password,
       salt,
@@ -25,11 +46,7 @@ export class UserService {
       64,
       `sha512`
     ).toString(`hex`)
-
-    return {
-      salt,
-      hashedPassword,
-    }
+    return hashedPassword
   }
 
   createToken(user: User, exp?: number): string {
@@ -42,7 +59,7 @@ export class UserService {
       uid: user.id,
     }
 
-    const token = jwt.sign(auth, process.env.APP_SECRET as string)
+    const token = jwt.sign(auth, this.getSecret())
 
     return token
   }
@@ -54,7 +71,8 @@ export class UserService {
     const exist = await this.userModel.findOne({ email })
     if (exist) throw `${email} is already exist`
 
-    const { salt, hashedPassword } = this.hashPassword(password)
+    const salt = randomBytes(16).toString('hex')
+    const hashedPassword = this.hashPassword(salt, password)
 
     const user = await new this.userModel({
       email,
@@ -69,6 +87,16 @@ export class UserService {
       user,
       token,
     }
+  }
+
+  async login({ email, password }: LoginInput): Promise<LoginSuccess> {
+    const user = await this.userModel.findOne({ email })
+    if (!user) throw `there is no user with ${email}`
+    if (!this.validPassword(user, password)) throw `wrong password!`
+    const token = this.createToken(user)
+    user.lastLoginAt = new Date()
+    await user.save()
+    return { token }
   }
 
   async findAll(): Promise<User[]> {
