@@ -10,7 +10,9 @@ generates:
       - typescript
   './':
     documents:
-      - './(pages|components)/**/!(*.generated).{ts,tsx}'
+      - './pages/**/!(*.generated).{ts,tsx}'
+      - './components/**/!(*.generated).{ts,tsx}'
+      - './pages/components/**/!(*.generated).{ts,tsx}'
     preset: near-operation-file
     presetConfig:
       extension: .generated.ts
