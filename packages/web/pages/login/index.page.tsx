@@ -3,10 +3,10 @@ import { useRouter } from 'next/router'
 import { gql } from '@apollo/client'
 import Layout from '@web/components/Layout'
 
-import LoginForm from './components/LoginForm'
 import LoginHeader from './components/LoginHeader'
 import styles from './index.module.scss'
 import { useLoginPageQuery } from './index.page.generated'
+import LoginForm from './components/LoginForm'
 
 type Props = {}
 
