@@ -29,10 +29,10 @@ export const query = gql`
 
 const LoginPage = (props: Props) => {
   const router = useRouter()
-  const { data, loading } = useLoginPageQuery()
+  const { data, error, loading } = useLoginPageQuery()
 
+  if (error) return <div>에러!</div>
   if (!data || loading) return <div>로딩중...</div>
-
   if (data.me.__typename === 'MeSuccess') {
     router.replace('/')
     return null
