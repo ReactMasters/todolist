@@ -30,28 +30,33 @@ export type CreateTagOutput = {
   tag?: Maybe<Tag>
 }
 
-export type CreateTodoGroupInput = {
-  name: Scalars['String']
-}
-
-export type CreateTodoGroupOutput = {
-  __typename?: 'CreateTodoGroupOutput'
-  success: Scalars['Boolean']
-  message?: Maybe<Scalars['String']>
-  todoGroup: TodoGroup
-}
-
-export type CreateTodoInput = {
+export type CreateTodoItemInput = {
   content: Scalars['String']
-  todoStatus?: Maybe<Scalars['String']>
+  status?: Maybe<Scalars['String']>
   dueDateTime?: Maybe<Scalars['DateTime']>
 }
 
-export type CreateTodoOutput = {
-  __typename?: 'CreateTodoOutput'
+export type CreateTodoItemOutput = {
+  __typename?: 'CreateTodoItemOutput'
   success: Scalars['Boolean']
   message?: Maybe<Scalars['String']>
-  todo?: Maybe<Todo>
+  todoItem?: Maybe<TodoItem>
+}
+
+export type CreateTodoListInput = {
+  name: Scalars['String']
+}
+
+export type CreateTodoListOutput = {
+  __typename?: 'CreateTodoListOutput'
+  success: Scalars['Boolean']
+  message?: Maybe<Scalars['String']>
+  todoList: TodoList
+}
+
+export type CreateUserError = {
+  __typename?: 'CreateUserError'
+  message: Scalars['String']
 }
 
 export type CreateUserInput = {
@@ -61,11 +66,13 @@ export type CreateUserInput = {
   password: Scalars['String']
 }
 
-export type CreateUserOutput = {
-  __typename?: 'CreateUserOutput'
-  success: Scalars['Boolean']
-  message?: Maybe<Scalars['String']>
-  user?: Maybe<User>
+export type CreateUserOutput = CreateUserSuccess | CreateUserError
+
+export type CreateUserSuccess = {
+  __typename?: 'CreateUserSuccess'
+  user: User
+  /** JWT when create user success */
+  token: Scalars['String']
 }
 
 export type ListTagsOutput = {
@@ -75,18 +82,54 @@ export type ListTagsOutput = {
   tags: Array<Tag>
 }
 
+export type LoginError = {
+  __typename?: 'LoginError'
+  message: Scalars['String']
+}
+
+export type LoginInput = {
+  /** user email */
+  email: Scalars['String']
+  /** user password */
+  password: Scalars['String']
+}
+
+export type LoginOutput = LoginSuccess | LoginError
+
+export type LoginSuccess = {
+  __typename?: 'LoginSuccess'
+  token: Scalars['String']
+}
+
+export type MeError = {
+  __typename?: 'MeError'
+  message: Scalars['String']
+}
+
+export type MeOutput = MeSuccess | MeError
+
+export type MeSuccess = {
+  __typename?: 'MeSuccess'
+  user: User
+}
+
 export type Mutation = {
   __typename?: 'Mutation'
   createUser: CreateUserOutput
+  login: LoginOutput
   updateUser: User
   removeUser: User
   createTag: CreateTagOutput
-  createTodo: CreateTodoOutput
-  createTodoGroup: CreateTodoGroupOutput
+  createTotoItem: CreateTodoItemOutput
+  createTodoList: CreateTodoListOutput
 }
 
 export type MutationCreateUserArgs = {
   createUserInput: CreateUserInput
+}
+
+export type MutationLoginArgs = {
+  loginInput: LoginInput
 }
 
 export type MutationUpdateUserArgs = {
@@ -101,16 +144,17 @@ export type MutationCreateTagArgs = {
   createTagInput: CreateTagInput
 }
 
-export type MutationCreateTodoArgs = {
-  createTodoInput: CreateTodoInput
+export type MutationCreateTotoItemArgs = {
+  createTodoItemInput: CreateTodoItemInput
 }
 
-export type MutationCreateTodoGroupArgs = {
-  createTodoGroupInput: CreateTodoGroupInput
+export type MutationCreateTodoListArgs = {
+  createTodoListInput: CreateTodoListInput
 }
 
 export type Query = {
   __typename?: 'Query'
+  me: MeOutput
   users: Array<User>
   user: User
   listTags: ListTagsOutput
@@ -122,34 +166,34 @@ export type QueryUserArgs = {
 
 export type Tag = {
   __typename?: 'Tag'
+  id: Scalars['ID']
   createdAt: Scalars['DateTime']
   updatedAt: Scalars['DateTime']
   deletedAt?: Maybe<Scalars['DateTime']>
-  _id: Scalars['ID']
   name: Scalars['String']
   owner: User
 }
 
-export type Todo = {
-  __typename?: 'Todo'
+export type TodoItem = {
+  __typename?: 'TodoItem'
+  id: Scalars['ID']
   createdAt: Scalars['DateTime']
   updatedAt: Scalars['DateTime']
   deletedAt?: Maybe<Scalars['DateTime']>
-  _id: Scalars['ID']
   content: Scalars['String']
-  todoStatus: TodoStatus
+  status: TodoStatus
   tags: Array<Tag>
   dueDateTime?: Maybe<Scalars['DateTime']>
 }
 
-export type TodoGroup = {
-  __typename?: 'TodoGroup'
+export type TodoList = {
+  __typename?: 'TodoList'
+  id: Scalars['ID']
   createdAt: Scalars['DateTime']
   updatedAt: Scalars['DateTime']
   deletedAt?: Maybe<Scalars['DateTime']>
-  _id: Scalars['ID']
   name: Scalars['String']
-  todos: Array<Todo>
+  todos: Array<TodoItem>
   owners: Array<User>
 }
 
@@ -167,10 +211,10 @@ export type UpdateUserInput = {
 
 export type User = {
   __typename?: 'User'
+  id: Scalars['ID']
   createdAt: Scalars['DateTime']
   updatedAt: Scalars['DateTime']
   deletedAt?: Maybe<Scalars['DateTime']>
-  id: Scalars['ID']
   email: Scalars['String']
   lastLoginAt?: Maybe<Scalars['DateTime']>
 }

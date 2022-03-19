@@ -1,0 +1,24 @@
+$colors-theme: (
+  primary: #21325e,
+  light: #3e497a,
+  warn: #f1d00a,
+  background: #f0f0f0,
+  border: #eeeeee,
+  grey-1: #111111,
+  grey-2: #333333,
+  grey-3: #555555,
+  grey-4: #777777,
+  grey-5: #999999,
+  grey-6: #aeaeae,
+  grey-7: #c3c3c3,
+  grey-8: #d9d9d9,
+  grey-9: #eeeeee,
+);
+
+@function get-color($name) {
+  @return if(
+    map-has-key($colors-theme, $name),
+    map-get($colors-theme, $name),
+    map-get($colors-theme, primary)
+  );
+}

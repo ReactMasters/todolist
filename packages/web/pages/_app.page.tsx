@@ -1,4 +1,4 @@
-import '@web/lib/global.scss'
+import '@web/styles/global.scss'
 import 'antd/dist/antd.css'
 
 import { AppProps } from 'next/app'
