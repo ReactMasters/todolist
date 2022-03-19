@@ -1,19 +1,21 @@
-import { gql, useQuery } from '@apollo/client'
 import AddItem from '@web/components/AddItem'
+import Header from '@web/components/Header/Header'
 import ItemList from '@web/components/ItemList'
 import { initializeApollo } from '@web/lib/apollo/client'
-
-import styles from './index.module.scss'
-import 'antd/dist/antd.css'
 import { Button } from 'antd'
+import 'antd/dist/antd.css'
+import styles from './index.module.scss'
 
 const Index = () => {
   return (
-    <div className={styles.wrapper}>
-      <AddItem />
-      <Button>Antd</Button>
-      <ItemList />
-    </div>
+    <>
+      <Header></Header>
+      <div className={styles.wrapper}>
+        <AddItem />
+        <Button>Antd</Button>
+        <ItemList />
+      </div>
+    </>
   )
 }
 
