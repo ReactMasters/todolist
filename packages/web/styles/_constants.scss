@@ -3,11 +3,13 @@ $edge-padding: 16px;
 $header-height: 32px;
 $footer-height: 32px;
 $ui-height: 48px;
+$ui-width: 120px;
 $border-radius: 4px;
 $font-size: 1.6rem;
 $font-nanum-square: 'NanumSquareR';
 
 @mixin ui-default {
+  min-width: $ui-width;
   height: $ui-height;
   border-radius: $border-radius;
   &.small {
@@ -18,9 +20,6 @@ $font-nanum-square: 'NanumSquareR';
     height: $ui-height + 10px;
     font-size: $font-size + 0.4rem;
   }
-}
-
-@mixin ui-full {
   &.full {
     display: block;
     width: 100%;
