@@ -7,7 +7,7 @@
     "gen:graphql": "graphql-codegen",
     "watch:graphql": "graphql-codegen --watch",
     "dev:next": "next",
-    "dev": "run-p dev:next watch:sass watch:graphql",
+    "dev": "run-p dev:next watch:graphql",
     "build": "yarn codegen && next build",
     "test": "jest",
     "start": "next start",
