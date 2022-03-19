@@ -1,0 +1,20 @@
+$max-width: 800px;
+$edge-padding: 16px;
+$header-height: 32px;
+$footer-height: 32px;
+$ui-height: 48px;
+$border-radius: 4px;
+$font-size: 1.4rem;
+$font-nanum-square: 'NanumSquareR';
+
+@mixin ui-default {
+  height: $ui-height;
+  border-radius: $border-radius;
+}
+
+@mixin ui-full {
+  &.full {
+    display: block;
+    width: 100%;
+  }
+}

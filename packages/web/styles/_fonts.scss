@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap');
+
+@font-face {
+  font-family: $font-nanum-square;
+  src: local($font-nanum-square),
+    url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquare/NanumSquareR.eot),
+    url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquare/NanumSquareR.eot?#iefix)
+      format('embedded-opentype'),
+    url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquare/NanumSquareR.woff)
+      format('woff'),
+    url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquare/NanumSquareR.ttf)
+      format('truetype');
+  font-display: swap;
+}
