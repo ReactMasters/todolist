@@ -4,12 +4,20 @@ $header-height: 32px;
 $footer-height: 32px;
 $ui-height: 48px;
 $border-radius: 4px;
-$font-size: 1.4rem;
+$font-size: 1.6rem;
 $font-nanum-square: 'NanumSquareR';
 
 @mixin ui-default {
   height: $ui-height;
   border-radius: $border-radius;
+  &.small {
+    height: $ui-height - 10px;
+    font-size: $font-size - 0.2rem;
+  }
+  &.large {
+    height: $ui-height + 10px;
+    font-size: $font-size + 0.4rem;
+  }
 }
 
 @mixin ui-full {
