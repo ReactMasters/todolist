@@ -1,6 +1,6 @@
 import { gql, useQuery } from '@apollo/client'
 import AddItem from '@web/components/AddItem'
-import ItemList from '@web/components/ItemList'
+import TodoItemList from '@web/components/TodoItemList'
 import { initializeApollo } from '@web/lib/apollo/client'
 
 import styles from './index.module.scss'
@@ -12,7 +12,7 @@ const Index = () => {
     <div className={styles.wrapper}>
       <AddItem />
       <Button>Antd</Button>
-      <ItemList />
+      <TodoItemList />
     </div>
   )
 }
