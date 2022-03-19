@@ -1,0 +1,51 @@
+@import '../styles/common';
+
+.button {
+  @include ui-default;
+  @include ui-full;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 $edge-padding;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: bold;
+  color: get-color('grey-1');
+  background-color: get-color('grey-9');
+  transition: background-color 0.3s;
+  border: none;
+  &:hover {
+    background-color: get-color('grey-8');
+  }
+  &.outlined {
+    background-color: get-color('background');
+    border: 1px solid get-color('grey-1');
+  }
+  &.transparent {
+    background-color: transparent;
+  }
+
+  &:active {
+    background-color: get-color('grey-7');
+  }
+  &.primary {
+    background-color: get-color('primary');
+    color: white;
+    &:hover {
+      background-color: get-color('dark');
+    }
+    &:active {
+      background-color: get-color('darker');
+    }
+  }
+  &:disabled {
+    background-color: get-color('grey-9');
+    color: get-color('grey-8');
+    &:hover {
+      background-color: get-color('grey-9');
+    }
+    &:active {
+      background-color: get-color('grey-9');
+    }
+  }
+}
