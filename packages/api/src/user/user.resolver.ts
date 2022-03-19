@@ -1,8 +1,14 @@
+import { UseGuards } from '@nestjs/common'
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql'
 import { CreateUserInput } from './dto/create-user.input'
 import { CreateUserOutput } from './dto/create-user.output'
+import { LoginInput } from './dto/login.input'
+import { LoginOutput } from './dto/login.output'
+import { MeOutput } from './dto/me.output'
 import { UpdateUserInput } from './dto/update-user.input'
 import { User } from './entities/user.entity'
+import { CurrentUser } from './user.decorator'
+import { UserGuard } from './user.guard'
 import { UserService } from './user.service'
 
 @Resolver(() => User)
@@ -12,18 +18,33 @@ export class UserResolver {
   @Mutation(() => CreateUserOutput)
   async createUser(
     @Args('createUserInput') createUserInput: CreateUserInput
-  ): Promise<CreateUserOutput> {
+  ): Promise<typeof CreateUserOutput> {
     try {
-      const user = await this.userService.create(createUserInput)
-      return {
-        success: true,
-        user,
-      }
+      return await this.userService.create(createUserInput)
     } catch (error) {
-      return {
-        success: false,
-        message: error?.message ?? error,
-      }
+      return { message: error?.message ?? error }
+    }
+  }
+
+  @Mutation(() => LoginOutput)
+  async login(
+    @Args('loginInput') loginInput: LoginInput
+  ): Promise<typeof LoginOutput> {
+    try {
+      return await this.userService.login(loginInput)
+    } catch (error) {
+      return { message: error?.message ?? error }
+    }
+  }
+
+  @UseGuards(UserGuard)
+  @Query(() => MeOutput)
+  async me(@CurrentUser() user?: User): Promise<typeof MeOutput> {
+    try {
+      if (!user) throw 'login need'
+      return { user }
+    } catch (error) {
+      return { message: error?.message ?? error }
     }
   }
 

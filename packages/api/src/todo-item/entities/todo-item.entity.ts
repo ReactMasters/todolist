@@ -1,22 +1,22 @@
 import { Field, ObjectType } from '@nestjs/graphql'
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import * as mongoose from 'mongoose'
+import { BaseEntity } from 'src/base/base.entity'
 import { Tag } from 'src/tag/entities/tag.entity'
-import { Auditable } from 'src/types/auditable/auditable.entity'
-import { TodoStatus } from 'src/types/todo-status/todo-status.entity'
+import { TodoStatus } from 'src/todo-item/dto/todo-status.enum'
 
-export type TodoDocument = Todo & mongoose.Document
+export type TodoDocument = TodoItem & mongoose.Document
 
 @ObjectType()
 @Schema()
-export class Todo extends Auditable {
+export class TodoItem extends BaseEntity {
   @Field()
   @Prop()
   content: string
 
   @Field(() => TodoStatus)
   @Prop({ required: true })
-  todoStatus: TodoStatus
+  status: TodoStatus
 
   @Field(() => [Tag])
   @Prop({
@@ -29,4 +29,4 @@ export class Todo extends Auditable {
   dueDateTime: Date | null
 }
 
-export const TodoSchema = SchemaFactory.createForClass(Todo)
+export const TodoItemSchema = SchemaFactory.createForClass(TodoItem)

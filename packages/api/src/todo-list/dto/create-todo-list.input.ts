@@ -1,8 +1,8 @@
 import { Field, InputType, OmitType, PartialType } from '@nestjs/graphql'
-import { TodoGroup } from '../entities/todo_group.entity'
+import { TodoList } from '../entities/todo-list.entity'
 
 @InputType()
-export class CreateTodoGroupInput extends OmitType(PartialType(TodoGroup), [
+export class CreateTodoListInput extends OmitType(PartialType(TodoList), [
   'id',
 ]) {
   @Field(() => String)

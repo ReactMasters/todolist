@@ -2,15 +2,14 @@ import { Field, ObjectType } from '@nestjs/graphql'
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import * as mongoose from 'mongoose'
 import { Document } from 'mongoose'
-import { Auditable } from 'src/types/auditable/auditable.entity'
+import { BaseEntity } from 'src/base/base.entity'
 import { User } from 'src/user/entities/user.entity'
 
 export type TagDocument = Tag & Document
 
 @ObjectType()
 @Schema()
-export class Tag extends Auditable {
-
+export class Tag extends BaseEntity {
   @Field()
   @Prop()
   name: string

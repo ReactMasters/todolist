@@ -1,9 +1,9 @@
-import { Field, ID, ObjectType } from '@nestjs/graphql';
-import { Prop, Schema } from '@nestjs/mongoose';
+import { Field, ID, ObjectType } from '@nestjs/graphql'
+import { Prop, Schema } from '@nestjs/mongoose'
 
 @ObjectType({ isAbstract: true })
 @Schema()
-export abstract class Auditable {
+export abstract class BaseEntity {
   @Field(() => ID)
   id: string
 

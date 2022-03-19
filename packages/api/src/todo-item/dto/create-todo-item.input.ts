@@ -1,14 +1,16 @@
 import { Field, InputType, OmitType, PartialType } from '@nestjs/graphql'
-import { TodoStatus } from 'src/types/todo-status/todo-status.entity'
-import { Todo } from '../entities/todo.entity'
+import { TodoStatus } from 'src/todo-item/dto/todo-status.enum'
+import { TodoItem } from '../entities/todo-item.entity'
 
 @InputType()
-export class CreateTodoInput extends OmitType(PartialType(Todo), ['id']) {
+export class CreateTodoItemInput extends OmitType(PartialType(TodoItem), [
+  'id',
+]) {
   @Field()
   content: string
 
   @Field({ nullable: true })
-  todoStatus?: TodoStatus
+  status?: TodoStatus
 
   // @Field(() => [String])
   // tagNames?: String[];
