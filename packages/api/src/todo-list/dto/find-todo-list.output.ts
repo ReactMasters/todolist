@@ -4,7 +4,9 @@ import { TodoList } from '../entities/todo-list.entity'
 
 @ObjectType()
 class FindTodoListSuccess {
-  @Field(() => TodoList)
+  @Field(() => TodoList, {
+    nullable: true,
+  })
   todoList: TodoList
 }
 
@@ -15,7 +17,7 @@ export const FindTodoListOutput = createUnionType({
   name: 'FindTodoListOutput',
   types: () => [FindTodoListSuccess, FindTodoListError],
   resolveType: (value) => {
-    if (value?.id) {
+    if (value?.todoList) {
       return FindTodoListSuccess
     }
     return FindTodoListError
