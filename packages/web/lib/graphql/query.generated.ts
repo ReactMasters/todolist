@@ -1,26 +1,23 @@
-import * as Types from '../lib/graphql/types'
+import * as Types from './types'
 
 import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core'
-export type IndexPageQueryVariables = Types.Exact<{ [key: string]: never }>
+export type AuthPageQueryVariables = Types.Exact<{ [key: string]: never }>
 
-export type IndexPageQuery = { __typename?: 'Query' } & {
+export type AuthPageQuery = { __typename?: 'Query' } & {
   me:
-    | ({ __typename?: 'MeSuccess' } & {
-        user: { __typename?: 'User' } & Pick<
-          Types.User,
-          'id' | 'email' | 'lastLoginAt'
-        >
+    | ({ __typename: 'MeSuccess' } & {
+        user: { __typename?: 'User' } & Pick<Types.User, 'id' | 'email'>
       })
-    | ({ __typename?: 'MeError' } & Pick<Types.MeError, 'message'>)
+    | ({ __typename: 'MeError' } & Pick<Types.MeError, 'message'>)
 }
 
-export const IndexPageDocument = {
+export const AuthPageDocument = {
   kind: 'Document',
   definitions: [
     {
       kind: 'OperationDefinition',
       operation: 'query',
-      name: { kind: 'Name', value: 'IndexPage' },
+      name: { kind: 'Name', value: 'AuthPage' },
       selectionSet: {
         kind: 'SelectionSet',
         selections: [
@@ -30,6 +27,7 @@ export const IndexPageDocument = {
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
+                { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
                 {
                   kind: 'InlineFragment',
                   typeCondition: {
@@ -69,10 +67,6 @@ export const IndexPageDocument = {
                               kind: 'Field',
                               name: { kind: 'Name', value: 'email' },
                             },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'lastLoginAt' },
-                            },
                           ],
                         },
                       },
@@ -86,4 +80,4 @@ export const IndexPageDocument = {
       },
     },
   ],
-} as unknown as DocumentNode<IndexPageQuery, IndexPageQueryVariables>
+} as unknown as DocumentNode<AuthPageQuery, AuthPageQueryVariables>

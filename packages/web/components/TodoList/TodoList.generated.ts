@@ -1,8 +1,6 @@
-import * as Types from '../../lib/graphql'
+import * as Types from '../../lib/graphql/types'
 
-import { gql } from '@apollo/client'
-import * as Apollo from '@apollo/client'
-const defaultOptions = {}
+import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core'
 export type FindTodoListQueryVariables = Types.Exact<{
   id: Types.Scalars['String']
 }>
@@ -27,74 +25,128 @@ export type FindTodoListQuery = { __typename?: 'Query' } & {
       >)
 }
 
-export const FindTodoListDocument = gql`
-  query FindTodoList($id: String!) {
-    findTodoList(findTodoListInput: { id: $id }) {
-      ... on FindTodoListSuccess {
-        todoList {
-          id
-          todos {
-            id
-            dueDateTime
-            content
-            status
-          }
-        }
-      }
-      ... on FindTodoListError {
-        message
-      }
-    }
-  }
-`
-
-/**
- * __useFindTodoListQuery__
- *
- * To run a query within a React component, call `useFindTodoListQuery` and pass it any options that fit your needs.
- * When your component renders, `useFindTodoListQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useFindTodoListQuery({
- *   variables: {
- *      id: // value for 'id'
- *   },
- * });
- */
-export function useFindTodoListQuery(
-  baseOptions: Apollo.QueryHookOptions<
-    FindTodoListQuery,
-    FindTodoListQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useQuery<FindTodoListQuery, FindTodoListQueryVariables>(
-    FindTodoListDocument,
-    options
-  )
-}
-export function useFindTodoListLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    FindTodoListQuery,
-    FindTodoListQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useLazyQuery<FindTodoListQuery, FindTodoListQueryVariables>(
-    FindTodoListDocument,
-    options
-  )
-}
-export type FindTodoListQueryHookResult = ReturnType<
-  typeof useFindTodoListQuery
->
-export type FindTodoListLazyQueryHookResult = ReturnType<
-  typeof useFindTodoListLazyQuery
->
-export type FindTodoListQueryResult = Apollo.QueryResult<
-  FindTodoListQuery,
-  FindTodoListQueryVariables
->
+export const FindTodoListDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'FindTodoList' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'String' },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'findTodoList' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'findTodoListInput' },
+                value: {
+                  kind: 'ObjectValue',
+                  fields: [
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'id' },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'id' },
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'InlineFragment',
+                  typeCondition: {
+                    kind: 'NamedType',
+                    name: { kind: 'Name', value: 'FindTodoListSuccess' },
+                  },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'todoList' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'id' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'todos' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'id' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: {
+                                      kind: 'Name',
+                                      value: 'dueDateTime',
+                                    },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'content' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'status' },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: 'InlineFragment',
+                  typeCondition: {
+                    kind: 'NamedType',
+                    name: { kind: 'Name', value: 'FindTodoListError' },
+                  },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'message' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<FindTodoListQuery, FindTodoListQueryVariables>
