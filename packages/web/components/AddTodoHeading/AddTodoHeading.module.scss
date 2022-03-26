@@ -1,0 +1,38 @@
+.wrapper {
+  margin-bottom: 10px;
+  padding: 0 15px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+
+.leftWrapper,
+.titleWrapper,
+.rightWrapper {
+  display: flex;
+  flex: 1;
+}
+
+.leftWrapper {
+  justify-content: flex-start;
+}
+
+.titleWrapper {
+  justify-content: center;
+}
+
+.title {
+  text-align: center;
+  font-size: 18px;
+  color: black;
+}
+
+.rightWrapper {
+  justify-content: flex-end;
+}
+
+.right,
+.left {
+  color: #7a747d;
+  font-size: 15px;
+}

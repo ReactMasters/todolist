@@ -1,9 +1,14 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import { Button } from 'antd'
+import AddTodoItem from 'components/AddTodoItem'
 import Cookies from 'js-cookie'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useCallback } from 'react'
 
-import { gql } from '@apollo/client'
+import { gql, useApolloClient } from '@apollo/client'
+import AddItem from '@web/components/AddItem'
+import ItemList from '@web/components/ItemList'
 import { ROUTES, TOKEN_KEY } from '@web/lib/constant'
 
 import styles from './index.module.scss'
@@ -28,11 +33,13 @@ export const query = gql`
 
 const Index = () => {
   const router = useRouter()
+  const client = useApolloClient()
   const { data, error, loading } = useIndexPageQuery()
 
   const handleLogout = useCallback(() => {
     Cookies.remove(TOKEN_KEY)
     router.push(ROUTES.LOGIN)
+    client.resetStore()
   }, [])
 
   if (error) return <div className={styles.wrapper}>에러!</div>
@@ -52,18 +59,13 @@ const Index = () => {
     <div className={styles.wrapper}>
       <h1>email : {data.me.user.email}</h1>
       <h1>lastLoginAt : {data.me.user.lastLoginAt}</h1>
-      <button onClick={handleLogout}>로그아웃</button>
+      <Button onClick={handleLogout}>로그아웃</Button>
+      <AddItem />
+      <Button>Antd</Button>
+      <ItemList />
+      <AddTodoItem></AddTodoItem>
     </div>
   )
 }
-
-// export async function getStaticProps() {
-//   const apolloClient = initializeApollo()
-//   return {
-//     props: {
-//       initialApolloState: apolloClient.cache.extract(),
-//     },
-//   }
-// }
 
 export default Index

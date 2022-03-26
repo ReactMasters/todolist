@@ -3,10 +3,9 @@ import React, { ChangeEventHandler, useCallback } from 'react'
 import { useReactiveVar } from '@apollo/client'
 
 import { passwordVar } from '../index.state'
+import { Input } from 'antd'
 
-type Props = {}
-
-const Password = (props: Props) => {
+const Password = () => {
   const password = useReactiveVar(passwordVar)
   const handleChange = useCallback<ChangeEventHandler<HTMLInputElement>>(
     (e) => {
@@ -14,11 +13,7 @@ const Password = (props: Props) => {
     },
     []
   )
-  return (
-    <div>
-      <input type="password" value={password} onChange={handleChange} />
-    </div>
-  )
+  return <Input type="password" value={password} onChange={handleChange} />
 }
 
 export default Password

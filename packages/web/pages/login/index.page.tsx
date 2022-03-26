@@ -8,8 +8,6 @@ import styles from './index.module.scss'
 import { useLoginPageQuery } from './index.page.generated'
 import LoginForm from './components/LoginForm'
 
-type Props = {}
-
 export const query = gql`
   query LoginPage {
     me {
@@ -27,7 +25,7 @@ export const query = gql`
   }
 `
 
-const LoginPage = (props: Props) => {
+const LoginPage = () => {
   const router = useRouter()
   const { data, error, loading } = useLoginPageQuery()
 

@@ -3,7 +3,7 @@ import React, { ChangeEventHandler, useCallback } from 'react'
 import { useReactiveVar } from '@apollo/client'
 
 import { emailVar } from '../index.state'
-
+import { Input } from 'antd'
 type Props = {}
 
 const Email = (props: Props) => {
@@ -14,11 +14,7 @@ const Email = (props: Props) => {
     },
     []
   )
-  return (
-    <div>
-      <input type="email" value={email} onChange={handleEmailChange} />
-    </div>
-  )
+  return <Input type="email" value={email} onChange={handleEmailChange} />
 }
 
 export default Email
