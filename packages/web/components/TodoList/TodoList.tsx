@@ -2,7 +2,7 @@ import { gql, useQuery } from '@apollo/client'
 import React from 'react'
 
 type Props = {
-  todoListId: string
+  todoListId?: string
 }
 
 export const findTodoList = gql`

@@ -10,7 +10,7 @@ const TodoListPage = (props: Props) => {
     <>
       <Header></Header>
       <div>
-        <TodoList todoListId="623e45133f4c5d61e137a573"></TodoList>
+        <TodoList></TodoList>
         <ItemList />
       </div>
     </>
