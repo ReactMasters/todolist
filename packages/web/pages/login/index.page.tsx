@@ -1,12 +1,12 @@
 import { useRouter } from 'next/router'
 
 import { gql } from '@apollo/client'
+import AuthForm from '@web/components/AuthForm'
 import Layout from '@web/components/Layout'
 
 import LoginHeader from './components/LoginHeader'
 import styles from './index.module.scss'
 import { useLoginPageQuery } from './index.page.generated'
-import LoginForm from './components/LoginForm'
 
 export const query = gql`
   query LoginPage {
@@ -39,7 +39,7 @@ const LoginPage = () => {
   return (
     <Layout title="로그인" className={styles.wrapper}>
       <LoginHeader />
-      <LoginForm />
+      <AuthForm type="login" />
     </Layout>
   )
 }
