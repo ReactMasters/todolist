@@ -7,14 +7,17 @@ export class CreateTodoItemInput extends OmitType(PartialType(TodoItem), [
   'id',
 ]) {
   @Field()
+  todoListId: string
+
+  @Field()
   content: string
 
   @Field({ nullable: true })
   status?: TodoStatus
 
-  // @Field(() => [String])
-  // tagNames?: String[];
-
   @Field({ nullable: true })
   dueDateTime: Date
+
+  @Field()
+  ownerId: string
 }
