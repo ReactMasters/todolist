@@ -1,4 +1,8 @@
+import { UseGuards } from '@nestjs/common'
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql'
+import { User } from 'src/user/entities/user.entity'
+import { CurrentUser } from 'src/user/user.decorator'
+import { UserGuard } from 'src/user/user.guard'
 import { CreateTodoListInput } from './dto/create-todo-list.input'
 import { CreateTodoListOutput } from './dto/create-todo-list.output'
 import { FindTodoListInput } from './dto/find-todo-list.input'
@@ -27,13 +31,16 @@ export class TodoListResolver {
     return res
   }
 
+  @UseGuards(UserGuard)
   @Query(() => FindTodoListOutput)
   async findTodoList(
-    @Args('findTodoListInput') findTodoListInput: FindTodoListInput
+    @Args('findTodoListInput') findTodoListInput: FindTodoListInput,
+    @CurrentUser() user?: User
   ): Promise<typeof FindTodoListOutput> {
     try {
       const todoList = await this.todoListService.findTodoList(
-        findTodoListInput.id
+        findTodoListInput.id,
+        user.id
       )
       return {
         todoList,
