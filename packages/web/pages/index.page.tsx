@@ -1,10 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { Button } from 'antd'
+import AddTodoItem from 'components/AddTodoItem'
 import Cookies from 'js-cookie'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useCallback } from 'react'
 
 import { gql, useApolloClient } from '@apollo/client'
+import AddItem from '@web/components/AddItem'
+import ItemList from '@web/components/ItemList'
 import { ROUTES, TOKEN_KEY } from '@web/lib/constant'
 
 import styles from './index.module.scss'
@@ -56,6 +60,10 @@ const Index = () => {
       <h1>email : {data.me.user.email}</h1>
       <h1>lastLoginAt : {data.me.user.lastLoginAt}</h1>
       <button onClick={handleLogout}>로그아웃</button>
+      <AddItem />
+      <Button>Antd</Button>
+      <ItemList />
+      <AddTodoItem></AddTodoItem>
     </div>
   )
 }
