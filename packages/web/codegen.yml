@@ -2,7 +2,7 @@ overwrite: true
 schema:
   - ../api/src/schema.gql
 generates:
-  lib/graphql.ts:
+  lib/graphql/types.ts:
     config:
       scalars:
         DateTime: string
@@ -13,10 +13,11 @@ generates:
       - './pages/**/!(*.generated).{ts,tsx}'
       - './components/**/!(*.generated).{ts,tsx}'
       - './pages/components/**/!(*.generated).{ts,tsx}'
+      - './lib/graphql/**/!(*.types).{ts,tsx}'
     preset: near-operation-file
     presetConfig:
       extension: .generated.ts
-      baseTypesPath: lib/graphql.ts
+      baseTypesPath: lib/graphql/types.ts
     plugins:
       - typescript-operations
       - typed-document-node

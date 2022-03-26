@@ -1,4 +1,4 @@
-import * as Types from '../lib/graphql'
+import * as Types from '../lib/graphql/types'
 
 import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core'
 export type IndexPageQueryVariables = Types.Exact<{ [key: string]: never }>
