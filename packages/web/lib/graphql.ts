@@ -31,6 +31,7 @@ export type CreateTagOutput = {
 }
 
 export type CreateTodoItemInput = {
+  todoListId: Scalars['String']
   content: Scalars['String']
   status?: Maybe<Scalars['String']>
   dueDateTime?: Maybe<Scalars['DateTime']>
@@ -136,7 +137,7 @@ export type Mutation = {
   updateUser: User
   removeUser: User
   createTag: CreateTagOutput
-  createTotoItem: CreateTodoItemOutput
+  createTodoItem: CreateTodoItemOutput
   createTodoList: CreateTodoListOutput
 }
 
@@ -160,7 +161,7 @@ export type MutationCreateTagArgs = {
   createTagInput: CreateTagInput
 }
 
-export type MutationCreateTotoItemArgs = {
+export type MutationCreateTodoItemArgs = {
   createTodoItemInput: CreateTodoItemInput
 }
 

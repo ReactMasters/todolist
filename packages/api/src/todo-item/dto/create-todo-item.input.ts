@@ -17,7 +17,4 @@ export class CreateTodoItemInput extends OmitType(PartialType(TodoItem), [
 
   @Field({ nullable: true })
   dueDateTime: Date
-
-  @Field()
-  ownerId: string
 }

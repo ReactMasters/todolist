@@ -14,14 +14,16 @@ export class TodoItemService {
     private readonly todoListService: TodoListService
   ) {}
 
-  async create({
-    todoListId,
-    content,
-    status: todoStatus = TodoStatus.IN_PROGRESS,
-    tags = [],
-    dueDateTime = null,
-    ownerId,
-  }: CreateTodoItemInput) {
+  async create(
+    {
+      todoListId,
+      content,
+      status: todoStatus = TodoStatus.IN_PROGRESS,
+      tags = [],
+      dueDateTime = null,
+    }: CreateTodoItemInput,
+    ownerId
+  ) {
     const newTodoItem = await new this.todoItemModel({
       content,
       todoStatus,
