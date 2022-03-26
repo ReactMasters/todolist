@@ -75,6 +75,22 @@ export type CreateUserSuccess = {
   token: Scalars['String']
 }
 
+export type FindTodoListError = {
+  __typename?: 'FindTodoListError'
+  message: Scalars['String']
+}
+
+export type FindTodoListInput = {
+  id: Scalars['String']
+}
+
+export type FindTodoListOutput = FindTodoListSuccess | FindTodoListError
+
+export type FindTodoListSuccess = {
+  __typename?: 'FindTodoListSuccess'
+  todoList?: Maybe<TodoList>
+}
+
 export type ListTagsOutput = {
   __typename?: 'ListTagsOutput'
   success: Scalars['Boolean']
@@ -158,10 +174,15 @@ export type Query = {
   users: Array<User>
   user: User
   listTags: ListTagsOutput
+  findTodoList: FindTodoListOutput
 }
 
 export type QueryUserArgs = {
   id: Scalars['String']
+}
+
+export type QueryFindTodoListArgs = {
+  findTodoListInput: FindTodoListInput
 }
 
 export type Tag = {
