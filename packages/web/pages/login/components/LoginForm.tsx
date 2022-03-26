@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { FormEventHandler, useCallback } from 'react'
 import Cookies from 'js-cookie'
-import { gql, useReactiveVar } from '@apollo/client'
+import { gql, useApolloClient, useReactiveVar } from '@apollo/client'
 import { MESSAGES, TOKEN_KEY } from '@web/lib/constant'
 
 import { emailVar, loginLoadingVar, passwordVar } from '../index.state'
@@ -24,6 +24,7 @@ export const query = gql`
 `
 
 const LoginForm = () => {
+  const clinet = useApolloClient()
   const router = useRouter()
   const [login] = useLoginMutation()
   const loading = useReactiveVar(loginLoadingVar)
@@ -48,6 +49,8 @@ const LoginForm = () => {
     }
 
     Cookies.set(TOKEN_KEY, data.login.token)
+    clinet.resetStore()
+    loginLoadingVar(false)
     router.replace('/')
   }, [])
   return (

@@ -1,9 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Cookies from 'js-cookie'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useCallback } from 'react'
 
-import { gql } from '@apollo/client'
+import { gql, useApolloClient } from '@apollo/client'
 import { ROUTES, TOKEN_KEY } from '@web/lib/constant'
 
 import styles from './index.module.scss'
@@ -28,11 +29,13 @@ export const query = gql`
 
 const Index = () => {
   const router = useRouter()
+  const client = useApolloClient()
   const { data, error, loading } = useIndexPageQuery()
 
   const handleLogout = useCallback(() => {
     Cookies.remove(TOKEN_KEY)
     router.push(ROUTES.LOGIN)
+    client.resetStore()
   }, [])
 
   if (error) return <div className={styles.wrapper}>에러!</div>
@@ -56,14 +59,5 @@ const Index = () => {
     </div>
   )
 }
-
-// export async function getStaticProps() {
-//   const apolloClient = initializeApollo()
-//   return {
-//     props: {
-//       initialApolloState: apolloClient.cache.extract(),
-//     },
-//   }
-// }
 
 export default Index
