@@ -12,13 +12,24 @@ export type LoginMutation = { __typename?: 'Mutation' } & {
 }
 
 export type SignUpMutationVariables = Types.Exact<{
-  loginInput: Types.LoginInput
+  signUpInput: Types.CreateUserInput
 }>
 
 export type SignUpMutation = { __typename?: 'Mutation' } & {
-  login:
-    | ({ __typename?: 'LoginSuccess' } & Pick<Types.LoginSuccess, 'token'>)
-    | ({ __typename?: 'LoginError' } & Pick<Types.LoginError, 'message'>)
+  createUser:
+    | ({ __typename?: 'CreateUserSuccess' } & Pick<
+        Types.CreateUserSuccess,
+        'token'
+      > & {
+          user: { __typename?: 'User' } & Pick<
+            Types.User,
+            'id' | 'email' | 'lastLoginAt'
+          >
+        })
+    | ({ __typename?: 'CreateUserError' } & Pick<
+        Types.CreateUserError,
+        'message'
+      >)
 }
 
 export const LoginDocument = {
@@ -112,13 +123,13 @@ export const SignUpDocument = {
           kind: 'VariableDefinition',
           variable: {
             kind: 'Variable',
-            name: { kind: 'Name', value: 'loginInput' },
+            name: { kind: 'Name', value: 'signUpInput' },
           },
           type: {
             kind: 'NonNullType',
             type: {
               kind: 'NamedType',
-              name: { kind: 'Name', value: 'LoginInput' },
+              name: { kind: 'Name', value: 'CreateUserInput' },
             },
           },
         },
@@ -128,14 +139,14 @@ export const SignUpDocument = {
         selections: [
           {
             kind: 'Field',
-            name: { kind: 'Name', value: 'login' },
+            name: { kind: 'Name', value: 'createUser' },
             arguments: [
               {
                 kind: 'Argument',
-                name: { kind: 'Name', value: 'loginInput' },
+                name: { kind: 'Name', value: 'createUserInput' },
                 value: {
                   kind: 'Variable',
-                  name: { kind: 'Name', value: 'loginInput' },
+                  name: { kind: 'Name', value: 'signUpInput' },
                 },
               },
             ],
@@ -146,20 +157,7 @@ export const SignUpDocument = {
                   kind: 'InlineFragment',
                   typeCondition: {
                     kind: 'NamedType',
-                    name: { kind: 'Name', value: 'LoginSuccess' },
-                  },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      { kind: 'Field', name: { kind: 'Name', value: 'token' } },
-                    ],
-                  },
-                },
-                {
-                  kind: 'InlineFragment',
-                  typeCondition: {
-                    kind: 'NamedType',
-                    name: { kind: 'Name', value: 'LoginError' },
+                    name: { kind: 'Name', value: 'CreateUserError' },
                   },
                   selectionSet: {
                     kind: 'SelectionSet',
@@ -168,6 +166,40 @@ export const SignUpDocument = {
                         kind: 'Field',
                         name: { kind: 'Name', value: 'message' },
                       },
+                    ],
+                  },
+                },
+                {
+                  kind: 'InlineFragment',
+                  typeCondition: {
+                    kind: 'NamedType',
+                    name: { kind: 'Name', value: 'CreateUserSuccess' },
+                  },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'user' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'id' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'email' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'lastLoginAt' },
+                            },
+                          ],
+                        },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'token' } },
                     ],
                   },
                 },
