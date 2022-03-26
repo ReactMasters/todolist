@@ -1,6 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { FormEventHandler, useCallback } from 'react'
+import { Button } from 'antd'
 import Cookies from 'js-cookie'
+import { useRouter } from 'next/router'
+import React, { FormEventHandler, useCallback } from 'react'
+
 import { gql, useApolloClient, useReactiveVar } from '@apollo/client'
 import { MESSAGES, TOKEN_KEY } from '@web/lib/constant'
 
@@ -8,7 +11,7 @@ import { emailVar, loginLoadingVar, passwordVar } from '../index.state'
 import Email from './Email'
 import { useLoginMutation } from './LoginForm.generated'
 import Password from './Password'
-import { useRouter } from 'next/router'
+import styles from './LoginForm.module.scss'
 
 export const query = gql`
   mutation Login($loginInput: LoginInput!) {
@@ -54,16 +57,14 @@ const LoginForm = () => {
     router.replace('/')
   }, [])
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <Email />
-        <Password />
-        <button type="submit" disabled={loading}>
-          로그인
-        </button>
-      </form>
-      <button type="button">회원가입</button>
-    </div>
+    <form className={styles.form} onSubmit={handleSubmit}>
+      <Email />
+      <Password />
+      <Button type="primary" htmlType="submit" disabled={loading}>
+        로그인
+      </Button>
+      <Button htmlType="button">회원가입</Button>
+    </form>
   )
 }
 

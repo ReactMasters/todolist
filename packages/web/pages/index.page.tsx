@@ -59,7 +59,7 @@ const Index = () => {
     <div className={styles.wrapper}>
       <h1>email : {data.me.user.email}</h1>
       <h1>lastLoginAt : {data.me.user.lastLoginAt}</h1>
-      <button onClick={handleLogout}>로그아웃</button>
+      <Button onClick={handleLogout}>로그아웃</Button>
       <AddItem />
       <Button>Antd</Button>
       <ItemList />
