@@ -39,9 +39,11 @@ export class TodoListResolver {
   ): Promise<typeof FindTodoListOutput> {
     try {
       const todoList = await this.todoListService.findTodoList(
-        findTodoListInput.id,
-        user.id
+        findTodoListInput.id
       )
+      if (!(todoList.owners as unknown as string[]).includes(user.id)) {
+        throw new Error('Unauthorized')
+      }
       return {
         todoList,
       }
