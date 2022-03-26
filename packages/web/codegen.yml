@@ -19,7 +19,7 @@ generates:
       baseTypesPath: lib/graphql.ts
     plugins:
       - typescript-operations
-      - typescript-react-apollo
+      - typed-document-node
 hooks:
   afterAllFileWrite:
     - prettier --write
