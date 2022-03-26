@@ -1,0 +1,115 @@
+.flex {
+  display: flex;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+}
+
+.addTodoItem {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+
+  .addTodoItemText {
+    margin-left: 10px;
+    font-size: 16px;
+    text-transform: none;
+  }
+}
+
+.addTodoItemButton {
+  background-color: powderblue;
+}
+
+.plusIcon {
+  display: flex;
+  align-items: center;
+}
+
+.addTodoItem.accordionActive .addTodoItemButton {
+  background-color: white;
+  min-height: 0px;
+  height: 0px;
+}
+
+.addTodoItemContent {
+  padding: 0;
+}
+
+.dateOption {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+}
+
+.dateIcon {
+  margin-right: 8px;
+  font-size: 20px;
+}
+
+.dayName {
+  margin-left: auto;
+}
+
+.editorWrapper {
+  box-sizing: border-box;
+  padding: 10px 15px;
+  width: 100%;
+  display: grid;
+  grid-template-areas:
+    'plus title'
+    'filler buttons';
+  grid-template-columns: minmax(25px, auto) 1fr;
+  grid-template-rows: 1fr auto;
+  row-gap: 10px;
+  align-items: center;
+
+  .gridPlus {
+    grid-area: plus;
+  }
+
+  .gridTitle {
+    grid-area: title;
+    legend {
+      display: none;
+    }
+  }
+
+  .gridFiller {
+    grid-area: filler;
+  }
+
+  .gridBtns {
+    grid-area: buttons;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 10px;
+    row-gap: 10px;
+    align-items: center;
+  }
+
+  .todayIcon {
+    margin-right: 10px;
+  }
+}
+
+.chip {
+  border-radius: 5px;
+  height: 27px;
+  color: white;
+
+  .chipLabel {
+    font-size: 12px;
+  }
+
+  .tagIcon {
+    color: white;
+    font-size: 18px;
+  }
+}
+
+.selectDateWrapper {
+  width: 100%;
+}
