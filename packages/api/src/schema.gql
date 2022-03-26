@@ -63,12 +63,6 @@ type TodoList {
   owners: [User!]!
 }
 
-type CreateTodoItemOutput {
-  success: Boolean!
-  message: String
-  todoItem: TodoItem
-}
-
 type CreateTodoListOutput {
   success: Boolean!
   message: String
@@ -166,6 +160,16 @@ input UpdateUserInput {
 
 input CreateTagInput {
   name: String!
+}
+
+union CreateTodoItemOutput = CreateTodoItemSuccess | CreateTodoItemError
+
+type CreateTodoItemSuccess {
+  todoItem: TodoItem!
+}
+
+type CreateTodoItemError {
+  message: String!
 }
 
 input CreateTodoItemInput {

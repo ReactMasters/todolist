@@ -30,6 +30,11 @@ export type CreateTagOutput = {
   tag?: Maybe<Tag>
 }
 
+export type CreateTodoItemError = {
+  __typename?: 'CreateTodoItemError'
+  message: Scalars['String']
+}
+
 export type CreateTodoItemInput = {
   todoListId: Scalars['String']
   content: Scalars['String']
@@ -37,11 +42,11 @@ export type CreateTodoItemInput = {
   dueDateTime?: Maybe<Scalars['DateTime']>
 }
 
-export type CreateTodoItemOutput = {
-  __typename?: 'CreateTodoItemOutput'
-  success: Scalars['Boolean']
-  message?: Maybe<Scalars['String']>
-  todoItem?: Maybe<TodoItem>
+export type CreateTodoItemOutput = CreateTodoItemSuccess | CreateTodoItemError
+
+export type CreateTodoItemSuccess = {
+  __typename?: 'CreateTodoItemSuccess'
+  todoItem: TodoItem
 }
 
 export type CreateTodoListInput = {

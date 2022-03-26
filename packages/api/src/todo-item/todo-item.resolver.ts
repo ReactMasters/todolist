@@ -17,15 +17,13 @@ export class TodoItemResolver {
   async createTodoItem(
     @Args('createTodoItemInput') createTodoItemInput: CreateTodoItemInput,
     @CurrentUser() user?: User
-  ): Promise<CreateTodoItemOutput> {
-    const res: CreateTodoItemOutput = {
-      success: true,
-    }
+  ): Promise<typeof CreateTodoItemOutput> {
     try {
-      res.todoItem = await this.todoService.create(createTodoItemInput, user.id)
+      return {
+        todoItem: await this.todoService.create(createTodoItemInput, user?.id),
+      }
     } catch (error) {
-      res.message = error?.message ?? ''
+      return { message: error?.message ?? '' }
     }
-    return res
   }
 }

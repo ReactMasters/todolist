@@ -18,7 +18,7 @@ export class TodoItemService {
     {
       todoListId,
       content,
-      status: todoStatus = TodoStatus.IN_PROGRESS,
+      status = TodoStatus.IN_PROGRESS,
       tags = [],
       dueDateTime = null,
     }: CreateTodoItemInput,
@@ -26,7 +26,7 @@ export class TodoItemService {
   ) {
     const newTodoItem = await new this.todoItemModel({
       content,
-      todoStatus,
+      status,
       tags,
       dueDateTime,
     }).save()
