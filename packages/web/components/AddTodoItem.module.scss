@@ -72,6 +72,9 @@
 
   .gridTitle {
     grid-area: title;
+    legend {
+      display: none;
+    }
   }
 
   .gridFiller {

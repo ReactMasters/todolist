@@ -171,7 +171,7 @@ const AddTodoItem = () => {
         <Box className={styles.editorWrapper}>
           <Add className={styles.gridPlus}></Add>
           <TextField
-            className={`${styles.titleInput} ${styles.gridTitle}`}
+            className={`${styles.gridTitle}`}
             value={taskTitle}
             onChange={(e) => setTaskTitle(e.target.value)}
           />
