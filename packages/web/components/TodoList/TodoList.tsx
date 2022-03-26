@@ -32,8 +32,12 @@ const TodoList = ({ todoListId }: Props) => {
       id: todoListId,
     },
   })
-  console.log(loading, data, error)
-  return <div>TodoList</div>
+  if (loading) return null
+  if (error) return <div>error</div>
+  const todos = (data?.findTodoList?.todoList?.todos ?? []).map((todo) => {
+    return <div key={todo.id}>{todo.name}</div>
+  })
+  return <div>{todos}</div>
 }
 
 export default TodoList
