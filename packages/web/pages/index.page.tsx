@@ -1,6 +1,7 @@
 import AddItem from '@web/components/AddItem'
 import Header from '@web/components/Header/Header'
 import ItemList from '@web/components/ItemList'
+import TodoList from '@web/components/TodoList/TodoList'
 import { initializeApollo } from '@web/lib/apollo/client'
 import { Button } from 'antd'
 import 'antd/dist/antd.css'
@@ -11,6 +12,7 @@ const Index = () => {
     <>
       <Header></Header>
       <div className={styles.wrapper}>
+        <TodoList todoListId="623e45133f4c5d61e137a573"></TodoList>
         <AddItem />
         <Button>Antd</Button>
         <ItemList />
