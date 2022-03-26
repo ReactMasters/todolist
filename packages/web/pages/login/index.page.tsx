@@ -1,34 +1,16 @@
 import { useRouter } from 'next/router'
 
-import { gql, useQuery } from '@apollo/client'
+import { useQuery } from '@apollo/client'
 import AuthForm from '@web/components/AuthForm'
+import styles from '@web/components/AuthForm/index.module.scss'
 import Layout from '@web/components/Layout'
 import Title from '@web/components/Title'
 import { APP_TITLE } from '@web/lib/constant'
-
-import styles from './index.module.scss'
-import { LoginPageDocument } from './index.page.generated'
-
-export const query = gql`
-  query LoginPage {
-    me {
-      __typename
-      ... on MeError {
-        message
-      }
-      ... on MeSuccess {
-        user {
-          id
-          email
-        }
-      }
-    }
-  }
-`
+import { AuthPageDocument } from '@web/lib/graphql/query.generated'
 
 const LoginPage = () => {
   const router = useRouter()
-  const { data, error, loading } = useQuery(LoginPageDocument)
+  const { data, error, loading } = useQuery(AuthPageDocument)
 
   if (error) return <div>에러!</div>
   if (!data || loading) return <div>로딩중...</div>
