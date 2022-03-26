@@ -1,11 +1,12 @@
-import { gql } from '@apollo/client'
-import { APP_TITLE } from '@web/lib/constant'
 import { useRouter } from 'next/router'
 
+import { gql } from '@apollo/client'
+import Layout from '@web/components/Layout'
+
+import LoginHeader from './components/LoginHeader'
 import styles from './index.module.scss'
 import { useLoginPageQuery } from './index.page.generated'
-
-type Props = {}
+import LoginForm from './components/LoginForm'
 
 export const query = gql`
   query LoginPage {
@@ -24,24 +25,22 @@ export const query = gql`
   }
 `
 
-const LoginPage = (props: Props) => {
+const LoginPage = () => {
   const router = useRouter()
-  const { data } = useLoginPageQuery()
+  const { data, error, loading } = useLoginPageQuery()
 
-  if (data?.me?.__typename === 'MeSuccess') {
-    // 이미 로그인됨
+  if (error) return <div>에러!</div>
+  if (!data || loading) return <div>로딩중...</div>
+  if (data.me.__typename === 'MeSuccess') {
     router.replace('/')
     return null
   }
 
   return (
-    <div className={styles.wrapper}>
-      <h1 className={styles.title}>{APP_TITLE}</h1>
-      <input type="text" />
-      <input type="text" />
-      <button>로그인</button>
-      <button>회원가입</button>
-    </div>
+    <Layout title="로그인" className={styles.wrapper}>
+      <LoginHeader />
+      <LoginForm />
+    </Layout>
   )
 }
 
