@@ -4,12 +4,17 @@ import Cookies from 'js-cookie'
 import { useRouter } from 'next/router'
 import React, { FormEventHandler, useCallback } from 'react'
 
-import { gql, useApolloClient, useReactiveVar } from '@apollo/client'
+import {
+  gql,
+  useApolloClient,
+  useMutation,
+  useReactiveVar,
+} from '@apollo/client'
 import { MESSAGES, TOKEN_KEY } from '@web/lib/constant'
 
 import styles from './index.module.scss'
 import Email from './Email'
-import { useLoginMutation } from './index.generated'
+import { LoginDocument, SignUpDocument } from './index.generated'
 import { emailVar, loginLoadingVar, passwordVar } from './index.state'
 import Password from './Password'
 
@@ -27,7 +32,7 @@ const Login = gql`
 `
 
 const SignUp = gql`
-  mutation Login($loginInput: LoginInput!) {
+  mutation SignUp($loginInput: LoginInput!) {
     login(loginInput: $loginInput) {
       ... on LoginSuccess {
         token
@@ -45,7 +50,8 @@ interface Props {
 const AuthForm = ({ type }: Props) => {
   const clinet = useApolloClient()
   const router = useRouter()
-  const [login] = useLoginMutation()
+  const [login] = useMutation(LoginDocument)
+  const [signup] = useMutation(SignUpDocument)
   const loading = useReactiveVar(loginLoadingVar)
   const handleSubmit = useCallback<FormEventHandler>(async (e) => {
     e.preventDefault()
