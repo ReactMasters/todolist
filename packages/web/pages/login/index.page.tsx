@@ -3,8 +3,9 @@ import { useRouter } from 'next/router'
 import { gql } from '@apollo/client'
 import AuthForm from '@web/components/AuthForm'
 import Layout from '@web/components/Layout'
+import Title from '@web/components/Title'
+import { APP_TITLE } from '@web/lib/constant'
 
-import LoginHeader from './components/LoginHeader'
 import styles from './index.module.scss'
 import { useLoginPageQuery } from './index.page.generated'
 
@@ -38,7 +39,7 @@ const LoginPage = () => {
 
   return (
     <Layout title="로그인" className={styles.wrapper}>
-      <LoginHeader />
+      <Title level={2}>{APP_TITLE}</Title>
       <AuthForm type="login" />
     </Layout>
   )
