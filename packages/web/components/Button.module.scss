@@ -1,0 +1,58 @@
+@import '../styles/common';
+
+@mixin button-bg($name) {
+  @if ($name == 'transparent') {
+    background-color: transparent;
+    color: get-color('grey-1');
+    border: 1px solid get-color('grey-1');
+  }
+  @if ($name == 'default') {
+    $bg: get-color('grey-9');
+    background-color: $bg;
+    &:hover {
+      background-color: darken($bg, 20%);
+    }
+    &:active {
+      background-color: darken($bg, 40%);
+    }
+    &:disabled {
+      color: lighten($bg, 10%);
+    }
+  } @else {
+    $bg: get-color($name);
+    background-color: $bg;
+    &:hover {
+      background-color: darken($bg, 5%);
+    }
+    &:active {
+      background-color: darken($bg, 10%);
+    }
+    &:disabled {
+      color: lighten($bg, 10%);
+    }
+  }
+}
+
+.button {
+  @include ui-default;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 $edge-padding;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  border: none;
+  @include button-bg('default');
+  &.primary {
+    color: white;
+    @include button-bg('primary');
+  }
+  &.outlined {
+    @include button-bg('transparent');
+  }
+  &.transparent {
+    background-color: transparent;
+  }
+}
