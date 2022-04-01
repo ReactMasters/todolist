@@ -4,7 +4,7 @@ import { TodoStatus, Tag as TodoTag } from '@web/lib/graphql/types'
 import styles from './TodoItem.module.scss'
 
 interface Props {
-  id: number
+  id: string
   content: string
   status: TodoStatus
   tags?: TodoTag[]
