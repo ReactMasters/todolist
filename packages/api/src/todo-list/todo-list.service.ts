@@ -15,4 +15,11 @@ export class TodoListService {
     const { name } = createTodoListInput
     return await new this.TodoListModel({ name }).save()
   }
+
+  async findTodoList(id: string, ownerId: string): Promise<TodoList> {
+    return await this.TodoListModel.findOne({
+      id,
+      owners: { $in: [ownerId] },
+    })
+  }
 }

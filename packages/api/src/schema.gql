@@ -80,6 +80,7 @@ type Query {
   users: [User!]!
   user(id: String!): User!
   listTags: ListTagsOutput!
+  findTodoList(findTodoListInput: FindTodoListInput!): FindTodoListOutput!
 }
 
 union MeOutput = MeSuccess | MeError
@@ -90,6 +91,20 @@ type MeSuccess {
 
 type MeError {
   message: String!
+}
+
+union FindTodoListOutput = FindTodoListSuccess | FindTodoListError
+
+type FindTodoListSuccess {
+  todoList: TodoList
+}
+
+type FindTodoListError {
+  message: String!
+}
+
+input FindTodoListInput {
+  id: String!
 }
 
 type Mutation {

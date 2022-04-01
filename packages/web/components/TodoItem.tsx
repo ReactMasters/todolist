@@ -1,6 +1,6 @@
 import { CalendarToday } from '@mui/icons-material'
 import { Checkbox, Tag } from 'antd'
-import { TodoStatus, Tag as TodoTag } from '@web/lib/graphql'
+import { TodoStatus, Tag as TodoTag } from '@web/lib/graphql/types'
 import styles from './TodoItem.module.scss'
 
 interface Props {
