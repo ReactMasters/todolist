@@ -15,6 +15,9 @@ export class User extends BaseEntity {
   @Prop({ required: true })
   password: string
 
+  @Prop({ required: true })
+  salt: string
+
   @Prop({ type: Date })
   @Field({ nullable: true })
   lastLoginAt: Date | null

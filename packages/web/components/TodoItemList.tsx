@@ -1,9 +1,9 @@
 import { useReactiveVar } from '@apollo/client'
 import localStates from '@web/lib/apollo/localStates'
 
-import TodoItem from '@web/components/TodoItem/TodoItem'
+import TodoItem from './TodoItem'
 
-const ItemList = () => {
+const TodoItemList = () => {
   const selectedItems = useReactiveVar(localStates.selectedItems)
 
   return (
@@ -15,4 +15,4 @@ const ItemList = () => {
   )
 }
 
-export default ItemList
+export default TodoItemList

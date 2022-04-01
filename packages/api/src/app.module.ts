@@ -3,8 +3,6 @@ import { ConfigModule } from '@nestjs/config'
 import { GraphQLModule } from '@nestjs/graphql'
 import { MongooseModule } from '@nestjs/mongoose'
 import { join } from 'path'
-import { AppController } from './app.controller'
-import { AppService } from './app.service'
 import { TagModule } from './tag/tag.module'
 import { TodoItemModule } from './todo-item/todo-item.module'
 import { TodoListModule } from './todo-list/todo-list.module'
@@ -29,7 +27,7 @@ import { UserModule } from './user/user.module'
     TodoItemModule,
     TodoListModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

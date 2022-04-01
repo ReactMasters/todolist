@@ -5,7 +5,7 @@ const signForm = makeVar({
   password: '',
 })
 
-const selectedItems = makeVar<string[]>([])
+const selectedItems = makeVar<string[]>(['todo1', 'todo2'])
 
 const localStates = {
   signForm,
