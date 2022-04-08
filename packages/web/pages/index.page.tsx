@@ -6,13 +6,13 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useCallback } from 'react'
 
-import { gql, useApolloClient } from '@apollo/client'
+import { gql, useApolloClient, useQuery } from '@apollo/client'
 import AddItem from '@web/components/AddItem'
 import ItemList from '@web/components/ItemList'
 import { ROUTES, TOKEN_KEY } from '@web/lib/constant'
 
 import styles from './index.module.scss'
-import { useIndexPageQuery } from './index.page.generated'
+import { IndexPageDocument } from './index.page.generated'
 
 export const query = gql`
   query IndexPage {
@@ -34,7 +34,7 @@ export const query = gql`
 const Index = () => {
   const router = useRouter()
   const client = useApolloClient()
-  const { data, error, loading } = useIndexPageQuery()
+  const { data, error, loading } = useQuery(IndexPageDocument)
 
   const handleLogout = useCallback(() => {
     Cookies.remove(TOKEN_KEY)
