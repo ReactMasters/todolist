@@ -1,5 +1,7 @@
 import { UseGuards } from '@nestjs/common'
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql'
+import { CreateTodoListInput } from 'src/todo-list/dto/create-todo-list.input'
+import { TodoListService } from 'src/todo-list/todo-list.service'
 import { CreateUserInput } from './dto/create-user.input'
 import { CreateUserOutput } from './dto/create-user.output'
 import { LoginInput } from './dto/login.input'
@@ -7,20 +9,36 @@ import { LoginOutput } from './dto/login.output'
 import { MeOutput } from './dto/me.output'
 import { UpdateUserInput } from './dto/update-user.input'
 import { User } from './entities/user.entity'
+import { DEFAULT_TODO_LIST_NAME } from './user.config'
 import { CurrentUser } from './user.decorator'
 import { UserGuard } from './user.guard'
 import { UserService } from './user.service'
 
 @Resolver(() => User)
 export class UserResolver {
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+    private readonly todoListService: TodoListService
+  ) {}
 
   @Mutation(() => CreateUserOutput)
   async createUser(
     @Args('createUserInput') createUserInput: CreateUserInput
   ): Promise<typeof CreateUserOutput> {
     try {
-      return await this.userService.create(createUserInput)
+      const newUser = await this.userService.create(createUserInput)
+      const defaultTodoListInput: CreateTodoListInput = {
+        name: DEFAULT_TODO_LIST_NAME,
+        owners: [newUser.user.id],
+      }
+      const defaultTodoList = await this.todoListService.createTodoList(
+        defaultTodoListInput
+      )
+
+      return {
+        ...newUser,
+        todoList: defaultTodoList,
+      }
     } catch (error) {
       return { message: error?.message ?? error }
     }

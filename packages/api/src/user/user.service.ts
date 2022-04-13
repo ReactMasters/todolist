@@ -67,7 +67,7 @@ export class UserService {
   async create({
     email,
     password,
-  }: CreateUserInput): Promise<CreateUserSuccess> {
+  }: CreateUserInput): Promise<Omit<CreateUserSuccess, 'todoList'>> {
     const exist = await this.userModel.findOne({ email })
     if (exist) throw `${email} is already exist`
 

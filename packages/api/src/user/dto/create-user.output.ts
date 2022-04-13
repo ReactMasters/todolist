@@ -1,5 +1,6 @@
 import { createUnionType, Field, ObjectType } from '@nestjs/graphql'
 import { BaseError } from 'src/base/error.dto'
+import { TodoList } from 'src/todo-list/entities/todo-list.entity'
 import { User } from '../entities/user.entity'
 
 @ObjectType()
@@ -9,6 +10,9 @@ export class CreateUserSuccess {
 
   @Field({ description: 'JWT when create user success' })
   token: string
+
+  @Field(() => TodoList)
+  todoList: TodoList
 }
 
 @ObjectType()
