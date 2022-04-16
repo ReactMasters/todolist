@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { CalendarOutlined } from '@ant-design/icons'
 import { Tag, Col, Row, Checkbox } from 'antd'
 import dayjs from 'dayjs'
@@ -19,6 +20,13 @@ const TodoItem: React.FC<Props> = ({
   tags,
   dueDateTime,
 }) => {
+  const [isExpired, setExpired] = useState(false)
+
+  useEffect(() => {
+    if (!dueDateTime) return
+    setExpired(dayjs(dueDateTime).isBefore(dayjs()))
+  }, [dueDateTime])
+
   return (
     <div className={styles.todoItem}>
       <Checkbox
@@ -27,7 +35,14 @@ const TodoItem: React.FC<Props> = ({
       />
       <Col>
         <Row>{content}</Row>
-        {dueDateTime && (
+        {dueDateTime && isExpired ? (
+          <Row align="middle">
+            <CalendarOutlined style={{ marginRight: '0.5rem', color: 'red' }} />
+            <span style={{ color: 'red' }}>
+              {dayjs(dueDateTime).format('ddd MMM D, YYYY')}
+            </span>
+          </Row>
+        ) : (
           <Row align="middle">
             <CalendarOutlined style={{ marginRight: '0.5rem' }} />
             <span>{dayjs(dueDateTime).format('ddd MMM D, YYYY')}</span>

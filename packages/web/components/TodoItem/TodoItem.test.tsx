@@ -42,7 +42,6 @@ describe('tests TodoItem component', () => {
     expect(screen.getByText(dateDisplayed)).toBeInTheDocument()
   })
   it('dueDateTime이 만료됐을 경우, 아이콘과 날짜 표시가 빨간색으로 표시된다.', () => {
-    props.dueDateTime = '2022-01-23T16:00:00.000Z'
     render(<TodoItem {...props}></TodoItem>)
     const styleRed = `color: red`
     expect(screen.getByText(dateDisplayed)).toHaveStyle(styleRed)
