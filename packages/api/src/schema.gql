@@ -118,6 +118,7 @@ type CreateUserSuccess {
 
   """JWT when create user success"""
   token: String!
+  todoList: TodoList!
 }
 
 type CreateUserError {
@@ -181,4 +182,5 @@ input CreateTodoItemInput {
 
 input CreateTodoListInput {
   name: String!
+  owners: [String!]!
 }

@@ -12,8 +12,8 @@ export class TodoListService {
   ) {}
 
   async createTodoList(createTodoListInput: CreateTodoListInput) {
-    const { name } = createTodoListInput
-    return await new this.TodoListModel({ name }).save()
+    const { name, owners } = createTodoListInput
+    return await new this.TodoListModel({ name, owners, todos: [] }).save()
   }
 
   async findTodoList(id: string, ownerId: string): Promise<TodoList> {
