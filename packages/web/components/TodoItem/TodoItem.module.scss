@@ -2,13 +2,9 @@
   border: 1px solid white;
   border-radius: 12px;
   padding: 16px;
-  display:flex;
+  display: flex;
 }
 
 .todoItem + .todoItem {
   margin-top: 8px;
-}
-
-.checkBox {
-  margin-right: 10px;
 }
