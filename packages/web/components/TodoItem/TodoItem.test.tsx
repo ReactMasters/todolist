@@ -24,7 +24,7 @@ describe('tests TodoItem component', () => {
     ],
     dueDateTime: '2022-04-04T16:00:00.000Z',
   }
-  const dateDisplayed = 'Due Mon, Apr 4'
+  const dateDisplayed = 'Tue Apr 5, 2022'
   it('tests TodoItem renders without crashing', () => {
     render(<TodoItem {...props}></TodoItem>)
     expect(screen.getByText(props.content)).toBeInTheDocument()
@@ -39,7 +39,7 @@ describe('tests TodoItem component', () => {
   })
   it('dueDateTime이 있을 경우, 만료일이 MMM D, YYYY 형식으로 표시된다.', () => {
     render(<TodoItem {...props}></TodoItem>)
-    expect(screen.getByText('Tue Apr 5, 2022')).toBeInTheDocument()
+    expect(screen.getByText(dateDisplayed)).toBeInTheDocument()
   })
   it('dueDateTime이 만료됐을 경우, 아이콘과 날짜 표시가 빨간색으로 표시된다.', () => {
     props.dueDateTime = '2022-01-23T16:00:00.000Z'
