@@ -15,7 +15,7 @@ export class Tag extends BaseEntity {
   name: string
 
   @Field(() => User)
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User', index: true })
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: User.name, index: true })
   owner: User
 }
 
