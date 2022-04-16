@@ -81,7 +81,7 @@ describe('tests TodoItem component', () => {
     if (props.dueDateTime) delete props.dueDateTime
     render(<TodoItem {...props}></TodoItem>)
     expect(screen.getByText(props.content)).toBeInTheDocument()
-    expect(screen.getByText(dateDisplayed)).not.toBeInTheDocument()
+    expect(screen.queryByText(dateDisplayed)).toBe(null)
   })
   it('tags 정보만 없을 경우, content와 dueDateTime만 표시된다.', () => {
     if (!props.dueDateTime) {
@@ -92,15 +92,15 @@ describe('tests TodoItem component', () => {
     expect(screen.getByText(props.content)).toBeInTheDocument()
     expect(screen.getByText(dateDisplayed)).toBeInTheDocument()
     // TODO: 태그 엘리먼트를 가리킬 명칭을 아직 안정함
-    // expect(screen.getByText()).not.toBeInTheDocument()
+    // expect(screen.queryByText()).toBe(null)
   })
   it('dueDateTime과 tags 모두 없을 경우, content만 표시된다.', () => {
     if (props.dueDateTime) delete props.dueDateTime
     if (props.tags) delete props.tags
     render(<TodoItem {...props}></TodoItem>)
     expect(screen.getByText(props.content)).toBeInTheDocument()
-    expect(screen.getByText(dateDisplayed)).not.toBeInTheDocument()
+    expect(screen.queryByText(dateDisplayed)).toBe(null)
     // TODO: 태그 엘리먼트를 가리킬 명칭을 아직 안정함
-    // expect(screen.getByText()).not.toBeInTheDocument()
+    // expect(screen.queryByText()).toBe(null)
   })
 })
