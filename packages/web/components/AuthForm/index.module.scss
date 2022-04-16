@@ -17,3 +17,12 @@
   flex-direction: column;
   align-items: center;
 }
+.title {
+  font-size: 2rem;
+}
+.todoItem {
+  width: 100%;
+  max-width: 200px;
+  display: block;
+  height: 60px;
+}

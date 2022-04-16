@@ -1,6 +1,8 @@
 import * as Types from '../../lib/graphql/types'
 
+import { TodoItem_TodoItemFragment } from '../TodoItem/TodoItem.generated'
 import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core'
+import { TodoItem_TodoItemFragmentDoc } from '../TodoItem/TodoItem.generated'
 export type FindTodoListQueryVariables = Types.Exact<{
   id: Types.Scalars['String']
 }>
@@ -11,10 +13,7 @@ export type FindTodoListQuery = { __typename?: 'Query' } & {
         todoList?: Types.Maybe<
           { __typename?: 'TodoList' } & Pick<Types.TodoList, 'id'> & {
               todos: Array<
-                { __typename?: 'TodoItem' } & Pick<
-                  Types.TodoItem,
-                  'id' | 'dueDateTime' | 'content' | 'status'
-                >
+                { __typename?: 'TodoItem' } & TodoItem_TodoItemFragment
               >
             }
         >
@@ -99,23 +98,11 @@ export const FindTodoListDocument = {
                                 kind: 'SelectionSet',
                                 selections: [
                                   {
-                                    kind: 'Field',
-                                    name: { kind: 'Name', value: 'id' },
-                                  },
-                                  {
-                                    kind: 'Field',
+                                    kind: 'FragmentSpread',
                                     name: {
                                       kind: 'Name',
-                                      value: 'dueDateTime',
+                                      value: 'TodoItem_TodoItem',
                                     },
-                                  },
-                                  {
-                                    kind: 'Field',
-                                    name: { kind: 'Name', value: 'content' },
-                                  },
-                                  {
-                                    kind: 'Field',
-                                    name: { kind: 'Name', value: 'status' },
                                   },
                                 ],
                               },
@@ -148,5 +135,6 @@ export const FindTodoListDocument = {
         ],
       },
     },
+    ...TodoItem_TodoItemFragmentDoc.definitions,
   ],
 } as unknown as DocumentNode<FindTodoListQuery, FindTodoListQueryVariables>
