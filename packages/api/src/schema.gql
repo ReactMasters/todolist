@@ -53,12 +53,6 @@ enum TodoStatus {
   COMPLETED
 }
 
-type CreateTodoItemOutput {
-  success: Boolean!
-  message: String
-  todoItem: TodoItem
-}
-
 type TodoList {
   id: ID!
   createdAt: DateTime!
@@ -113,7 +107,7 @@ type Mutation {
   updateUser(updateUserInput: UpdateUserInput!): User!
   removeUser(id: String!): User!
   createTag(createTagInput: CreateTagInput!): CreateTagOutput!
-  createTotoItem(createTodoItemInput: CreateTodoItemInput!): CreateTodoItemOutput!
+  createTodoItem(createTodoItemInput: CreateTodoItemInput!): CreateTodoItemOutput!
   createTodoList(createTodoListInput: CreateTodoListInput!): CreateTodoListOutput!
 }
 
@@ -168,7 +162,18 @@ input CreateTagInput {
   name: String!
 }
 
+union CreateTodoItemOutput = CreateTodoItemSuccess | CreateTodoItemError
+
+type CreateTodoItemSuccess {
+  todoItem: TodoItem!
+}
+
+type CreateTodoItemError {
+  message: String!
+}
+
 input CreateTodoItemInput {
+  todoListId: String!
   content: String!
   status: String
   dueDateTime: DateTime

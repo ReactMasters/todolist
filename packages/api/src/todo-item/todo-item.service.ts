@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
 import { TodoStatus } from 'src/todo-item/dto/todo-status.enum'
+import { TodoListService } from 'src/todo-list/todo-list.service'
 import { CreateTodoItemInput } from './dto/create-todo-item.input'
 import { TodoDocument, TodoItem } from './entities/todo-item.entity'
 
@@ -9,20 +10,31 @@ import { TodoDocument, TodoItem } from './entities/todo-item.entity'
 export class TodoItemService {
   constructor(
     @InjectModel(TodoItem.name)
-    private readonly todoItemModel: Model<TodoDocument>
+    private readonly todoItemModel: Model<TodoDocument>,
+    private readonly todoListService: TodoListService
   ) {}
 
-  async create({
-    content,
-    status: todoStatus = TodoStatus.IN_PROGRESS,
-    tags = [],
-    dueDateTime = null,
-  }: CreateTodoItemInput): Promise<TodoItem> {
-    return await new this.todoItemModel({
+  async create(
+    {
+      todoListId,
       content,
-      todoStatus,
+      status = TodoStatus.IN_PROGRESS,
+      tags = [],
+      dueDateTime = null,
+    }: CreateTodoItemInput,
+    ownerId
+  ) {
+    const newTodoItem = await new this.todoItemModel({
+      content,
+      status,
       tags,
       dueDateTime,
     }).save()
+    await this.todoListService.addTodoItemToList(
+      todoListId,
+      newTodoItem.id,
+      ownerId
+    )
+    return newTodoItem
   }
 }

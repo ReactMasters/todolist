@@ -22,4 +22,20 @@ export class TodoListService {
       owners: { $in: [ownerId] },
     })
   }
+
+  async addTodoItemToList(
+    todoListId: string,
+    todoItemId: string,
+    ownerId: string
+  ) {
+    return await this.TodoListModel.updateOne(
+      {
+        id: todoListId,
+        owners: { $in: [ownerId] },
+      },
+      {
+        $push: { todos: todoItemId },
+      }
+    )
+  }
 }
