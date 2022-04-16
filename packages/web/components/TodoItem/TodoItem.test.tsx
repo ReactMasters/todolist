@@ -1,6 +1,7 @@
+import { render, screen } from '@testing-library/react'
+import '@web/__mocks__/matchMedia.mock'
 import TodoItem from './TodoItem'
 import { TodoStatus } from '@web/lib/graphql/types'
-import { render, screen } from '@testing-library/react'
 
 describe('tests TodoItem component', () => {
   const props = {
