@@ -1,6 +1,7 @@
 import { gql, useQuery } from '@apollo/client'
 import React from 'react'
 import { FindTodoListDocument } from './TodoList.generated'
+import TodoItem from '../TodoItem'
 
 type Props = {
   todoListId?: string
@@ -39,7 +40,15 @@ const TodoList = ({ todoListId }: Props) => {
     return <div>{data.findTodoList.message}</div>
 
   const todos = (data?.findTodoList.todoList.todos ?? []).map((todo) => {
-    return <div key={todo.id}>{todo.content}</div>
+    return (
+      <TodoItem
+        key={todo.id}
+        id={todo.id}
+        content={todo.content}
+        status={todo.status}
+        dueDateTime={todo.dueDateTime}
+      />
+    )
   })
   return <div>{todos}</div>
 }
