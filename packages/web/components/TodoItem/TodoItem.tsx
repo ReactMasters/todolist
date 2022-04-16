@@ -4,22 +4,15 @@ import { Tag, Col, Row, Checkbox } from 'antd'
 import dayjs from 'dayjs'
 import { TodoStatus, Tag as TodoTag } from '@web/lib/graphql/types'
 import styles from './TodoItem.module.scss'
+import { gql } from '@apollo/client'
+import { TodoItem_TodoItemFragment } from './TodoItem.generated'
 
 interface Props {
-  id: string
-  content: string
-  status: TodoStatus
-  tags?: TodoTag[]
-  dueDateTime?: string
+  todo?: TodoItem_TodoItemFragment
 }
 
-const TodoItem: React.FC<Props> = ({
-  id,
-  content,
-  status,
-  tags,
-  dueDateTime,
-}) => {
+const TodoItem = ({ todo }: Props) => {
+  const { id, content, status, tags, dueDateTime } = todo
   const [isExpired, setExpired] = useState(false)
   const [checked, setChecked] = useState(status === TodoStatus.Completed)
 
@@ -86,6 +79,21 @@ const TodoItem: React.FC<Props> = ({
       </Col>
     </div>
   )
+}
+
+TodoItem.fragments = {
+  todoItem: gql`
+    fragment TodoItem_TodoItem on TodoItem {
+      id
+      content
+      status
+      dueDateTime
+      tags {
+        id
+        name
+      }
+    }
+  `,
 }
 
 export default TodoItem
