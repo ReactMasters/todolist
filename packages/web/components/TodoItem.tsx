@@ -1,5 +1,5 @@
-import { CalendarToday } from '@mui/icons-material'
-import { Checkbox, Tag } from 'antd'
+import { CalendarOutlined } from '@ant-design/icons'
+import { Tag, Col, Row, Checkbox } from 'antd'
 import { TodoStatus, Tag as TodoTag } from '@web/lib/graphql/types'
 import styles from './TodoItem.module.scss'
 
@@ -20,17 +20,27 @@ const TodoItem: React.FC<Props> = ({
 }) => {
   return (
     <div className={styles.todoItem}>
-      <Checkbox className={styles.checkBox} />
-      <div>
-        <div>{content}</div>
-        <div>
-          <CalendarToday />
-          <span>Tomorrow</span>
-        </div>
-        <div>
-          <Tag closable={true}>Tag1</Tag>
-        </div>
-      </div>
+      <Checkbox checked={status === TodoStatus.Completed} />
+      <Col>
+        <Row>{content}</Row>
+        {dueDateTime && (
+          <Row align="middle">
+            <CalendarOutlined style={{ marginRight: '0.5rem' }} />
+            <span>{dueDateTime}</span>
+          </Row>
+        )}
+        {tags && (
+          <Row>
+            <Col>
+              {tags.map((tag) => (
+                <Tag key={tag.id} closable={true}>
+                  {tag.name}
+                </Tag>
+              ))}
+            </Col>
+          </Row>
+        )}
+      </Col>
     </div>
   )
 }
