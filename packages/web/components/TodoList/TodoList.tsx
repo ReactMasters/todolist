@@ -1,6 +1,8 @@
 import { gql, useQuery } from '@apollo/client'
+import { TodoStatus } from '@web/lib/graphql/types'
 import React from 'react'
 import TodoItem from '../TodoItem/TodoItem'
+import { TodoItem_TodoItemFragment } from '../TodoItem/TodoItem.generated'
 import { FindTodoListDocument } from './TodoList.generated'
 
 type Props = {
@@ -37,6 +39,22 @@ const TodoList = ({ todoListId }: Props) => {
   if (data.findTodoList.__typename === 'FindTodoListError')
     return <div>{data.findTodoList.message}</div>
 
+  // const exampleTodos: TodoItem_TodoItemFragment[] = [
+  //   {
+  //     id: '1',
+  //     content: 'item1',
+  //     status: TodoStatus.Completed,
+  //     dueDateTime: '2022-04-17',
+  //     tags: [],
+  //   },
+  //   {
+  //     id: '2',
+  //     content: 'item2',
+  //     status: TodoStatus.InProgress,
+  //     dueDateTime: '2022-04-18',
+  //     tags: [],
+  //   },
+  // ]
   const todos = (data?.findTodoList.todoList.todos ?? []).map((todo) => {
     return <TodoItem key={todo.id} todo={todo} />
   })
