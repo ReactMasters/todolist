@@ -21,20 +21,27 @@ const TodoItem: React.FC<Props> = ({
   dueDateTime,
 }) => {
   const [isExpired, setExpired] = useState(false)
+  const [checked, setChecked] = useState(status === TodoStatus.Completed)
 
   useEffect(() => {
     if (!dueDateTime) return
     setExpired(dayjs(dueDateTime).isBefore(dayjs()))
   }, [dueDateTime])
 
+  useEffect(() => {
+    setChecked(status === TodoStatus.Completed)
+  }, [status])
+
   return (
     <div className={styles.todoItem}>
-      <Checkbox
-        checked={status === TodoStatus.Completed}
-        style={{ marginRight: '0.8rem' }}
-      />
+      <Checkbox checked={checked} style={{ marginRight: '0.8rem' }} />
       <Col>
-        <Row>{content}</Row>
+        <Row
+          className={styles.content}
+          data-checked={checked ? 'true' : 'false'}
+        >
+          {content}
+        </Row>
         {dueDateTime && isExpired ? (
           <Row align="middle">
             <CalendarOutlined style={{ marginRight: '0.5rem', color: 'red' }} />

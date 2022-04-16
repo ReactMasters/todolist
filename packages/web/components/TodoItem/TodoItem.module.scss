@@ -8,3 +8,7 @@
 .todoItem + .todoItem {
   margin-top: 8px;
 }
+
+.content[data-checked='true'] {
+  text-decoration: line-through;
+}
