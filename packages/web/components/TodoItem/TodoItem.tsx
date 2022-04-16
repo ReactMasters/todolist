@@ -32,9 +32,17 @@ const TodoItem: React.FC<Props> = ({
     setChecked(status === TodoStatus.Completed)
   }, [status])
 
+  const onStatusChange = (e) => {
+    setChecked(e.target.checked)
+  }
+
   return (
     <div className={styles.todoItem}>
-      <Checkbox checked={checked} style={{ marginRight: '0.8rem' }} />
+      <Checkbox
+        defaultChecked={status === TodoStatus.Completed}
+        onChange={onStatusChange}
+        style={{ marginRight: '0.8rem' }}
+      />
       <Col>
         <Row
           className={styles.content}
@@ -45,14 +53,23 @@ const TodoItem: React.FC<Props> = ({
         {dueDateTime && isExpired ? (
           <Row align="middle">
             <CalendarOutlined style={{ marginRight: '0.5rem', color: 'red' }} />
-            <span style={{ color: 'red' }}>
+            <span
+              className={styles.dueDateTime}
+              data-checked={checked ? 'true' : 'false'}
+              style={{ color: 'red' }}
+            >
               {dayjs(dueDateTime).format('ddd MMM D, YYYY')}
             </span>
           </Row>
         ) : (
           <Row align="middle">
             <CalendarOutlined style={{ marginRight: '0.5rem' }} />
-            <span>{dayjs(dueDateTime).format('ddd MMM D, YYYY')}</span>
+            <span
+              className={styles.dueDateTime}
+              data-checked={checked ? 'true' : 'false'}
+            >
+              {dayjs(dueDateTime).format('ddd MMM D, YYYY')}
+            </span>
           </Row>
         )}
         {tags && (
