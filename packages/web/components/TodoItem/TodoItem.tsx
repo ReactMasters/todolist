@@ -1,5 +1,6 @@
 import { CalendarOutlined } from '@ant-design/icons'
 import { Tag, Col, Row, Checkbox } from 'antd'
+import dayjs from 'dayjs'
 import { TodoStatus, Tag as TodoTag } from '@web/lib/graphql/types'
 import styles from './TodoItem.module.scss'
 
@@ -20,13 +21,16 @@ const TodoItem: React.FC<Props> = ({
 }) => {
   return (
     <div className={styles.todoItem}>
-      <Checkbox checked={status === TodoStatus.Completed} />
+      <Checkbox
+        checked={status === TodoStatus.Completed}
+        style={{ marginRight: '0.8rem' }}
+      />
       <Col>
         <Row>{content}</Row>
         {dueDateTime && (
           <Row align="middle">
             <CalendarOutlined style={{ marginRight: '0.5rem' }} />
-            <span>{dueDateTime}</span>
+            <span>{dayjs(dueDateTime).format('ddd MMM D, YYYY')}</span>
           </Row>
         )}
         {tags && (
