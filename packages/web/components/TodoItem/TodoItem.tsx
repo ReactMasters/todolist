@@ -43,7 +43,7 @@ const TodoItem = ({ todo }: Props) => {
         >
           {content}
         </Row>
-        {dueDateTime && isExpired ? (
+        {!!dueDateTime && isExpired ? (
           <Row align="middle">
             <CalendarOutlined style={{ marginRight: '0.5rem', color: 'red' }} />
             <span
@@ -65,7 +65,7 @@ const TodoItem = ({ todo }: Props) => {
             </span>
           </Row>
         )}
-        {tags && (
+        {!!tags.length && (
           <Row>
             <Col>
               {tags.map((tag) => (

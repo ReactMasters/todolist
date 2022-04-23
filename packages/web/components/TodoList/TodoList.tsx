@@ -4,6 +4,7 @@ import { TodoStatus } from '@web/lib/graphql/types'
 import { Button, List } from 'antd'
 import React, { useState } from 'react'
 import TodoItem from '../TodoItem/TodoItem'
+import { TodoItem_TodoItemFragment } from '../TodoItem/TodoItem.generated'
 import { FindTodoListDocument } from './TodoList.generated'
 
 type Props = {
