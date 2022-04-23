@@ -3,9 +3,7 @@ import { TodoStatus } from 'src/todo-item/dto/todo-status.enum'
 import { TodoItem } from '../entities/todo-item.entity'
 
 @InputType()
-export class CreateTodoItemInput extends OmitType(PartialType(TodoItem), [
-  'id',
-]) {
+export class AddTodoItemInput extends OmitType(PartialType(TodoItem), ['id']) {
   @Field()
   todoListId: string
 

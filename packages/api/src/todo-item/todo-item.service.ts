@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
 import { TodoStatus } from 'src/todo-item/dto/todo-status.enum'
 import { TodoListService } from 'src/todo-list/todo-list.service'
-import { CreateTodoItemInput } from './dto/create-todo-item.input'
+import { AddTodoItemInput } from './dto/add-todo-item.input'
 import { TodoDocument, TodoItem } from './entities/todo-item.entity'
 
 @Injectable()
@@ -21,7 +21,7 @@ export class TodoItemService {
       status = TodoStatus.IN_PROGRESS,
       tags = [],
       dueDateTime = null,
-    }: CreateTodoItemInput,
+    }: AddTodoItemInput,
     ownerId
   ) {
     const newTodoItem = await new this.todoItemModel({

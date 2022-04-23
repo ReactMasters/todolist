@@ -107,7 +107,7 @@ type Mutation {
   updateUser(updateUserInput: UpdateUserInput!): User!
   removeUser(id: String!): User!
   addTag(addTagInput: AddTagInput!): AddTagOutput!
-  createTodoItem(createTodoItemInput: CreateTodoItemInput!): CreateTodoItemOutput!
+  addTodoItem(addTodoItemInput: AddTodoItemInput!): AddTodoItemOutput!
   createTodoList(createTodoListInput: CreateTodoListInput!): CreateTodoListOutput!
 }
 
@@ -163,17 +163,17 @@ input AddTagInput {
   name: String!
 }
 
-union CreateTodoItemOutput = CreateTodoItemSuccess | CreateTodoItemError
+union AddTodoItemOutput = AddTodoItemSuccess | AddTodoItemError
 
-type CreateTodoItemSuccess {
+type AddTodoItemSuccess {
   todoItem: TodoItem!
 }
 
-type CreateTodoItemError {
+type AddTodoItemError {
   message: String!
 }
 
-input CreateTodoItemInput {
+input AddTodoItemInput {
   todoListId: String!
   content: String!
   status: String
