@@ -100,8 +100,6 @@ export type Mutation = {
   __typename?: 'Mutation'
   signup: SignupOutput
   signin: SigninOutput
-  updateUser: User
-  removeUser: User
   addTag: AddTagOutput
   addTodoItem: AddTodoItemOutput
   addTodoList: AddTodoListOutput
@@ -113,14 +111,6 @@ export type MutationSignupArgs = {
 
 export type MutationSigninArgs = {
   signinInput: SigninInput
-}
-
-export type MutationUpdateUserArgs = {
-  updateUserInput: UpdateUserInput
-}
-
-export type MutationRemoveUserArgs = {
-  id: Scalars['String']
 }
 
 export type MutationAddTagArgs = {
@@ -229,13 +219,6 @@ export type TodoList = {
 export enum TodoStatus {
   InProgress = 'IN_PROGRESS',
   Completed = 'COMPLETED',
-}
-
-export type UpdateUserInput = {
-  email?: Maybe<Scalars['String']>
-  /** user password */
-  password?: Maybe<Scalars['String']>
-  id: Scalars['String']
 }
 
 export type User = {

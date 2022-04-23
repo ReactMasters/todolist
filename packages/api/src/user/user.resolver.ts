@@ -9,7 +9,6 @@ import { SigninInput } from './dto/signin.input'
 import { SigninOutput } from './dto/signin.output'
 import { SignupInput } from './dto/signup.input'
 import { SignupOutput } from './dto/signup.output'
-import { UpdateUserInput } from './dto/update-user.input'
 import { User } from './entities/user.entity'
 import { DEFAULT_TODO_LIST_NAME } from './user.config'
 import { CurrentUser } from './user.decorator'
@@ -76,15 +75,5 @@ export class UserResolver {
   @Query(() => User, { name: 'user' })
   findOne(@Args('id') id: string) {
     return this.userService.findOne(id)
-  }
-
-  @Mutation(() => User)
-  updateUser(@Args('updateUserInput') updateUserInput: UpdateUserInput) {
-    return this.userService.update(updateUserInput)
-  }
-
-  @Mutation(() => User)
-  removeUser(@Args('id') id: string) {
-    return this.userService.remove(id)
   }
 }

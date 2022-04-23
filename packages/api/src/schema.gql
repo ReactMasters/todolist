@@ -104,8 +104,6 @@ input FindTodoListInput {
 type Mutation {
   signup(signupInput: SignupInput!): SignupOutput!
   signin(signinInput: SigninInput!): SigninOutput!
-  updateUser(updateUserInput: UpdateUserInput!): User!
-  removeUser(id: String!): User!
   addTag(addTagInput: AddTagInput!): AddTagOutput!
   addTodoItem(addTodoItemInput: AddTodoItemInput!): AddTodoItemOutput!
   addTodoList(addTodoListInput: AddTodoListInput!): AddTodoListOutput!
@@ -149,14 +147,6 @@ input SigninInput {
 
   """user password"""
   password: String!
-}
-
-input UpdateUserInput {
-  email: String
-
-  """user password"""
-  password: String
-  id: String!
 }
 
 input AddTagInput {
