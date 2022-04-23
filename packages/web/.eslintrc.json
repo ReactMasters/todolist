@@ -7,12 +7,12 @@
         "groups": ["builtin", "external", "internal"],
         "pathGroups": [
           {
-            "pattern": "react",
+            "pattern": "{next,react}/**/*",
             "group": "external",
             "position": "before"
           }
         ],
-        "pathGroupsExcludedImportTypes": ["react"],
+        "pathGroupsExcludedImportTypes": ["react", "next"],
         "newlines-between": "always",
         "alphabetize": {
           "order": "asc",
