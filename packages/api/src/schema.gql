@@ -102,7 +102,7 @@ input FindTodoListInput {
 }
 
 type Mutation {
-  createUser(createUserInput: CreateUserInput!): CreateUserOutput!
+  signup(signupInput: SignupInput!): SignupOutput!
   login(loginInput: LoginInput!): LoginOutput!
   updateUser(updateUserInput: UpdateUserInput!): User!
   removeUser(id: String!): User!
@@ -111,9 +111,9 @@ type Mutation {
   addTodoList(addTodoListInput: AddTodoListInput!): AddTodoListOutput!
 }
 
-union CreateUserOutput = CreateUserSuccess | CreateUserError
+union SignupOutput = SignupSuccess | SignupError
 
-type CreateUserSuccess {
+type SignupSuccess {
   user: User!
 
   """JWT when create user success"""
@@ -121,11 +121,11 @@ type CreateUserSuccess {
   todoList: TodoList!
 }
 
-type CreateUserError {
+type SignupError {
   message: String!
 }
 
-input CreateUserInput {
+input SignupInput {
   """user email"""
   email: String!
 

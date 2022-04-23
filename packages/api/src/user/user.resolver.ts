@@ -4,11 +4,11 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql'
 import { AddTodoListInput } from 'src/todo-list/dto/add-todo-list.input'
 import { TodoListService } from 'src/todo-list/todo-list.service'
 
-import { CreateUserInput } from './dto/create-user.input'
-import { CreateUserOutput } from './dto/create-user.output'
 import { LoginInput } from './dto/login.input'
 import { LoginOutput } from './dto/login.output'
 import { MeOutput } from './dto/me.output'
+import { SignupInput } from './dto/signup.input'
+import { SignupOutput } from './dto/signup.output'
 import { UpdateUserInput } from './dto/update-user.input'
 import { User } from './entities/user.entity'
 import { DEFAULT_TODO_LIST_NAME } from './user.config'
@@ -23,12 +23,12 @@ export class UserResolver {
     private readonly todoListService: TodoListService
   ) {}
 
-  @Mutation(() => CreateUserOutput)
-  async createUser(
-    @Args('createUserInput') createUserInput: CreateUserInput
-  ): Promise<typeof CreateUserOutput> {
+  @Mutation(() => SignupOutput)
+  async signup(
+    @Args('signupInput') signupInput: SignupInput
+  ): Promise<typeof SignupOutput> {
     try {
-      const newUser = await this.userService.create(createUserInput)
+      const newUser = await this.userService.create(signupInput)
       const defaultTodoListInput: AddTodoListInput = {
         name: DEFAULT_TODO_LIST_NAME,
         owners: [newUser.user.id],

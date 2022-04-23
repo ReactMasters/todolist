@@ -1,8 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Button } from 'antd'
-import Cookies from 'js-cookie'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React, { FormEventHandler, useCallback } from 'react'
 
 import {
   gql,
@@ -11,14 +9,16 @@ import {
   useReactiveVar,
 } from '@apollo/client'
 import { MESSAGES, ROUTES, TOKEN_KEY } from '@web/lib/constant'
+import { LoginInput } from '@web/lib/graphql/types'
+import { Button } from 'antd'
+import Cookies from 'js-cookie'
+import React, { FormEventHandler, useCallback } from 'react'
 
-import styles from './index.module.scss'
 import Email from './Email'
 import { LoginDocument, SignUpDocument } from './index.generated'
+import styles from './index.module.scss'
 import { emailVar, loginLoadingVar, passwordVar } from './index.state'
 import Password from './Password'
-import Link from 'next/link'
-import { LoginInput } from '@web/lib/graphql/types'
 
 const Login = gql`
   mutation Login($loginInput: LoginInput!) {
@@ -34,12 +34,12 @@ const Login = gql`
 `
 
 const SignUp = gql`
-  mutation SignUp($signUpInput: CreateUserInput!) {
-    createUser(createUserInput: $signUpInput) {
-      ... on CreateUserError {
+  mutation SignUp($signUpInput: SignupInput!) {
+    signup(signupInput: $signUpInput) {
+      ... on SignupError {
         message
       }
-      ... on CreateUserSuccess {
+      ... on SignupSuccess {
         user {
           id
           email
@@ -82,11 +82,11 @@ const AuthForm = ({ type }: Props) => {
       token = data.login.token
     } else {
       const { data } = await signup({ variables: { signUpInput: inputs } })
-      if (data.createUser.__typename === 'CreateUserError') {
+      if (data.signup.__typename === 'SignupError') {
         loginLoadingVar(false)
-        return alert(data.createUser.message)
+        return alert(data.signup.message)
       }
-      token = data.createUser.token
+      token = data.signup.token
     }
 
     Cookies.set(TOKEN_KEY, token)

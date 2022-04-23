@@ -1,6 +1,7 @@
+import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core'
+
 import * as Types from '../../lib/graphql/types'
 
-import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core'
 export type LoginMutationVariables = Types.Exact<{
   loginInput: Types.LoginInput
 }>
@@ -12,24 +13,18 @@ export type LoginMutation = { __typename?: 'Mutation' } & {
 }
 
 export type SignUpMutationVariables = Types.Exact<{
-  signUpInput: Types.CreateUserInput
+  signUpInput: Types.SignupInput
 }>
 
 export type SignUpMutation = { __typename?: 'Mutation' } & {
-  createUser:
-    | ({ __typename?: 'CreateUserSuccess' } & Pick<
-        Types.CreateUserSuccess,
-        'token'
-      > & {
+  signup:
+    | ({ __typename?: 'SignupSuccess' } & Pick<Types.SignupSuccess, 'token'> & {
           user: { __typename?: 'User' } & Pick<
             Types.User,
             'id' | 'email' | 'lastLoginAt'
           >
         })
-    | ({ __typename?: 'CreateUserError' } & Pick<
-        Types.CreateUserError,
-        'message'
-      >)
+    | ({ __typename?: 'SignupError' } & Pick<Types.SignupError, 'message'>)
 }
 
 export const LoginDocument = {
@@ -129,7 +124,7 @@ export const SignUpDocument = {
             kind: 'NonNullType',
             type: {
               kind: 'NamedType',
-              name: { kind: 'Name', value: 'CreateUserInput' },
+              name: { kind: 'Name', value: 'SignupInput' },
             },
           },
         },
@@ -139,11 +134,11 @@ export const SignUpDocument = {
         selections: [
           {
             kind: 'Field',
-            name: { kind: 'Name', value: 'createUser' },
+            name: { kind: 'Name', value: 'signup' },
             arguments: [
               {
                 kind: 'Argument',
-                name: { kind: 'Name', value: 'createUserInput' },
+                name: { kind: 'Name', value: 'signupInput' },
                 value: {
                   kind: 'Variable',
                   name: { kind: 'Name', value: 'signUpInput' },
@@ -157,7 +152,7 @@ export const SignUpDocument = {
                   kind: 'InlineFragment',
                   typeCondition: {
                     kind: 'NamedType',
-                    name: { kind: 'Name', value: 'CreateUserError' },
+                    name: { kind: 'Name', value: 'SignupError' },
                   },
                   selectionSet: {
                     kind: 'SelectionSet',
@@ -173,7 +168,7 @@ export const SignUpDocument = {
                   kind: 'InlineFragment',
                   typeCondition: {
                     kind: 'NamedType',
-                    name: { kind: 'Name', value: 'CreateUserSuccess' },
+                    name: { kind: 'Name', value: 'SignupSuccess' },
                   },
                   selectionSet: {
                     kind: 'SelectionSet',
