@@ -74,6 +74,7 @@ type Query {
   users: [User!]!
   user(id: String!): User!
   listTags: ListTagsOutput!
+  todoItems(todoItemsInput: TodoItemsInput!): TodoItemsOutput!
   findTodoList(findTodoListInput: FindTodoListInput!): FindTodoListOutput!
 }
 
@@ -85,6 +86,22 @@ type MeSuccess {
 
 type MeError {
   message: String!
+}
+
+union TodoItemsOutput = TodoItemsSuccess | TodoItemsError
+
+type TodoItemsSuccess {
+  totalCount: Int!
+  items: [TodoItem!]!
+}
+
+type TodoItemsError {
+  message: String!
+}
+
+input TodoItemsInput {
+  todoListId: ID!
+  tagIds: [ID!] = []
 }
 
 union FindTodoListOutput = FindTodoListSuccess | FindTodoListError

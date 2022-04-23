@@ -1,10 +1,18 @@
 import { UseGuards } from '@nestjs/common'
-import { Args, Mutation, Resolver } from '@nestjs/graphql'
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql'
+
 import { User } from 'src/user/entities/user.entity'
 import { CurrentUser } from 'src/user/user.decorator'
 import { UserGuard } from 'src/user/user.guard'
+
 import { AddTodoItemInput } from './dto/add-todo-item.input'
 import { AddTodoItemOutput } from './dto/add-todo-item.output'
+import { TodoItemsInput } from './dto/todo-itmes.input'
+import {
+  TodoItemsError,
+  TodoItemsOutput,
+  TodoItemsSuccess,
+} from './dto/todo-itmes.output'
 import { TodoItem } from './entities/todo-item.entity'
 import { TodoItemService } from './todo-item.service'
 
@@ -24,6 +32,22 @@ export class TodoItemResolver {
       }
     } catch (error) {
       return { message: error?.message ?? '' }
+    }
+  }
+
+  @UseGuards(UserGuard)
+  @Query(() => TodoItemsOutput)
+  async todoItems(
+    @Args('todoItemsInput') todoItemsInput: TodoItemsInput,
+    @CurrentUser() user?: User
+  ): Promise<typeof TodoItemsOutput> {
+    try {
+      return {
+        items: [],
+        totalCount: 0,
+      } as TodoItemsSuccess
+    } catch (error) {
+      return { message: error?.message ?? '' } as TodoItemsError
     }
   }
 }
