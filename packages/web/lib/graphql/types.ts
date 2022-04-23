@@ -84,25 +84,6 @@ export type ListTagsOutput = {
   tags: Array<Tag>
 }
 
-export type LoginError = {
-  __typename?: 'LoginError'
-  message: Scalars['String']
-}
-
-export type LoginInput = {
-  /** user email */
-  email: Scalars['String']
-  /** user password */
-  password: Scalars['String']
-}
-
-export type LoginOutput = LoginSuccess | LoginError
-
-export type LoginSuccess = {
-  __typename?: 'LoginSuccess'
-  token: Scalars['String']
-}
-
 export type MeError = {
   __typename?: 'MeError'
   message: Scalars['String']
@@ -118,7 +99,7 @@ export type MeSuccess = {
 export type Mutation = {
   __typename?: 'Mutation'
   signup: SignupOutput
-  login: LoginOutput
+  signin: SigninOutput
   updateUser: User
   removeUser: User
   addTag: AddTagOutput
@@ -130,8 +111,8 @@ export type MutationSignupArgs = {
   signupInput: SignupInput
 }
 
-export type MutationLoginArgs = {
-  loginInput: LoginInput
+export type MutationSigninArgs = {
+  signinInput: SigninInput
 }
 
 export type MutationUpdateUserArgs = {
@@ -169,6 +150,25 @@ export type QueryUserArgs = {
 
 export type QueryFindTodoListArgs = {
   findTodoListInput: FindTodoListInput
+}
+
+export type SigninError = {
+  __typename?: 'SigninError'
+  message: Scalars['String']
+}
+
+export type SigninInput = {
+  /** user email */
+  email: Scalars['String']
+  /** user password */
+  password: Scalars['String']
+}
+
+export type SigninOutput = SigninSuccess | SigninError
+
+export type SigninSuccess = {
+  __typename?: 'SigninSuccess'
+  token: Scalars['String']
 }
 
 export type SignupError = {

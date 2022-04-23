@@ -103,7 +103,7 @@ input FindTodoListInput {
 
 type Mutation {
   signup(signupInput: SignupInput!): SignupOutput!
-  login(loginInput: LoginInput!): LoginOutput!
+  signin(signinInput: SigninInput!): SigninOutput!
   updateUser(updateUserInput: UpdateUserInput!): User!
   removeUser(id: String!): User!
   addTag(addTagInput: AddTagInput!): AddTagOutput!
@@ -133,17 +133,17 @@ input SignupInput {
   password: String!
 }
 
-union LoginOutput = LoginSuccess | LoginError
+union SigninOutput = SigninSuccess | SigninError
 
-type LoginSuccess {
+type SigninSuccess {
   token: String!
 }
 
-type LoginError {
+type SigninError {
   message: String!
 }
 
-input LoginInput {
+input SigninInput {
   """user email"""
   email: String!
 

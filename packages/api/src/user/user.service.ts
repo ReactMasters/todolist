@@ -8,8 +8,8 @@ import { Model } from 'mongoose'
 import { ISSUER, TIME } from 'src/constants'
 import { UserAuth } from 'src/types'
 
-import { LoginInput } from './dto/login.input'
-import { LoginSuccess } from './dto/login.output'
+import { SigninInput } from './dto/signin.input'
+import { SigninSuccess } from './dto/signin.output'
 import { SignupInput } from './dto/signup.input'
 import { SignupSuccess } from './dto/signup.output'
 import { UpdateUserInput } from './dto/update-user.input'
@@ -92,7 +92,7 @@ export class UserService {
     }
   }
 
-  async login({ email, password }: LoginInput): Promise<LoginSuccess> {
+  async signin({ email, password }: SigninInput): Promise<SigninSuccess> {
     const user = await this.userModel.findOne({ email })
     if (!user) throw `there is no user with ${email}`
     if (!this.validPassword(user, password)) throw `wrong password!`

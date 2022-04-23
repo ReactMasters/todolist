@@ -4,9 +4,9 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql'
 import { AddTodoListInput } from 'src/todo-list/dto/add-todo-list.input'
 import { TodoListService } from 'src/todo-list/todo-list.service'
 
-import { LoginInput } from './dto/login.input'
-import { LoginOutput } from './dto/login.output'
 import { MeOutput } from './dto/me.output'
+import { SigninInput } from './dto/signin.input'
+import { SigninOutput } from './dto/signin.output'
 import { SignupInput } from './dto/signup.input'
 import { SignupOutput } from './dto/signup.output'
 import { UpdateUserInput } from './dto/update-user.input'
@@ -46,12 +46,12 @@ export class UserResolver {
     }
   }
 
-  @Mutation(() => LoginOutput)
-  async login(
-    @Args('loginInput') loginInput: LoginInput
-  ): Promise<typeof LoginOutput> {
+  @Mutation(() => SigninOutput)
+  async signin(
+    @Args('signinInput') signinInput: SigninInput
+  ): Promise<typeof SigninOutput> {
     try {
-      return await this.userService.login(loginInput)
+      return await this.userService.signin(signinInput)
     } catch (error) {
       return { message: error?.message ?? error }
     }

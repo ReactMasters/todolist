@@ -9,24 +9,24 @@ import {
   useReactiveVar,
 } from '@apollo/client'
 import { MESSAGES, ROUTES, TOKEN_KEY } from '@web/lib/constant'
-import { LoginInput } from '@web/lib/graphql/types'
+import { SigninInput } from '@web/lib/graphql/types'
 import { Button } from 'antd'
 import Cookies from 'js-cookie'
 import React, { FormEventHandler, useCallback } from 'react'
 
 import Email from './Email'
-import { LoginDocument, SignUpDocument } from './index.generated'
+import { SigninDocument, SignUpDocument } from './index.generated'
 import styles from './index.module.scss'
 import { emailVar, loginLoadingVar, passwordVar } from './index.state'
 import Password from './Password'
 
 const Login = gql`
-  mutation Login($loginInput: LoginInput!) {
-    login(loginInput: $loginInput) {
-      ... on LoginSuccess {
+  mutation Signin($signinInput: SigninInput!) {
+    signin(signinInput: $signinInput) {
+      ... on SigninSuccess {
         token
       }
-      ... on LoginError {
+      ... on SigninError {
         message
       }
     }
@@ -57,7 +57,7 @@ interface Props {
 const AuthForm = ({ type }: Props) => {
   const client = useApolloClient()
   const router = useRouter()
-  const [login] = useMutation(LoginDocument)
+  const [login] = useMutation(SigninDocument)
   const [signup] = useMutation(SignUpDocument)
   const loading = useReactiveVar(loginLoadingVar)
 
@@ -69,17 +69,17 @@ const AuthForm = ({ type }: Props) => {
 
     let token = ''
 
-    const inputs: LoginInput = {
+    const inputs: SigninInput = {
       email: emailVar(),
       password: passwordVar(),
     }
     if (type === 'login') {
-      const { data } = await login({ variables: { loginInput: inputs } })
-      if (data.login.__typename === 'LoginError') {
+      const { data } = await login({ variables: { signinInput: inputs } })
+      if (data.signin.__typename === 'SigninError') {
         loginLoadingVar(false)
-        return alert(data.login.message)
+        return alert(data.signin.message)
       }
-      token = data.login.token
+      token = data.signin.token
     } else {
       const { data } = await signup({ variables: { signUpInput: inputs } })
       if (data.signup.__typename === 'SignupError') {
