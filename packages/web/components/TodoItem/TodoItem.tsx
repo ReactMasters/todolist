@@ -65,7 +65,7 @@ const TodoItem = ({ todo }: Props) => {
             </span>
           </Row>
         )}
-        {tags && (
+        {!!tags.length && (
           <Row>
             <Col>
               {tags.map((tag) => (
