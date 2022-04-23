@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material'
+import { Typography } from 'antd'
 import React from 'react'
 import styles from './AddTodoHeading.module.scss'
 
@@ -22,25 +22,25 @@ const AddTodoHeading = ({
   return (
     <div className={styles.wrapper}>
       <div className={styles.leftWrapper}>
-        <Typography onClick={onClickLeft}>{left}</Typography>
+        <Typography.Text onClick={onClickLeft}>{left}</Typography.Text>
       </div>
       <div className={styles.titleWrapper}>
-        <Typography
+        <Typography.Title
           onClick={onClickTitle}
-          variant="h5"
+          level={4}
           className={styles.title}
         >
           {title}
-        </Typography>
+        </Typography.Title>
       </div>
       <div className={styles.rightWrapper}>
-        <Typography
+        <Typography.Title
           onClick={onClickRight}
-          variant="h6"
+          level={5}
           className={styles.right}
         >
           {right}
-        </Typography>
+        </Typography.Title>
       </div>
     </div>
   )
