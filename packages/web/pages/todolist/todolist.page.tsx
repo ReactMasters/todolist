@@ -1,4 +1,3 @@
-import ItemList from '@web/components/ItemList'
 import TodoList from '@web/components/TodoList/TodoList'
 import { Header } from 'antd/lib/layout/layout'
 import React from 'react'
@@ -11,7 +10,6 @@ const TodoListPage = (props: Props) => {
       <Header></Header>
       <div>
         <TodoList></TodoList>
-        <ItemList />
       </div>
     </>
   )
