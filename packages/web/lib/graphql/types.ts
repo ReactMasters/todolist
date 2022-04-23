@@ -51,6 +51,7 @@ export type CreateTodoItemSuccess = {
 
 export type CreateTodoListInput = {
   name: Scalars['String']
+  owners: Array<Scalars['String']>
 }
 
 export type CreateTodoListOutput = {
@@ -79,6 +80,7 @@ export type CreateUserSuccess = {
   user: User
   /** JWT when create user success */
   token: Scalars['String']
+  todoList: TodoList
 }
 
 export type FindTodoListError = {
