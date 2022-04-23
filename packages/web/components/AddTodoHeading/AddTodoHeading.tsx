@@ -1,5 +1,4 @@
 import { Typography } from '@mui/material'
-import { Box } from '@mui/system'
 import React from 'react'
 import styles from './AddTodoHeading.module.scss'
 
@@ -21,11 +20,11 @@ const AddTodoHeading = ({
   onClickRight,
 }: Props) => {
   return (
-    <Box className={styles.wrapper}>
-      <Box className={styles.leftWrapper}>
+    <div className={styles.wrapper}>
+      <div className={styles.leftWrapper}>
         <Typography onClick={onClickLeft}>{left}</Typography>
-      </Box>
-      <Box className={styles.titleWrapper}>
+      </div>
+      <div className={styles.titleWrapper}>
         <Typography
           onClick={onClickTitle}
           variant="h5"
@@ -33,8 +32,8 @@ const AddTodoHeading = ({
         >
           {title}
         </Typography>
-      </Box>
-      <Box className={styles.rightWrapper}>
+      </div>
+      <div className={styles.rightWrapper}>
         <Typography
           onClick={onClickRight}
           variant="h6"
@@ -42,8 +41,8 @@ const AddTodoHeading = ({
         >
           {right}
         </Typography>
-      </Box>
-    </Box>
+      </div>
+    </div>
   )
 }
 
