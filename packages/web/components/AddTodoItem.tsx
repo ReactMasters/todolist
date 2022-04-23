@@ -19,7 +19,6 @@ import {
   TextField,
   Typography,
 } from '@mui/material'
-import { Box } from '@mui/system'
 import { getDayFromToday, includeDate } from '@web/utils/dateUtil'
 import { genMockTags } from '@web/utils/mockUtil'
 import dayjs from 'dayjs'
@@ -128,7 +127,7 @@ const AddTodoItem = () => {
   ) => {
     const date = getDayFromToday(daysFromToday)
     return (
-      <Box
+      <div
         style={{
           background: date.isSame(selectedDate, 'day') ? 'lightpink' : 'white',
         }}
@@ -140,7 +139,7 @@ const AddTodoItem = () => {
         <IconComponent className={styles.dateIcon}></IconComponent>
         <Typography variant="h6">{label}</Typography>
         <Typography className={styles.dayName}>{date.format('ddd')}</Typography>
-      </Box>
+      </div>
     )
   }
 
@@ -168,20 +167,20 @@ const AddTodoItem = () => {
         <Today className={styles.todayIcon} onClick={onClickCalendarIcon} />
       )
       return (
-        <Box className={styles.editorWrapper}>
+        <div className={styles.editorWrapper}>
           <Add className={styles.gridPlus}></Add>
           <TextField
             className={`${styles.gridTitle}`}
             value={taskTitle}
             onChange={(e) => setTaskTitle(e.target.value)}
           />
-          <Box className={styles.gridFiller}></Box>
-          <Box className={styles.gridBtns}>
+          <div className={styles.gridFiller}></div>
+          <div className={styles.gridBtns}>
             {dateButton}
             {renderTagChips()}
             <LocalOfferOutlined onClick={onClickTagIcon} />
-          </Box>
-        </Box>
+          </div>
+        </div>
       )
     }
 
@@ -209,7 +208,7 @@ const AddTodoItem = () => {
       }
 
       return (
-        <Box className={`${styles.col} ${styles.selectDateWrapper}`}>
+        <div className={`${styles.col} ${styles.selectDateWrapper}`}>
           <AddTodoHeading
             title="Due"
             onClickRight={() => {
@@ -221,7 +220,7 @@ const AddTodoItem = () => {
           {renderDateOption(0, 'Today', Today)}
           {renderDateOption(1, 'Tomorrow', Event)}
           {renderDateOption(7, 'Next Week', NextWeek)}
-          <Box
+          <div
             style={{
               background: isCustomDateSelected ? 'lightpink' : 'white',
             }}
@@ -230,7 +229,7 @@ const AddTodoItem = () => {
           >
             <CalendarToday className={styles.dateIcon}></CalendarToday>
             <Typography variant="h6">{customDateString}</Typography>
-          </Box>
+          </div>
           <DatePicker
             inputRef={datePickerRef}
             value={datePickerDate}
@@ -239,13 +238,13 @@ const AddTodoItem = () => {
             cancelText={cancelButton}
             renderInput={renderInput}
           />
-        </Box>
+        </div>
       )
     }
 
     if (currentPage === AddTodoItemPage.TODO_TAG) {
       return (
-        <Box>
+        <div>
           <AddTodoHeading
             left="Edit"
             title="Tags"
@@ -256,7 +255,7 @@ const AddTodoItem = () => {
             right="Done"
           />
           {renderTags()}
-        </Box>
+        </div>
       )
     }
   }
@@ -265,9 +264,9 @@ const AddTodoItem = () => {
     if (!isAddingTask) {
       return (
         <>
-          <Box className={styles.plusIcon}>
+          <div className={styles.plusIcon}>
             <Add></Add>
-          </Box>
+          </div>
           <Typography className={styles.addTodoItemText}>Add a task</Typography>
         </>
       )
