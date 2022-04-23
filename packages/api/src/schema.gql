@@ -63,7 +63,7 @@ type TodoList {
   owners: [User!]!
 }
 
-type CreateTodoListOutput {
+type AddTodoListOutput {
   success: Boolean!
   message: String
   todoList: TodoList!
@@ -108,7 +108,7 @@ type Mutation {
   removeUser(id: String!): User!
   addTag(addTagInput: AddTagInput!): AddTagOutput!
   addTodoItem(addTodoItemInput: AddTodoItemInput!): AddTodoItemOutput!
-  createTodoList(createTodoListInput: CreateTodoListInput!): CreateTodoListOutput!
+  addTodoList(addTodoListInput: AddTodoListInput!): AddTodoListOutput!
 }
 
 union CreateUserOutput = CreateUserSuccess | CreateUserError
@@ -180,7 +180,7 @@ input AddTodoItemInput {
   dueDateTime: DateTime
 }
 
-input CreateTodoListInput {
+input AddTodoListInput {
   name: String!
   owners: [String!]!
 }

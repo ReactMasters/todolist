@@ -49,13 +49,13 @@ export type AddTodoItemSuccess = {
   todoItem: TodoItem
 }
 
-export type CreateTodoListInput = {
+export type AddTodoListInput = {
   name: Scalars['String']
   owners: Array<Scalars['String']>
 }
 
-export type CreateTodoListOutput = {
-  __typename?: 'CreateTodoListOutput'
+export type AddTodoListOutput = {
+  __typename?: 'AddTodoListOutput'
   success: Scalars['Boolean']
   message?: Maybe<Scalars['String']>
   todoList: TodoList
@@ -145,7 +145,7 @@ export type Mutation = {
   removeUser: User
   addTag: AddTagOutput
   addTodoItem: AddTodoItemOutput
-  createTodoList: CreateTodoListOutput
+  addTodoList: AddTodoListOutput
 }
 
 export type MutationCreateUserArgs = {
@@ -172,8 +172,8 @@ export type MutationAddTodoItemArgs = {
   addTodoItemInput: AddTodoItemInput
 }
 
-export type MutationCreateTodoListArgs = {
-  createTodoListInput: CreateTodoListInput
+export type MutationAddTodoListArgs = {
+  addTodoListInput: AddTodoListInput
 }
 
 export type Query = {

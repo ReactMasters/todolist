@@ -1,10 +1,12 @@
 import { UseGuards } from '@nestjs/common'
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql'
+
 import { User } from 'src/user/entities/user.entity'
 import { CurrentUser } from 'src/user/user.decorator'
 import { UserGuard } from 'src/user/user.guard'
-import { CreateTodoListInput } from './dto/create-todo-list.input'
-import { CreateTodoListOutput } from './dto/create-todo-list.output'
+
+import { AddTodoListInput } from './dto/add-todo-list.input'
+import { AddTodoListOutput } from './dto/add-todo-list.output'
 import { FindTodoListInput } from './dto/find-todo-list.input'
 import { FindTodoListOutput } from './dto/find-todo-list.output'
 import { TodoList } from './entities/todo-list.entity'
@@ -14,17 +16,15 @@ import { TodoListService } from './todo-list.service'
 export class TodoListResolver {
   constructor(private readonly todoListService: TodoListService) {}
 
-  @Mutation(() => CreateTodoListOutput)
-  async createTodoList(
-    @Args('createTodoListInput') createTodoListInput: CreateTodoListInput
+  @Mutation(() => AddTodoListOutput)
+  async addTodoList(
+    @Args('addTodoListInput') addTodoListInput: AddTodoListInput
   ) {
-    const res: CreateTodoListOutput = {
+    const res: AddTodoListOutput = {
       success: true,
     }
     try {
-      res.todoList = await this.todoListService.createTodoList(
-        createTodoListInput
-      )
+      res.todoList = await this.todoListService.addTodoList(addTodoListInput)
     } catch (error) {
       res.message = error?.message ?? ''
     }
