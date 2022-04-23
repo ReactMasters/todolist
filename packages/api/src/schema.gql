@@ -25,7 +25,7 @@ type Tag {
   owner: User!
 }
 
-type CreateTagOutput {
+type AddTagOutput {
   success: Boolean!
   message: String
   tag: Tag
@@ -106,7 +106,7 @@ type Mutation {
   login(loginInput: LoginInput!): LoginOutput!
   updateUser(updateUserInput: UpdateUserInput!): User!
   removeUser(id: String!): User!
-  createTag(createTagInput: CreateTagInput!): CreateTagOutput!
+  addTag(addTagInput: AddTagInput!): AddTagOutput!
   createTodoItem(createTodoItemInput: CreateTodoItemInput!): CreateTodoItemOutput!
   createTodoList(createTodoListInput: CreateTodoListInput!): CreateTodoListOutput!
 }
@@ -159,7 +159,7 @@ input UpdateUserInput {
   id: String!
 }
 
-input CreateTagInput {
+input AddTagInput {
   name: String!
 }
 

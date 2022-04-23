@@ -19,12 +19,12 @@ export type Scalars = {
   DateTime: string
 }
 
-export type CreateTagInput = {
+export type AddTagInput = {
   name: Scalars['String']
 }
 
-export type CreateTagOutput = {
-  __typename?: 'CreateTagOutput'
+export type AddTagOutput = {
+  __typename?: 'AddTagOutput'
   success: Scalars['Boolean']
   message?: Maybe<Scalars['String']>
   tag?: Maybe<Tag>
@@ -143,7 +143,7 @@ export type Mutation = {
   login: LoginOutput
   updateUser: User
   removeUser: User
-  createTag: CreateTagOutput
+  addTag: AddTagOutput
   createTodoItem: CreateTodoItemOutput
   createTodoList: CreateTodoListOutput
 }
@@ -164,8 +164,8 @@ export type MutationRemoveUserArgs = {
   id: Scalars['String']
 }
 
-export type MutationCreateTagArgs = {
-  createTagInput: CreateTagInput
+export type MutationAddTagArgs = {
+  addTagInput: AddTagInput
 }
 
 export type MutationCreateTodoItemArgs = {
