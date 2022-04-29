@@ -20,9 +20,7 @@ export class TodoItem extends BaseEntity {
 
   @Field(() => [Tag])
   @Prop({
-    type: [
-      { type: mongoose.Schema.Types.ObjectId, ref: Tag.name, index: true },
-    ],
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Tag', index: true }],
   })
   tags: Tag[]
 
