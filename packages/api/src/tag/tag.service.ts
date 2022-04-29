@@ -19,4 +19,10 @@ export class TagService {
   async listTags(): Promise<Tag[]> {
     return await this.tagModel.find({})
   }
+
+  async listTagsByTodoList(todoListId: string): Promise<Tag[]> {
+    return await this.tagModel.find({
+      todoLists: [todoListId],
+    })
+  }
 }
