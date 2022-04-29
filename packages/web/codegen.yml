@@ -20,7 +20,8 @@ generates:
       baseTypesPath: lib/graphql/types.ts
     plugins:
       - typescript-operations
-      - typed-document-node
+      - typed-document-node:
+          dedupeFragments: true
 hooks:
   afterAllFileWrite:
     - prettier --write
