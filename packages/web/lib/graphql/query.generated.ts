@@ -3,12 +3,14 @@ import * as Types from './types'
 import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core'
 export type AuthPageQueryVariables = Types.Exact<{ [key: string]: never }>
 
-export type AuthPageQuery = { __typename?: 'Query' } & {
+export type AuthPageQuery = {
+  __typename?: 'Query'
   me:
-    | ({ __typename: 'MeSuccess' } & {
-        user: { __typename?: 'User' } & Pick<Types.User, 'id' | 'email'>
-      })
-    | ({ __typename: 'MeError' } & Pick<Types.MeError, 'message'>)
+    | { __typename: 'MeError'; message: string }
+    | {
+        __typename: 'MeSuccess'
+        user: { __typename?: 'User'; id: string; email: string }
+      }
 }
 
 export const AuthPageDocument = {
