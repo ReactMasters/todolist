@@ -1,5 +1,6 @@
 import { createUnionType, Field, ObjectType } from '@nestjs/graphql'
 import { BaseError } from 'src/base/error.dto'
+import { Tag } from 'src/tag/entities/tag.entity'
 import { TodoList } from '../entities/todo-list.entity'
 
 @ObjectType()
@@ -8,6 +9,9 @@ class FindTodoListSuccess {
     nullable: true,
   })
   todoList: TodoList
+
+  @Field(() => [Tag])
+  tags: Tag[]
 }
 
 @ObjectType()
