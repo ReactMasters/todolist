@@ -132,6 +132,7 @@ export type Query = {
   user: User
   listTags: ListTagsOutput
   todoItems: TodoItemsOutput
+  todoItem?: Maybe<TodoItem>
   findTodoList: FindTodoListOutput
 }
 
@@ -141,6 +142,10 @@ export type QueryUserArgs = {
 
 export type QueryTodoItemsArgs = {
   todoItemsInput: TodoItemsInput
+}
+
+export type QueryTodoItemArgs = {
+  id: Scalars['String']
 }
 
 export type QueryFindTodoListArgs = {
@@ -208,6 +213,7 @@ export type TodoItem = {
   status: TodoStatus
   tags: Array<Tag>
   dueDateTime?: Maybe<Scalars['DateTime']>
+  todoList: TodoList
 }
 
 export type TodoItemsError = {

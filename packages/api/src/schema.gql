@@ -46,6 +46,7 @@ type TodoItem {
   status: TodoStatus!
   tags: [Tag!]!
   dueDateTime: DateTime
+  todoList: TodoList!
 }
 
 enum TodoStatus {
@@ -75,6 +76,7 @@ type Query {
   user(id: String!): User!
   listTags: ListTagsOutput!
   todoItems(todoItemsInput: TodoItemsInput!): TodoItemsOutput!
+  todoItem(id: String!): TodoItem
   findTodoList(findTodoListInput: FindTodoListInput!): FindTodoListOutput!
 }
 

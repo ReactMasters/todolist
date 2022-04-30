@@ -8,11 +8,7 @@ import { UserGuard } from 'src/user/user.guard'
 import { AddTodoItemInput } from './dto/add-todo-item.input'
 import { AddTodoItemOutput } from './dto/add-todo-item.output'
 import { TodoItemsInput } from './dto/todo-itmes.input'
-import {
-  TodoItemsError,
-  TodoItemsOutput,
-  TodoItemsSuccess,
-} from './dto/todo-itmes.output'
+import { TodoItemsError, TodoItemsOutput } from './dto/todo-itmes.output'
 import { TodoItem } from './entities/todo-item.entity'
 import { TodoItemService } from './todo-item.service'
 
@@ -42,12 +38,28 @@ export class TodoItemResolver {
     @CurrentUser() user?: User
   ): Promise<typeof TodoItemsOutput> {
     try {
-      return {
-        items: [],
-        totalCount: 0,
-      } as TodoItemsSuccess
+      // check isMine
+      if (!user) throw Error('No authorized')
+      const result = await this.todoService.getTodoItems(todoItemsInput, user)
+      return result
     } catch (error) {
       return { message: error?.message ?? '' } as TodoItemsError
+    }
+  }
+
+  @UseGuards(UserGuard)
+  @Query(() => TodoItem, { nullable: true })
+  async todoItem(
+    @Args('id') id: string,
+    @CurrentUser() user?: User
+  ): Promise<TodoItem> {
+    try {
+      // todo : check isMine
+      if (!user) throw Error('No authorized')
+      return await this.todoService.getTodoItem(id)
+    } catch (error) {
+      // todo : logging errors
+      return null
     }
   }
 }
