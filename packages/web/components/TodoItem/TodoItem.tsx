@@ -43,29 +43,32 @@ const TodoItem = ({ todo }: Props) => {
         >
           {content}
         </Row>
-        {dueDateTime && isExpired ? (
-          <Row align="middle">
-            <CalendarOutlined style={{ marginRight: '0.5rem', color: 'red' }} />
-            <span
-              className={styles.dueDateTime}
-              data-checked={checked ? 'true' : 'false'}
-              style={{ color: 'red' }}
-            >
-              {dayjs(dueDateTime).format('ddd MMM D, YYYY')}
-            </span>
-          </Row>
-        ) : (
-          <Row align="middle">
-            <CalendarOutlined style={{ marginRight: '0.5rem' }} />
-            <span
-              className={styles.dueDateTime}
-              data-checked={checked ? 'true' : 'false'}
-            >
-              {dayjs(dueDateTime).format('ddd MMM D, YYYY')}
-            </span>
-          </Row>
-        )}
-        {tags && (
+        {!!dueDateTime &&
+          (isExpired ? (
+            <Row align="middle">
+              <CalendarOutlined
+                style={{ marginRight: '0.5rem', color: 'red' }}
+              />
+              <span
+                className={styles.dueDateTime}
+                data-checked={checked ? 'true' : 'false'}
+                style={{ color: 'red' }}
+              >
+                {dayjs(dueDateTime).format('ddd MMM D, YYYY')}
+              </span>
+            </Row>
+          ) : (
+            <Row align="middle">
+              <CalendarOutlined style={{ marginRight: '0.5rem' }} />
+              <span
+                className={styles.dueDateTime}
+                data-checked={checked ? 'true' : 'false'}
+              >
+                {dayjs(dueDateTime).format('ddd MMM D, YYYY')}
+              </span>
+            </Row>
+          ))}
+        {!!tags.length && (
           <Row>
             <Col>
               {tags.map((tag) => (
