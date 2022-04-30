@@ -1,14 +1,17 @@
+import { pbkdf2Sync, randomBytes } from 'crypto'
+
 import { Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
-import { pbkdf2Sync, randomBytes } from 'crypto'
+
 import * as jwt from 'jsonwebtoken'
 import { Model } from 'mongoose'
 import { ISSUER, TIME } from 'src/constants'
 import { UserAuth } from 'src/types'
-import { CreateUserInput } from './dto/create-user.input'
-import { CreateUserSuccess } from './dto/create-user.output'
-import { LoginInput } from './dto/login.input'
-import { LoginSuccess } from './dto/login.output'
+
+import { SigninInput } from './dto/signin.input'
+import { SigninSuccess } from './dto/signin.output'
+import { SignupInput } from './dto/signup.input'
+import { SignupSuccess } from './dto/signup.output'
 import { UpdateUserInput } from './dto/update-user.input'
 import { User, UserDocument } from './entities/user.entity'
 
@@ -67,7 +70,7 @@ export class UserService {
   async create({
     email,
     password,
-  }: CreateUserInput): Promise<Omit<CreateUserSuccess, 'todoList'>> {
+  }: SignupInput): Promise<Omit<SignupSuccess, 'todoList'>> {
     const exist = await this.userModel.findOne({ email })
     if (exist) throw `${email} is already exist`
 
@@ -89,7 +92,7 @@ export class UserService {
     }
   }
 
-  async login({ email, password }: LoginInput): Promise<LoginSuccess> {
+  async signin({ email, password }: SigninInput): Promise<SigninSuccess> {
     const user = await this.userModel.findOne({ email })
     if (!user) throw `there is no user with ${email}`
     if (!this.validPassword(user, password)) throw `wrong password!`

@@ -1,6 +1,7 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql'
-import { CreateTagInput } from './dto/create-tag.input'
-import { CreateTagOutput } from './dto/create-tag.output'
+
+import { AddTagInput } from './dto/add-tag.input'
+import { AddTagOutput } from './dto/add-tag.output'
 import { ListTagsOutput } from './dto/list-tags.output'
 import { Tag } from './entities/tag.entity'
 import { TagService } from './tag.service'
@@ -9,16 +10,16 @@ import { TagService } from './tag.service'
 export class TagResolver {
   constructor(private readonly tagService: TagService) {}
 
-  @Mutation(() => CreateTagOutput)
-  async createTag(
-    @Args({ name: 'createTagInput', type: () => CreateTagInput })
-    createTagInput: CreateTagInput
+  @Mutation(() => AddTagOutput)
+  async addTag(
+    @Args({ name: 'addTagInput', type: () => AddTagInput })
+    addTagInput: AddTagInput
   ) {
-    const res: CreateTagOutput = {
+    const res: AddTagOutput = {
       success: true,
     }
     try {
-      res.tag = await this.tagService.createTag(createTagInput)
+      res.tag = await this.tagService.createTag(addTagInput)
     } catch (error) {
       res.success = false
       res.message = error?.message ?? ''

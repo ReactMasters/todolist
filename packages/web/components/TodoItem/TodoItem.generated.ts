@@ -1,6 +1,6 @@
-import * as Types from '../../lib/graphql/types'
-
 import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core'
+
+import * as Types from '../../lib/graphql/types'
 import { TagBar_TagFragmentDoc } from '../TagBar/TagBar.generated'
 export type TodoItem_TodoItemFragment = {
   __typename?: 'TodoItem'

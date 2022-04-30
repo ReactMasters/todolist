@@ -19,68 +19,46 @@ export type Scalars = {
   DateTime: string
 }
 
-export type CreateTagInput = {
+export type AddTagInput = {
   name: Scalars['String']
 }
 
-export type CreateTagOutput = {
-  __typename?: 'CreateTagOutput'
+export type AddTagOutput = {
+  __typename?: 'AddTagOutput'
   message?: Maybe<Scalars['String']>
   success: Scalars['Boolean']
   tag?: Maybe<Tag>
 }
 
-export type CreateTodoItemError = {
-  __typename?: 'CreateTodoItemError'
+export type AddTodoItemError = {
+  __typename?: 'AddTodoItemError'
   message: Scalars['String']
 }
 
-export type CreateTodoItemInput = {
+export type AddTodoItemInput = {
   content: Scalars['String']
   dueDateTime?: Maybe<Scalars['DateTime']>
   status?: Maybe<Scalars['String']>
   todoListId: Scalars['String']
 }
 
-export type CreateTodoItemOutput = CreateTodoItemError | CreateTodoItemSuccess
+export type AddTodoItemOutput = AddTodoItemError | AddTodoItemSuccess
 
-export type CreateTodoItemSuccess = {
-  __typename?: 'CreateTodoItemSuccess'
+export type AddTodoItemSuccess = {
+  __typename?: 'AddTodoItemSuccess'
   todoItem: TodoItem
 }
 
-export type CreateTodoListInput = {
+export type AddTodoListInput = {
   name: Scalars['String']
   owners: Array<Scalars['String']>
 }
 
-export type CreateTodoListOutput = {
-  __typename?: 'CreateTodoListOutput'
+export type AddTodoListOutput = {
+  __typename?: 'AddTodoListOutput'
   message?: Maybe<Scalars['String']>
   success: Scalars['Boolean']
   todoList: TodoList
-}
-
-export type CreateUserError = {
-  __typename?: 'CreateUserError'
-  message: Scalars['String']
-}
-
-export type CreateUserInput = {
-  /** user email */
-  email: Scalars['String']
-  /** user password */
-  password: Scalars['String']
-}
-
-export type CreateUserOutput = CreateUserError | CreateUserSuccess
-
-export type CreateUserSuccess = {
-  __typename?: 'CreateUserSuccess'
-  todoList: TodoList
-  /** JWT when create user success */
-  token: Scalars['String']
-  user: User
 }
 
 export type FindTodoListError = {
@@ -107,25 +85,6 @@ export type ListTagsOutput = {
   tags: Array<Tag>
 }
 
-export type LoginError = {
-  __typename?: 'LoginError'
-  message: Scalars['String']
-}
-
-export type LoginInput = {
-  /** user email */
-  email: Scalars['String']
-  /** user password */
-  password: Scalars['String']
-}
-
-export type LoginOutput = LoginError | LoginSuccess
-
-export type LoginSuccess = {
-  __typename?: 'LoginSuccess'
-  token: Scalars['String']
-}
-
 export type MeError = {
   __typename?: 'MeError'
   message: Scalars['String']
@@ -140,41 +99,31 @@ export type MeSuccess = {
 
 export type Mutation = {
   __typename?: 'Mutation'
-  createTag: CreateTagOutput
-  createTodoItem: CreateTodoItemOutput
-  createTodoList: CreateTodoListOutput
-  createUser: CreateUserOutput
-  login: LoginOutput
-  removeUser: User
-  updateUser: User
+  addTag: AddTagOutput
+  addTodoItem: AddTodoItemOutput
+  addTodoList: AddTodoListOutput
+  signin: SigninOutput
+  signup: SignupOutput
 }
 
-export type MutationCreateTagArgs = {
-  createTagInput: CreateTagInput
+export type MutationAddTagArgs = {
+  addTagInput: AddTagInput
 }
 
-export type MutationCreateTodoItemArgs = {
-  createTodoItemInput: CreateTodoItemInput
+export type MutationAddTodoItemArgs = {
+  addTodoItemInput: AddTodoItemInput
 }
 
-export type MutationCreateTodoListArgs = {
-  createTodoListInput: CreateTodoListInput
+export type MutationAddTodoListArgs = {
+  addTodoListInput: AddTodoListInput
 }
 
-export type MutationCreateUserArgs = {
-  createUserInput: CreateUserInput
+export type MutationSigninArgs = {
+  signinInput: SigninInput
 }
 
-export type MutationLoginArgs = {
-  loginInput: LoginInput
-}
-
-export type MutationRemoveUserArgs = {
-  id: Scalars['String']
-}
-
-export type MutationUpdateUserArgs = {
-  updateUserInput: UpdateUserInput
+export type MutationSignupArgs = {
+  signupInput: SignupInput
 }
 
 export type Query = {
@@ -192,6 +141,47 @@ export type QueryFindTodoListArgs = {
 
 export type QueryUserArgs = {
   id: Scalars['String']
+}
+
+export type SigninError = {
+  __typename?: 'SigninError'
+  message: Scalars['String']
+}
+
+export type SigninInput = {
+  /** user email */
+  email: Scalars['String']
+  /** user password */
+  password: Scalars['String']
+}
+
+export type SigninOutput = SigninError | SigninSuccess
+
+export type SigninSuccess = {
+  __typename?: 'SigninSuccess'
+  token: Scalars['String']
+}
+
+export type SignupError = {
+  __typename?: 'SignupError'
+  message: Scalars['String']
+}
+
+export type SignupInput = {
+  /** user email */
+  email: Scalars['String']
+  /** user password */
+  password: Scalars['String']
+}
+
+export type SignupOutput = SignupError | SignupSuccess
+
+export type SignupSuccess = {
+  __typename?: 'SignupSuccess'
+  todoList: TodoList
+  /** JWT when create user success */
+  token: Scalars['String']
+  user: User
 }
 
 export type Tag = {
@@ -230,13 +220,6 @@ export type TodoList = {
 export enum TodoStatus {
   Completed = 'COMPLETED',
   InProgress = 'IN_PROGRESS',
-}
-
-export type UpdateUserInput = {
-  email?: Maybe<Scalars['String']>
-  id: Scalars['String']
-  /** user password */
-  password?: Maybe<Scalars['String']>
 }
 
 export type User = {

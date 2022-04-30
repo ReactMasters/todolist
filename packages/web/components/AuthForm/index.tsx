@@ -1,8 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Button } from 'antd'
-import Cookies from 'js-cookie'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React, { FormEventHandler, useCallback } from 'react'
 
 import {
   gql,
@@ -11,21 +9,24 @@ import {
   useReactiveVar,
 } from '@apollo/client'
 import { MESSAGES, ROUTES, TOKEN_KEY } from '@web/lib/constant'
+import { SigninInput } from '@web/lib/graphql/types'
+import { Button } from 'antd'
+import Cookies from 'js-cookie'
+import React, { FormEventHandler, useCallback } from 'react'
 
-import styles from './index.module.scss'
 import Email from './Email'
-import { LoginDocument, SignUpDocument } from './index.generated'
+import { SigninDocument, SignUpDocument } from './index.generated'
+import styles from './index.module.scss'
 import { emailVar, loginLoadingVar, passwordVar } from './index.state'
 import Password from './Password'
-import Link from 'next/link'
 
 const Login = gql`
-  mutation Login($loginInput: LoginInput!) {
-    login(loginInput: $loginInput) {
-      ... on LoginSuccess {
+  mutation Signin($signinInput: SigninInput!) {
+    signin(signinInput: $signinInput) {
+      ... on SigninSuccess {
         token
       }
-      ... on LoginError {
+      ... on SigninError {
         message
       }
     }
@@ -33,12 +34,12 @@ const Login = gql`
 `
 
 const SignUp = gql`
-  mutation SignUp($signUpInput: CreateUserInput!) {
-    createUser(createUserInput: $signUpInput) {
-      ... on CreateUserError {
+  mutation SignUp($signUpInput: SignupInput!) {
+    signup(signupInput: $signUpInput) {
+      ... on SignupError {
         message
       }
-      ... on CreateUserSuccess {
+      ... on SignupSuccess {
         user {
           id
           email
@@ -56,7 +57,7 @@ interface Props {
 const AuthForm = ({ type }: Props) => {
   const client = useApolloClient()
   const router = useRouter()
-  const [login] = useMutation(LoginDocument)
+  const [login] = useMutation(SigninDocument)
   const [signup] = useMutation(SignUpDocument)
   const loading = useReactiveVar(loginLoadingVar)
 
@@ -67,40 +68,32 @@ const AuthForm = ({ type }: Props) => {
     loginLoadingVar(true)
 
     let token = ''
-    if (type === 'login') {
-      const { data } = await login({
-        variables: {
-          loginInput: {
-            email: emailVar(),
-            password: passwordVar(),
-          },
-        },
-      })
-      if (data.login.__typename === 'LoginError') {
-        loginLoadingVar(false)
-        return alert(data.login.message)
-      }
-      client.resetStore()
-      token = data.login.token
-    } else {
-      const { data } = await signup({
-        variables: {
-          signUpInput: {
-            email: emailVar(),
-            password: passwordVar(),
-          },
-        },
-      })
-      if (data.createUser.__typename === 'CreateUserError') {
-        loginLoadingVar(false)
-        return alert(data.createUser.message)
-      }
-      token = data.createUser.token
+
+    const inputs: SigninInput = {
+      email: emailVar(),
+      password: passwordVar(),
     }
+    if (type === 'login') {
+      const { data } = await login({ variables: { signinInput: inputs } })
+      if (data.signin.__typename === 'SigninError') {
+        loginLoadingVar(false)
+        return alert(data.signin.message)
+      }
+      token = data.signin.token
+    } else {
+      const { data } = await signup({ variables: { signUpInput: inputs } })
+      if (data.signup.__typename === 'SignupError') {
+        loginLoadingVar(false)
+        return alert(data.signup.message)
+      }
+      token = data.signup.token
+    }
+
     Cookies.set(TOKEN_KEY, token)
     emailVar('')
     passwordVar('')
     loginLoadingVar(false)
+    client.resetStore()
     router.replace('/')
   }, [])
 

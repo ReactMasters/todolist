@@ -38,8 +38,8 @@ const Index = () => {
 
   const handleLogout = useCallback(() => {
     Cookies.remove(TOKEN_KEY)
-    router.push(ROUTES.LOGIN)
     client.resetStore()
+    router.replace(ROUTES.LOGIN)
   }, [])
 
   if (error) return <div className={styles.wrapper}>에러!</div>

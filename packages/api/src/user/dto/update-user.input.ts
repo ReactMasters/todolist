@@ -1,8 +1,9 @@
 import { Field, InputType, PartialType } from '@nestjs/graphql'
-import { CreateUserInput } from './create-user.input'
+
+import { SignupInput } from './signup.input'
 
 @InputType()
-export class UpdateUserInput extends PartialType(CreateUserInput) {
+export class UpdateUserInput extends PartialType(SignupInput) {
   @Field()
   id: string
 }
