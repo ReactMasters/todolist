@@ -4,7 +4,6 @@ import { TodoStatus } from '@web/lib/graphql/types'
 import { Button, List } from 'antd'
 import React, { useState } from 'react'
 import TodoItem from '../TodoItem/TodoItem'
-import { TodoItem_TodoItemFragment } from '../TodoItem/TodoItem.generated'
 import { FindTodoListDocument } from './TodoList.generated'
 
 type Props = {
@@ -12,8 +11,8 @@ type Props = {
 }
 
 export const findTodoList = gql`
-  query FindTodoList($id: String!) {
-    findTodoList(findTodoListInput: { id: $id }) {
+  query FindTodoList($input: FindTodoListInput!) {
+    findTodoList(findTodoListInput: $input) {
       ... on FindTodoListSuccess {
         todoList {
           id
@@ -34,11 +33,12 @@ const TodoList = ({ todoListId }: Props) => {
   const [showCompleted, setShowCompleted] = useState<boolean>(false)
   const { loading, data, error } = useQuery(FindTodoListDocument, {
     variables: {
-      id: todoListId,
+      input: { id: todoListId },
     },
+    skip: !todoListId,
   })
   if (loading) return null
-  if (error) return <div>error</div>
+  if (!data || error) return <div>{JSON.stringify(error)}</div>
   if (data.findTodoList.__typename === 'FindTodoListError')
     return <div>{data.findTodoList.message}</div>
 
