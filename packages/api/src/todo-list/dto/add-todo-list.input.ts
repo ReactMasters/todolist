@@ -1,7 +1,7 @@
 import { Field, InputType } from '@nestjs/graphql'
 
 @InputType()
-export class CreateTodoListInput {
+export class AddTodoListInput {
   @Field(() => String)
   name: string
 

@@ -1,56 +1,51 @@
+import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core'
+
 import * as Types from '../../lib/graphql/types'
 
-import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core'
-export type LoginMutationVariables = Types.Exact<{
-  loginInput: Types.LoginInput
+export type SigninMutationVariables = Types.Exact<{
+  signinInput: Types.SigninInput
 }>
 
-export type LoginMutation = { __typename?: 'Mutation' } & {
-  login:
-    | ({ __typename?: 'LoginSuccess' } & Pick<Types.LoginSuccess, 'token'>)
-    | ({ __typename?: 'LoginError' } & Pick<Types.LoginError, 'message'>)
+export type SigninMutation = { __typename?: 'Mutation' } & {
+  signin:
+    | ({ __typename?: 'SigninSuccess' } & Pick<Types.SigninSuccess, 'token'>)
+    | ({ __typename?: 'SigninError' } & Pick<Types.SigninError, 'message'>)
 }
 
 export type SignUpMutationVariables = Types.Exact<{
-  signUpInput: Types.CreateUserInput
+  signUpInput: Types.SignupInput
 }>
 
 export type SignUpMutation = { __typename?: 'Mutation' } & {
-  createUser:
-    | ({ __typename?: 'CreateUserSuccess' } & Pick<
-        Types.CreateUserSuccess,
-        'token'
-      > & {
+  signup:
+    | ({ __typename?: 'SignupSuccess' } & Pick<Types.SignupSuccess, 'token'> & {
           user: { __typename?: 'User' } & Pick<
             Types.User,
             'id' | 'email' | 'lastLoginAt'
           >
         })
-    | ({ __typename?: 'CreateUserError' } & Pick<
-        Types.CreateUserError,
-        'message'
-      >)
+    | ({ __typename?: 'SignupError' } & Pick<Types.SignupError, 'message'>)
 }
 
-export const LoginDocument = {
+export const SigninDocument = {
   kind: 'Document',
   definitions: [
     {
       kind: 'OperationDefinition',
       operation: 'mutation',
-      name: { kind: 'Name', value: 'Login' },
+      name: { kind: 'Name', value: 'Signin' },
       variableDefinitions: [
         {
           kind: 'VariableDefinition',
           variable: {
             kind: 'Variable',
-            name: { kind: 'Name', value: 'loginInput' },
+            name: { kind: 'Name', value: 'signinInput' },
           },
           type: {
             kind: 'NonNullType',
             type: {
               kind: 'NamedType',
-              name: { kind: 'Name', value: 'LoginInput' },
+              name: { kind: 'Name', value: 'SigninInput' },
             },
           },
         },
@@ -60,14 +55,14 @@ export const LoginDocument = {
         selections: [
           {
             kind: 'Field',
-            name: { kind: 'Name', value: 'login' },
+            name: { kind: 'Name', value: 'signin' },
             arguments: [
               {
                 kind: 'Argument',
-                name: { kind: 'Name', value: 'loginInput' },
+                name: { kind: 'Name', value: 'signinInput' },
                 value: {
                   kind: 'Variable',
-                  name: { kind: 'Name', value: 'loginInput' },
+                  name: { kind: 'Name', value: 'signinInput' },
                 },
               },
             ],
@@ -78,7 +73,7 @@ export const LoginDocument = {
                   kind: 'InlineFragment',
                   typeCondition: {
                     kind: 'NamedType',
-                    name: { kind: 'Name', value: 'LoginSuccess' },
+                    name: { kind: 'Name', value: 'SigninSuccess' },
                   },
                   selectionSet: {
                     kind: 'SelectionSet',
@@ -91,7 +86,7 @@ export const LoginDocument = {
                   kind: 'InlineFragment',
                   typeCondition: {
                     kind: 'NamedType',
-                    name: { kind: 'Name', value: 'LoginError' },
+                    name: { kind: 'Name', value: 'SigninError' },
                   },
                   selectionSet: {
                     kind: 'SelectionSet',
@@ -110,7 +105,7 @@ export const LoginDocument = {
       },
     },
   ],
-} as unknown as DocumentNode<LoginMutation, LoginMutationVariables>
+} as unknown as DocumentNode<SigninMutation, SigninMutationVariables>
 export const SignUpDocument = {
   kind: 'Document',
   definitions: [
@@ -129,7 +124,7 @@ export const SignUpDocument = {
             kind: 'NonNullType',
             type: {
               kind: 'NamedType',
-              name: { kind: 'Name', value: 'CreateUserInput' },
+              name: { kind: 'Name', value: 'SignupInput' },
             },
           },
         },
@@ -139,11 +134,11 @@ export const SignUpDocument = {
         selections: [
           {
             kind: 'Field',
-            name: { kind: 'Name', value: 'createUser' },
+            name: { kind: 'Name', value: 'signup' },
             arguments: [
               {
                 kind: 'Argument',
-                name: { kind: 'Name', value: 'createUserInput' },
+                name: { kind: 'Name', value: 'signupInput' },
                 value: {
                   kind: 'Variable',
                   name: { kind: 'Name', value: 'signUpInput' },
@@ -157,7 +152,7 @@ export const SignUpDocument = {
                   kind: 'InlineFragment',
                   typeCondition: {
                     kind: 'NamedType',
-                    name: { kind: 'Name', value: 'CreateUserError' },
+                    name: { kind: 'Name', value: 'SignupError' },
                   },
                   selectionSet: {
                     kind: 'SelectionSet',
@@ -173,7 +168,7 @@ export const SignUpDocument = {
                   kind: 'InlineFragment',
                   typeCondition: {
                     kind: 'NamedType',
-                    name: { kind: 'Name', value: 'CreateUserSuccess' },
+                    name: { kind: 'Name', value: 'SignupSuccess' },
                   },
                   selectionSet: {
                     kind: 'SelectionSet',

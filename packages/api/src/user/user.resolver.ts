@@ -1,13 +1,14 @@
 import { UseGuards } from '@nestjs/common'
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql'
-import { CreateTodoListInput } from 'src/todo-list/dto/create-todo-list.input'
+
+import { AddTodoListInput } from 'src/todo-list/dto/add-todo-list.input'
 import { TodoListService } from 'src/todo-list/todo-list.service'
-import { CreateUserInput } from './dto/create-user.input'
-import { CreateUserOutput } from './dto/create-user.output'
-import { LoginInput } from './dto/login.input'
-import { LoginOutput } from './dto/login.output'
+
 import { MeOutput } from './dto/me.output'
-import { UpdateUserInput } from './dto/update-user.input'
+import { SigninInput } from './dto/signin.input'
+import { SigninOutput } from './dto/signin.output'
+import { SignupInput } from './dto/signup.input'
+import { SignupOutput } from './dto/signup.output'
 import { User } from './entities/user.entity'
 import { DEFAULT_TODO_LIST_NAME } from './user.config'
 import { CurrentUser } from './user.decorator'
@@ -21,17 +22,17 @@ export class UserResolver {
     private readonly todoListService: TodoListService
   ) {}
 
-  @Mutation(() => CreateUserOutput)
-  async createUser(
-    @Args('createUserInput') createUserInput: CreateUserInput
-  ): Promise<typeof CreateUserOutput> {
+  @Mutation(() => SignupOutput)
+  async signup(
+    @Args('signupInput') signupInput: SignupInput
+  ): Promise<typeof SignupOutput> {
     try {
-      const newUser = await this.userService.create(createUserInput)
-      const defaultTodoListInput: CreateTodoListInput = {
+      const newUser = await this.userService.create(signupInput)
+      const defaultTodoListInput: AddTodoListInput = {
         name: DEFAULT_TODO_LIST_NAME,
         owners: [newUser.user.id],
       }
-      const defaultTodoList = await this.todoListService.createTodoList(
+      const defaultTodoList = await this.todoListService.addTodoList(
         defaultTodoListInput
       )
 
@@ -44,12 +45,12 @@ export class UserResolver {
     }
   }
 
-  @Mutation(() => LoginOutput)
-  async login(
-    @Args('loginInput') loginInput: LoginInput
-  ): Promise<typeof LoginOutput> {
+  @Mutation(() => SigninOutput)
+  async signin(
+    @Args('signinInput') signinInput: SigninInput
+  ): Promise<typeof SigninOutput> {
     try {
-      return await this.userService.login(loginInput)
+      return await this.userService.signin(signinInput)
     } catch (error) {
       return { message: error?.message ?? error }
     }
@@ -74,15 +75,5 @@ export class UserResolver {
   @Query(() => User, { name: 'user' })
   findOne(@Args('id') id: string) {
     return this.userService.findOne(id)
-  }
-
-  @Mutation(() => User)
-  updateUser(@Args('updateUserInput') updateUserInput: UpdateUserInput) {
-    return this.userService.update(updateUserInput)
-  }
-
-  @Mutation(() => User)
-  removeUser(@Args('id') id: string) {
-    return this.userService.remove(id)
   }
 }

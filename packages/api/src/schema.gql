@@ -25,7 +25,7 @@ type Tag {
   owner: User!
 }
 
-type CreateTagOutput {
+type AddTagOutput {
   success: Boolean!
   message: String
   tag: Tag
@@ -63,7 +63,7 @@ type TodoList {
   owners: [User!]!
 }
 
-type CreateTodoListOutput {
+type AddTodoListOutput {
   success: Boolean!
   message: String
   todoList: TodoList!
@@ -102,18 +102,16 @@ input FindTodoListInput {
 }
 
 type Mutation {
-  createUser(createUserInput: CreateUserInput!): CreateUserOutput!
-  login(loginInput: LoginInput!): LoginOutput!
-  updateUser(updateUserInput: UpdateUserInput!): User!
-  removeUser(id: String!): User!
-  createTag(createTagInput: CreateTagInput!): CreateTagOutput!
-  createTodoItem(createTodoItemInput: CreateTodoItemInput!): CreateTodoItemOutput!
-  createTodoList(createTodoListInput: CreateTodoListInput!): CreateTodoListOutput!
+  signup(signupInput: SignupInput!): SignupOutput!
+  signin(signinInput: SigninInput!): SigninOutput!
+  addTag(addTagInput: AddTagInput!): AddTagOutput!
+  addTodoItem(addTodoItemInput: AddTodoItemInput!): AddTodoItemOutput!
+  addTodoList(addTodoListInput: AddTodoListInput!): AddTodoListOutput!
 }
 
-union CreateUserOutput = CreateUserSuccess | CreateUserError
+union SignupOutput = SignupSuccess | SignupError
 
-type CreateUserSuccess {
+type SignupSuccess {
   user: User!
 
   """JWT when create user success"""
@@ -121,11 +119,11 @@ type CreateUserSuccess {
   todoList: TodoList!
 }
 
-type CreateUserError {
+type SignupError {
   message: String!
 }
 
-input CreateUserInput {
+input SignupInput {
   """user email"""
   email: String!
 
@@ -133,17 +131,17 @@ input CreateUserInput {
   password: String!
 }
 
-union LoginOutput = LoginSuccess | LoginError
+union SigninOutput = SigninSuccess | SigninError
 
-type LoginSuccess {
+type SigninSuccess {
   token: String!
 }
 
-type LoginError {
+type SigninError {
   message: String!
 }
 
-input LoginInput {
+input SigninInput {
   """user email"""
   email: String!
 
@@ -151,36 +149,28 @@ input LoginInput {
   password: String!
 }
 
-input UpdateUserInput {
-  email: String
-
-  """user password"""
-  password: String
-  id: String!
-}
-
-input CreateTagInput {
+input AddTagInput {
   name: String!
 }
 
-union CreateTodoItemOutput = CreateTodoItemSuccess | CreateTodoItemError
+union AddTodoItemOutput = AddTodoItemSuccess | AddTodoItemError
 
-type CreateTodoItemSuccess {
+type AddTodoItemSuccess {
   todoItem: TodoItem!
 }
 
-type CreateTodoItemError {
+type AddTodoItemError {
   message: String!
 }
 
-input CreateTodoItemInput {
+input AddTodoItemInput {
   todoListId: String!
   content: String!
   status: String
   dueDateTime: DateTime
 }
 
-input CreateTodoListInput {
+input AddTodoListInput {
   name: String!
   owners: [String!]!
 }
