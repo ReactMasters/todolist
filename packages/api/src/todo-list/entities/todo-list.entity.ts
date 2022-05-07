@@ -16,13 +16,15 @@ export class TodoList extends BaseEntity {
 
   @Field(() => [TodoItem])
   @Prop({
-    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Todo' }],
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: TodoItem.name }],
   })
   todos: TodoItem[]
 
   @Field(() => [User])
   @Prop({
-    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User', index: true }],
+    type: [
+      { type: mongoose.Schema.Types.ObjectId, ref: User.name, index: true },
+    ],
   })
   owners: User[]
 }

@@ -23,6 +23,8 @@ export class TodoListService {
       id,
       owners: { $in: [ownerId] },
     })
+      .populate('todos')
+      .populate('owners')
   }
 
   async addTodoItemToList(

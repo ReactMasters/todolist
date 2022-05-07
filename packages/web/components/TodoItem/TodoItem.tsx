@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react'
 import { CalendarOutlined } from '@ant-design/icons'
-import { Tag, Col, Row, Checkbox } from 'antd'
-import dayjs from 'dayjs'
-import { TodoStatus, Tag as TodoTag } from '@web/lib/graphql/types'
-import styles from './TodoItem.module.scss'
 import { gql } from '@apollo/client'
+import { TodoStatus } from '@web/lib/graphql/types'
+import { Checkbox, Col, Row, Tag } from 'antd'
+import dayjs from 'dayjs'
+import { useEffect, useState } from 'react'
 import { TodoItem_TodoItemFragment } from './TodoItem.generated'
+import styles from './TodoItem.module.scss'
 
 interface Props {
   todo?: TodoItem_TodoItemFragment
@@ -92,8 +92,7 @@ TodoItem.fragments = {
       status
       dueDateTime
       tags {
-        id
-        name
+        ...TagBar_Tag
       }
     }
   `,

@@ -1,6 +1,6 @@
 import { UseGuards } from '@nestjs/common'
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql'
-
+import { TagService } from 'src/tag/tag.service'
 import { User } from 'src/user/entities/user.entity'
 import { CurrentUser } from 'src/user/user.decorator'
 import { UserGuard } from 'src/user/user.guard'
@@ -14,7 +14,10 @@ import { TodoListService } from './todo-list.service'
 
 @Resolver(() => TodoList)
 export class TodoListResolver {
-  constructor(private readonly todoListService: TodoListService) {}
+  constructor(
+    private readonly todoListService: TodoListService,
+    private readonly tagService: TagService
+  ) {}
 
   @Mutation(() => AddTodoListOutput)
   async addTodoList(
@@ -42,8 +45,12 @@ export class TodoListResolver {
         findTodoListInput.id,
         user.id
       )
+      const tags = await this.tagService.listTagsByTodoList(
+        findTodoListInput.id
+      )
       return {
         todoList,
+        tags,
       }
     } catch (err) {
       return { message: err.message ?? err }
