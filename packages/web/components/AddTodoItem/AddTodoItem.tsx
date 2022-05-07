@@ -13,9 +13,9 @@ import { getDayFromToday, includeDate } from '@web/utils/dateUtil'
 import { genMockTags } from '@web/utils/mockUtil'
 import dayjs from 'dayjs'
 import React, { useEffect, useRef, useState } from 'react'
-import AddTodoHeading from './AddTodoHeading/AddTodoHeading'
+import AddTodoHeading from '../AddTodoHeading/AddTodoHeading'
 import styles from './AddTodoItem.module.scss'
-import TagOption from './TagOption/TagOption'
+import TagOption from '../TagOption/TagOption'
 
 enum AddTodoItemPage {
   TODO_TITLE,

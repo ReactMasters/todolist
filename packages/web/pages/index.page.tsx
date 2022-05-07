@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import AddTodoItem from 'components/AddTodoItem'
+import AddTodoItem from 'components/AddTodoItem/AddTodoItem'
 import Cookies from 'js-cookie'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
