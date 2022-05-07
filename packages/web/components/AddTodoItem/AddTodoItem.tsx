@@ -6,7 +6,6 @@ import {
   Today,
   TodayOutlined,
 } from '@mui/icons-material'
-import { DatePicker } from '@mui/lab'
 import { colors } from '@mui/material'
 import { getDayFromToday, includeDate } from '@web/utils/dateUtil'
 import { genMockTags } from '@web/utils/mockUtil'
@@ -15,6 +14,7 @@ import dayjs from 'dayjs'
 import React, { useEffect, useRef, useState } from 'react'
 
 import AddTodoHeading from '../AddTodoHeading/AddTodoHeading'
+import DatePicker from '../DatePicker'
 import TagOption from '../TagOption/TagOption'
 import styles from './AddTodoItem.module.scss'
 
@@ -28,9 +28,8 @@ const AddTodoItem = () => {
   const [taskTitle, setTaskTitle] = useState('')
   const [isAddingTask, setIsAddingTask] = useState(false)
   const [selectedDate, setSelectedDate] = useState(null)
-  const [datePickerDate, setDatePickerDate] = useState(null)
   const [finalSelectedDate, setFinalSelectedDate] = useState(null)
-  const datePickerRef = useRef<HTMLInputElement | null>(null)
+  const [datePickerOpen, setDatePickerOpen] = useState(false)
   const [currentPage, setCurrentPage] = useState(AddTodoItemPage.TODO_DATE)
   const [tags, setTags] = useState(genMockTags(5))
   const [selectedTags, setSelectedTags] = useState([])
@@ -76,7 +75,6 @@ const AddTodoItem = () => {
 
   const resetDateValues = () => {
     setFinalSelectedDate(null)
-    setDatePickerDate(null)
     setSelectedDate(null)
   }
 
@@ -163,26 +161,12 @@ const AddTodoItem = () => {
     }
 
     if (currentPage === AddTodoItemPage.TODO_DATE) {
-      const okButton = (
-        <Typography.Text onClick={() => setSelectedDate(datePickerDate)}>
-          Ok
-        </Typography.Text>
-      )
-      const cancelButton = (
-        <Typography.Text onClick={() => setDatePickerDate(selectedDate)}>
-          Cancel
-        </Typography.Text>
-      )
-
-      const renderInput = (params) => (
-        <Input sx={{ display: 'none' }} {...params} />
-      )
-      const onPickDate = (newDate) => {
-        setDatePickerDate(newDate)
+      const openDatePicker = () => {
+        setDatePickerOpen((prev) => !prev)
       }
 
-      const openDatePicker = () => {
-        datePickerRef.current.click()
+      const onDatePickerChange = (date) => {
+        setSelectedDate(date)
       }
 
       return (
@@ -209,15 +193,19 @@ const AddTodoItem = () => {
             <Typography.Text className={styles.dateLabel}>
               {customDateString}
             </Typography.Text>
+            <DatePicker
+              open={datePickerOpen}
+              onChange={onDatePickerChange}
+              style={{
+                position: 'relative',
+                left: '-10rem',
+                top: '-1rem',
+                visibility: 'hidden',
+                width: 0,
+                height: 0,
+              }}
+            />
           </div>
-          <DatePicker
-            inputRef={datePickerRef}
-            value={datePickerDate}
-            onChange={onPickDate}
-            okText={okButton}
-            cancelText={cancelButton}
-            renderInput={renderInput}
-          />
         </div>
       )
     }
