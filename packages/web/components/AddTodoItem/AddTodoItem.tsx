@@ -7,10 +7,10 @@ import {
   TodayOutlined,
 } from '@mui/icons-material'
 import { DatePicker } from '@mui/lab'
-import { colors, TextField } from '@mui/material'
+import { colors } from '@mui/material'
 import { getDayFromToday, includeDate } from '@web/utils/dateUtil'
 import { genMockTags } from '@web/utils/mockUtil'
-import { Tag, Collapse, Typography } from 'antd'
+import { Tag, Collapse, Typography, Input } from 'antd'
 import dayjs from 'dayjs'
 import React, { useEffect, useRef, useState } from 'react'
 
@@ -147,7 +147,7 @@ const AddTodoItem = () => {
       return (
         <div className={styles.editorWrapper}>
           <PlusOutlined className={styles.gridPlus} />
-          <TextField
+          <Input
             className={`${styles.gridTitle}`}
             value={taskTitle}
             onChange={(e) => setTaskTitle(e.target.value)}
@@ -175,7 +175,7 @@ const AddTodoItem = () => {
       )
 
       const renderInput = (params) => (
-        <TextField sx={{ display: 'none' }} {...params} />
+        <Input sx={{ display: 'none' }} {...params} />
       )
       const onPickDate = (newDate) => {
         setDatePickerDate(newDate)
