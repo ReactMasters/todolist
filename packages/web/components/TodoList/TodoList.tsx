@@ -2,9 +2,9 @@ import { DownOutlined } from '@ant-design/icons'
 import { gql, useQuery } from '@apollo/client'
 import { TodoStatus } from '@web/lib/graphql/types'
 import { Button, List } from 'antd'
-import TagBar from '../TagBar/TagBar'
 import React, { useState } from 'react'
 
+import TagBar from '../TagBar/TagBar'
 import TodoItem from '../TodoItem/TodoItem'
 import { FindTodoListDocument } from './TodoList.generated'
 
