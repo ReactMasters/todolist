@@ -1,11 +1,4 @@
-import Icon, { PlusOutlined, TagOutlined } from '@ant-design/icons'
-import {
-  CalendarToday,
-  Event,
-  NextWeek,
-  Today,
-  TodayOutlined,
-} from '@mui/icons-material'
+import { PlusOutlined, TagOutlined, CalendarOutlined } from '@ant-design/icons'
 import { colors } from '@mui/material'
 import { getDayFromToday, includeDate } from '@web/utils/dateUtil'
 import { genMockTags } from '@web/utils/mockUtil'
@@ -102,11 +95,7 @@ const AddTodoItem = () => {
     ))
   }
 
-  const renderDateOption = (
-    daysFromToday: number,
-    label: string,
-    IconComponent
-  ) => {
+  const renderDateOption = (daysFromToday: number, label: string) => {
     const date = getDayFromToday(daysFromToday)
     return (
       <div
@@ -118,7 +107,6 @@ const AddTodoItem = () => {
         }}
         className={styles.dateOption}
       >
-        <Icon className={styles.dateIcon} component={IconComponent}></Icon>
         <Typography.Text className={styles.dateLabel}>{label}</Typography.Text>
         <span className={styles.dayName}>{date.format('ddd')}</span>
       </div>
@@ -133,14 +121,17 @@ const AddTodoItem = () => {
           color={colors[tempRandomColors[0]][100]}
           className={styles.tag}
           onClick={onClickCalendarIcon}
-          icon={<TodayOutlined className={styles.tagIcon} />}
+          icon={<CalendarOutlined className={styles.tagIcon} />}
           closable
           onClose={resetDateValues}
         >
           <span className={styles.tagLabel}>Due {formattedDate}</span>
         </Tag>
       ) : (
-        <Today className={styles.todayIcon} onClick={onClickCalendarIcon} />
+        <CalendarOutlined
+          className={styles.todayIcon}
+          onClick={onClickCalendarIcon}
+        />
       )
       return (
         <div className={styles.editorWrapper}>
@@ -179,9 +170,9 @@ const AddTodoItem = () => {
             }}
             right="Done"
           />
-          {renderDateOption(0, 'Today', Today)}
-          {renderDateOption(1, 'Tomorrow', Event)}
-          {renderDateOption(7, 'Next Week', NextWeek)}
+          {renderDateOption(0, 'Today')}
+          {renderDateOption(1, 'Tomorrow')}
+          {renderDateOption(7, 'Next Week')}
           <div
             style={{
               background: isCustomDateSelected ? 'lightpink' : 'white',
@@ -189,7 +180,6 @@ const AddTodoItem = () => {
             onClick={openDatePicker}
             className={styles.dateOption}
           >
-            <Icon className={styles.dateIcon} component={CalendarToday} />
             <Typography.Text className={styles.dateLabel}>
               {customDateString}
             </Typography.Text>
