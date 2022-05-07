@@ -1,9 +1,8 @@
+import { useReactiveVar } from '@apollo/client'
+import { Input } from 'antd'
 import React, { ChangeEventHandler, useCallback } from 'react'
 
-import { useReactiveVar } from '@apollo/client'
-
 import { passwordVar } from './index.state'
-import { Input } from 'antd'
 
 const Password = () => {
   const password = useReactiveVar(passwordVar)

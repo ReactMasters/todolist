@@ -1,3 +1,4 @@
+import Icon, { PlusOutlined, TagOutlined } from '@ant-design/icons'
 import {
   CalendarToday,
   Event,
@@ -5,17 +6,17 @@ import {
   Today,
   TodayOutlined,
 } from '@mui/icons-material'
-import { Tag, Collapse, Typography } from 'antd'
-import Icon, { PlusOutlined, TagOutlined } from '@ant-design/icons'
 import { DatePicker } from '@mui/lab'
 import { colors, TextField } from '@mui/material'
 import { getDayFromToday, includeDate } from '@web/utils/dateUtil'
 import { genMockTags } from '@web/utils/mockUtil'
+import { Tag, Collapse, Typography } from 'antd'
 import dayjs from 'dayjs'
 import React, { useEffect, useRef, useState } from 'react'
+
 import AddTodoHeading from '../AddTodoHeading/AddTodoHeading'
-import styles from './AddTodoItem.module.scss'
 import TagOption from '../TagOption/TagOption'
+import styles from './AddTodoItem.module.scss'
 
 enum AddTodoItemPage {
   TODO_TITLE,
