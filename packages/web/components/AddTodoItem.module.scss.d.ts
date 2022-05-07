@@ -3,8 +3,6 @@ export const addTodoItem: string
 export const addTodoItemButton: string
 export const addTodoItemContent: string
 export const addTodoItemText: string
-export const chip: string
-export const chipLabel: string
 export const col: string
 export const dateIcon: string
 export const dateOption: string
@@ -17,5 +15,7 @@ export const gridPlus: string
 export const gridTitle: string
 export const plusIcon: string
 export const selectDateWrapper: string
+export const tag: string
 export const tagIcon: string
+export const tagLabel: string
 export const todayIcon: string

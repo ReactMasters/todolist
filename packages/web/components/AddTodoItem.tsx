@@ -102,7 +102,7 @@ const AddTodoItem = () => {
     return finalSelectedTags.map((tag, index) => (
       <Tag
         key={tag.name}
-        className={styles.chip}
+        className={styles.tag}
         color={colors[tempRandomColors[index % tempRandomColors.length]][100]}
         closable
         onClose={() => deleteTag(tag)}
@@ -141,13 +141,13 @@ const AddTodoItem = () => {
       const dateButton = finalSelectedDate ? (
         <Tag
           color={colors[tempRandomColors[0]][100]}
-          className={styles.chip}
+          className={styles.tag}
           onClick={onClickCalendarIcon}
           icon={<TodayOutlined className={styles.tagIcon} />}
           closable
           onClose={resetDateValues}
         >
-          <span className={styles.chipLabel}>Due {formattedDate}</span>
+          <span className={styles.tagLabel}>Due {formattedDate}</span>
         </Tag>
       ) : (
         <Today className={styles.todayIcon} onClick={onClickCalendarIcon} />
