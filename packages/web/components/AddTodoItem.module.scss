@@ -97,11 +97,15 @@
 
 .chip {
   border-radius: 5px;
-  height: 27px;
+  border-color: transparent;
   color: white;
+  height: 27px;
+  display: flex;
+  align-items: center;
 
   .chipLabel {
     font-size: 12px;
+    margin-left: 5px;
   }
 
   .tagIcon {
