@@ -1,13 +1,13 @@
 import { PlusOutlined, TagOutlined, CalendarOutlined } from '@ant-design/icons'
-import { colors } from '@mui/material'
 import { getDayFromToday, includeDate } from '@web/utils/dateUtil'
 import { genMockTags } from '@web/utils/mockUtil'
 import { Tag, Collapse, Typography, Input } from 'antd'
 import dayjs from 'dayjs'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import AddTodoHeading from '../AddTodoHeading/AddTodoHeading'
 import DatePicker from '../DatePicker'
+import tagColors from '../TagBar/tagColors'
 import TagOption from '../TagOption/TagOption'
 import styles from './AddTodoItem.module.scss'
 
@@ -27,12 +27,6 @@ const AddTodoItem = () => {
   const [tags, setTags] = useState(genMockTags(5))
   const [selectedTags, setSelectedTags] = useState([])
   const [finalSelectedTags, setFinalSelectedTags] = useState([])
-
-  const tempRandomColors = useRef(
-    Object.keys(colors)
-      .filter((colorGroup) => colorGroup !== 'common')
-      .sort(() => Math.random() - 0.5)
-  ).current
 
   useEffect(() => {
     if (!isAddingTask) {
@@ -86,7 +80,7 @@ const AddTodoItem = () => {
       <Tag
         key={tag.name}
         className={styles.tag}
-        color={colors[tempRandomColors[index % tempRandomColors.length]][100]}
+        color={tagColors[index % tagColors.length]}
         closable
         onClose={() => deleteTag(tag)}
       >
@@ -118,7 +112,7 @@ const AddTodoItem = () => {
       const formattedDate = dayjs(finalSelectedDate).format('ddd, MMM D')
       const dateButton = finalSelectedDate ? (
         <Tag
-          color={colors[tempRandomColors[0]][100]}
+          color={tagColors[0]}
           className={styles.tag}
           onClick={onClickCalendarIcon}
           icon={<CalendarOutlined className={styles.tagIcon} />}
@@ -251,9 +245,9 @@ const AddTodoItem = () => {
           onClick={onClickTagOption}
           isActive={isActive}
           key={tag.name}
-          color={colors[tempRandomColors[index % tempRandomColors.length]][100]}
+          color={tagColors[index % tagColors.length]}
           name={tag.name}
-        ></TagOption>
+        />
       )
     })
   }
