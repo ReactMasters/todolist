@@ -1,19 +1,18 @@
 import {
   Add,
   CalendarToday,
-  Cancel,
   Event,
   LocalOfferOutlined,
   NextWeek,
   Today,
   TodayOutlined,
 } from '@mui/icons-material'
+import { Tag } from 'antd'
 import { DatePicker } from '@mui/lab'
 import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-  Chip,
   colors,
   Icon,
   TextField,
@@ -100,24 +99,17 @@ const AddTodoItem = () => {
   }
 
   const renderTagChips = () => {
-    return finalSelectedTags.map((tag, index) => {
-      const chipStyle = {
-        backgroundColor:
-          colors[tempRandomColors[index % tempRandomColors.length]][100],
-      }
-      return (
-        <Chip
-          key={tag.name}
-          style={chipStyle}
-          className={styles.chip}
-          label={
-            <Typography className={styles.chipLabel}>{tag.name}</Typography>
-          }
-          deleteIcon={<Cancel className={styles.tagIcon} />}
-          onDelete={() => deleteTag(tag)}
-        />
-      )
-    })
+    return finalSelectedTags.map((tag, index) => (
+      <Tag
+        key={tag.name}
+        className={styles.chip}
+        color={colors[tempRandomColors[index % tempRandomColors.length]][100]}
+        closable
+        onClose={() => deleteTag(tag)}
+      >
+        <span>{tag.name}</span>
+      </Tag>
+    ))
   }
 
   const renderDateOption = (
@@ -146,23 +138,17 @@ const AddTodoItem = () => {
   const renderAddTaskContent = () => {
     if (currentPage === AddTodoItemPage.TODO_TITLE) {
       const formattedDate = dayjs(finalSelectedDate).format('ddd, MMM D')
-      const chipStyle = {
-        backgroundColor: colors[tempRandomColors[0]][100],
-      }
       const dateButton = finalSelectedDate ? (
-        <Chip
-          style={chipStyle}
+        <Tag
+          color={colors[tempRandomColors[0]][100]}
           className={styles.chip}
           onClick={onClickCalendarIcon}
           icon={<TodayOutlined className={styles.tagIcon} />}
-          label={
-            <Typography className={styles.chipLabel}>
-              Due {formattedDate}
-            </Typography>
-          }
-          deleteIcon={<Cancel className={styles.tagIcon} />}
-          onDelete={resetDateValues}
-        />
+          closable
+          onClose={resetDateValues}
+        >
+          <span className={styles.chipLabel}>Due {formattedDate}</span>
+        </Tag>
       ) : (
         <Today className={styles.todayIcon} onClick={onClickCalendarIcon} />
       )
