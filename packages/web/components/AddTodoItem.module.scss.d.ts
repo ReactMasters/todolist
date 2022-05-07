@@ -5,6 +5,7 @@ export const addTodoItemContent: string
 export const addTodoItemText: string
 export const col: string
 export const dateIcon: string
+export const dateLabel: string
 export const dateOption: string
 export const dayName: string
 export const editorWrapper: string

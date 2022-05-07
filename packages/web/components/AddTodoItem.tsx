@@ -5,10 +5,10 @@ import {
   Today,
   TodayOutlined,
 } from '@mui/icons-material'
-import { Tag, Collapse } from 'antd'
+import { Tag, Collapse, Typography } from 'antd'
 import Icon, { PlusOutlined, TagOutlined } from '@ant-design/icons'
 import { DatePicker } from '@mui/lab'
-import { colors, TextField, Typography } from '@mui/material'
+import { colors, TextField } from '@mui/material'
 import { getDayFromToday, includeDate } from '@web/utils/dateUtil'
 import { genMockTags } from '@web/utils/mockUtil'
 import dayjs from 'dayjs'
@@ -120,8 +120,8 @@ const AddTodoItem = () => {
         className={styles.dateOption}
       >
         <Icon className={styles.dateIcon} component={IconComponent}></Icon>
-        <Typography variant="h6">{label}</Typography>
-        <Typography className={styles.dayName}>{date.format('ddd')}</Typography>
+        <Typography.Text className={styles.dateLabel}>{label}</Typography.Text>
+        <span className={styles.dayName}>{date.format('ddd')}</span>
       </div>
     )
   }
@@ -163,14 +163,14 @@ const AddTodoItem = () => {
 
     if (currentPage === AddTodoItemPage.TODO_DATE) {
       const okButton = (
-        <Typography onClick={() => setSelectedDate(datePickerDate)}>
+        <Typography.Text onClick={() => setSelectedDate(datePickerDate)}>
           Ok
-        </Typography>
+        </Typography.Text>
       )
       const cancelButton = (
-        <Typography onClick={() => setDatePickerDate(selectedDate)}>
+        <Typography.Text onClick={() => setDatePickerDate(selectedDate)}>
           Cancel
-        </Typography>
+        </Typography.Text>
       )
 
       const renderInput = (params) => (
@@ -205,7 +205,9 @@ const AddTodoItem = () => {
             className={styles.dateOption}
           >
             <Icon className={styles.dateIcon} component={CalendarToday} />
-            <Typography variant="h6">{customDateString}</Typography>
+            <Typography.Text className={styles.dateLabel}>
+              {customDateString}
+            </Typography.Text>
           </div>
           <DatePicker
             inputRef={datePickerRef}
