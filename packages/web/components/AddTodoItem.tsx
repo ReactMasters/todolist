@@ -1,16 +1,14 @@
 import {
-  Add,
   CalendarToday,
   Event,
-  LocalOfferOutlined,
   NextWeek,
   Today,
   TodayOutlined,
 } from '@mui/icons-material'
 import { Tag, Collapse } from 'antd'
-import { PlusOutlined } from '@ant-design/icons'
+import Icon, { PlusOutlined, TagOutlined } from '@ant-design/icons'
 import { DatePicker } from '@mui/lab'
-import { colors, Icon, TextField, Typography } from '@mui/material'
+import { colors, TextField, Typography } from '@mui/material'
 import { getDayFromToday, includeDate } from '@web/utils/dateUtil'
 import { genMockTags } from '@web/utils/mockUtil'
 import dayjs from 'dayjs'
@@ -108,7 +106,7 @@ const AddTodoItem = () => {
   const renderDateOption = (
     daysFromToday: number,
     label: string,
-    IconComponent: typeof Icon
+    IconComponent
   ) => {
     const date = getDayFromToday(daysFromToday)
     return (
@@ -121,7 +119,7 @@ const AddTodoItem = () => {
         }}
         className={styles.dateOption}
       >
-        <IconComponent className={styles.dateIcon}></IconComponent>
+        <Icon className={styles.dateIcon} component={IconComponent}></Icon>
         <Typography variant="h6">{label}</Typography>
         <Typography className={styles.dayName}>{date.format('ddd')}</Typography>
       </div>
@@ -147,7 +145,7 @@ const AddTodoItem = () => {
       )
       return (
         <div className={styles.editorWrapper}>
-          <Add className={styles.gridPlus}></Add>
+          <PlusOutlined className={styles.gridPlus} />
           <TextField
             className={`${styles.gridTitle}`}
             value={taskTitle}
@@ -157,7 +155,7 @@ const AddTodoItem = () => {
           <div className={styles.gridBtns}>
             {dateButton}
             {renderTagChips()}
-            <LocalOfferOutlined onClick={onClickTagIcon} />
+            <TagOutlined onClick={onClickTagIcon} />
           </div>
         </div>
       )
@@ -206,7 +204,7 @@ const AddTodoItem = () => {
             onClick={openDatePicker}
             className={styles.dateOption}
           >
-            <CalendarToday className={styles.dateIcon}></CalendarToday>
+            <Icon className={styles.dateIcon} component={CalendarToday} />
             <Typography variant="h6">{customDateString}</Typography>
           </div>
           <DatePicker
