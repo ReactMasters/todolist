@@ -1,7 +1,6 @@
 {
-  "plugins": ["eslint-plugin-unused-imports"],
-  "extends": "next/core-web-vitals",
   "plugins": ["unused-imports"],
+  "extends": "next/core-web-vitals",
   "rules": {
     "import/order": [
       "warn",
