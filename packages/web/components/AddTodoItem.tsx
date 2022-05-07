@@ -7,17 +7,10 @@ import {
   Today,
   TodayOutlined,
 } from '@mui/icons-material'
-import { Tag } from 'antd'
+import { Tag, Collapse } from 'antd'
+import { PlusOutlined } from '@ant-design/icons'
 import { DatePicker } from '@mui/lab'
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  colors,
-  Icon,
-  TextField,
-  Typography,
-} from '@mui/material'
+import { colors, Icon, TextField, Typography } from '@mui/material'
 import { getDayFromToday, includeDate } from '@web/utils/dateUtil'
 import { genMockTags } from '@web/utils/mockUtil'
 import dayjs from 'dayjs'
@@ -94,8 +87,8 @@ const AddTodoItem = () => {
     )
   }
 
-  const onToggleAccordion = (e, expanded) => {
-    setIsAddingTask(expanded)
+  const onToggleAccordion = (key) => {
+    setIsAddingTask(key === '1')
   }
 
   const renderTagChips = () => {
@@ -249,12 +242,10 @@ const AddTodoItem = () => {
   const renderAccordionSummary = () => {
     if (!isAddingTask) {
       return (
-        <>
-          <div className={styles.plusIcon}>
-            <Add></Add>
-          </div>
-          <Typography className={styles.addTodoItemText}>Add a task</Typography>
-        </>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <PlusOutlined className={styles.plusIcon} />
+          <span className={styles.addTodoItemText}>Add a task</span>
+        </div>
       )
     }
   }
@@ -289,19 +280,22 @@ const AddTodoItem = () => {
   }
 
   return (
-    <Accordion
+    <Collapse
+      accordion
+      bordered={false}
       onChange={onToggleAccordion}
       className={`${styles.addTodoItem} ${
         isAddingTask ? styles.accordionActive : ''
       }`}
     >
-      <AccordionSummary className={styles.addTodoItemButton}>
-        {renderAccordionSummary()}
-      </AccordionSummary>
-      <AccordionDetails className={styles.addTodoItemContent}>
+      <Collapse.Panel
+        showArrow={false}
+        header={renderAccordionSummary()}
+        key="1"
+      >
         {renderAddTaskContent()}
-      </AccordionDetails>
-    </Accordion>
+      </Collapse.Panel>
+    </Collapse>
   )
 }
 
