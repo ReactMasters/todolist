@@ -1,7 +1,6 @@
 import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core'
 
 import * as Types from '../../lib/graphql/types'
-import { TodoItem_TodoItemFragment } from '../TodoItem/TodoItem.generated'
 import { TodoItem_TodoItemFragmentDoc } from '../TodoItem/TodoItem.generated'
 export type FindTodoListQueryVariables = Types.Exact<{
   input: Types.FindTodoListInput
@@ -10,19 +9,22 @@ export type FindTodoListQueryVariables = Types.Exact<{
 export type FindTodoListQuery = {
   __typename?: 'Query'
   findTodoList:
-    | ({ __typename?: 'FindTodoListSuccess' } & {
-        todoList?: Types.Maybe<
-          { __typename?: 'TodoList' } & Pick<Types.TodoList, 'id'> & {
-              todos: Array<
-                { __typename?: 'TodoItem' } & TodoItem_TodoItemFragment
-              >
-            }
-        >
-      })
-    | ({ __typename?: 'FindTodoListError' } & Pick<
-        Types.FindTodoListError,
-        'message'
-      >)
+    | { __typename?: 'FindTodoListError'; message: string }
+    | {
+        __typename?: 'FindTodoListSuccess'
+        todoList?: {
+          __typename?: 'TodoList'
+          id: string
+          todos: Array<{
+            __typename?: 'TodoItem'
+            id: string
+            content: string
+            status: Types.TodoStatus
+            dueDateTime?: any | null
+            tags: Array<{ __typename?: 'Tag'; id: string; name: string }>
+          }>
+        } | null
+      }
 }
 
 export const FindTodoListDocument = {
