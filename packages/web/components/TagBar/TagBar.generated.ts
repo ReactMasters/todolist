@@ -2,11 +2,10 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
 
 import * as Types from '../../lib/graphql/types'
 
-export type TagBar_TagFragment = {
-  __typename?: 'Tag'
-  id: string
-  name: string
-}
+export type TagBar_TagFragment = { __typename?: 'Tag' } & Pick<
+  Types.Tag,
+  'id' | 'name'
+>
 
 export const TagBar_TagFragmentDoc = {
   kind: 'Document',

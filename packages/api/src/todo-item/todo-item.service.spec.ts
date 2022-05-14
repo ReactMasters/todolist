@@ -7,12 +7,14 @@ import {
   TodoListSchema,
 } from 'src/todo-list/entities/todo-list.entity'
 import { TodoListService } from 'src/todo-list/todo-list.service'
+import { User, UserSchema } from 'src/user/entities/user.entity'
+import { UserModule } from 'src/user/user.module'
 
-import { User, UserSchema } from './entities/user.entity'
-import { UserResolver } from './user.resolver'
-import { UserService } from './user.service'
-describe('UserResolver', () => {
-  let resolver: UserResolver
+import { TodoItem, TodoItemSchema } from './entities/todo-item.entity'
+import { TodoItemService } from './todo-item.service'
+
+describe('TodoItemService', () => {
+  let service: TodoListService
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -21,18 +23,22 @@ describe('UserResolver', () => {
           isGlobal: true,
         }),
         MongooseModule.forRoot(process.env.MONGODB_URL),
+        MongooseModule.forFeature([
+          { name: TodoItem.name, schema: TodoItemSchema },
+        ]),
         MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
         MongooseModule.forFeature([
           { name: TodoList.name, schema: TodoListSchema },
         ]),
+        UserModule,
       ],
-      providers: [UserResolver, UserService, TodoListService],
+      providers: [TodoItemService, TodoListService],
     }).compile()
 
-    resolver = module.get<UserResolver>(UserResolver)
+    service = module.get<TodoListService>(TodoListService)
   })
 
   it('should be defined', () => {
-    expect(resolver).toBeDefined()
+    expect(service).toBeDefined()
   })
 })

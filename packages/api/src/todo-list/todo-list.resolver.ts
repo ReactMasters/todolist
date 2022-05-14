@@ -22,16 +22,19 @@ export class TodoListResolver {
   @Mutation(() => AddTodoListOutput)
   async addTodoList(
     @Args('addTodoListInput') addTodoListInput: AddTodoListInput
-  ) {
-    const res: AddTodoListOutput = {
-      success: true,
-    }
+  ): Promise<AddTodoListOutput> {
     try {
-      res.todoList = await this.todoListService.addTodoList(addTodoListInput)
+      const todoList = await this.todoListService.addTodoList(addTodoListInput)
+      return {
+        success: true,
+        todoList,
+      }
     } catch (error) {
-      res.message = error?.message ?? ''
+      return {
+        success: false,
+        message: error?.message ?? '',
+      }
     }
-    return res
   }
 
   @UseGuards(UserGuard)
