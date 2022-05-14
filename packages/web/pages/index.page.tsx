@@ -1,15 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import AddTodoItem from 'components/AddTodoItem'
-import Cookies from 'js-cookie'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useCallback } from 'react'
-import { Button } from 'antd'
 
 import { gql, useApolloClient, useQuery } from '@apollo/client'
 import AddItem from '@web/components/AddItem'
 import TodoList from '@web/components/TodoList/TodoList'
 import { ROUTES, TOKEN_KEY } from '@web/lib/constant'
+import { Button } from 'antd'
+import AddTodoItem from 'components/AddTodoItem'
+import Cookies from 'js-cookie'
+import { useCallback } from 'react'
 
 import styles from './index.module.scss'
 import { IndexPageDocument } from './index.page.generated'
@@ -61,7 +61,7 @@ const Index = () => {
       <h1>lastLoginAt : {data.me.user.lastLoginAt}</h1>
       <Button onClick={handleLogout}>로그아웃</Button>
       <AddItem />
-      <TodoList />
+      <TodoList todoListId="1234" />
       <AddTodoItem></AddTodoItem>
     </div>
   )

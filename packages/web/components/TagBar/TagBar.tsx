@@ -1,9 +1,9 @@
 import { gql } from '@apollo/client'
 import { Tag } from 'antd'
 import React from 'react'
-import styles from 'TagBar.module.scss'
+
 import { TagBar_TagFragment } from './TagBar.generated'
-import tagColors from './TagColors'
+import tagColors from './tagColors'
 
 interface Props {
   tags: TagBar_TagFragment[]

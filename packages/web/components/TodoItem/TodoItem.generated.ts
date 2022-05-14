@@ -2,6 +2,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
 
 import * as Types from '../../lib/graphql/types'
 import { TagBar_TagFragment } from '../TagBar/TagBar.generated'
+import { TagBar_TagFragmentDoc } from '../TagBar/TagBar.generated'
 export type TodoItem_TodoItemFragment = { __typename?: 'TodoItem' } & Pick<
   Types.TodoItem,
   'id' | 'content' | 'status' | 'dueDateTime'
@@ -40,5 +41,6 @@ export const TodoItem_TodoItemFragmentDoc = {
         ],
       },
     },
+    ...TagBar_TagFragmentDoc.definitions,
   ],
 } as unknown as DocumentNode<TodoItem_TodoItemFragment, unknown>

@@ -2,9 +2,9 @@ import { DownOutlined } from '@ant-design/icons'
 import { gql, useQuery } from '@apollo/client'
 import { TodoStatus } from '@web/lib/graphql/types'
 import { Button, List } from 'antd'
-import TagBar from '../TagBar/TagBar'
 import React, { useState } from 'react'
 
+import TagBar from '../TagBar/TagBar'
 import TodoItem from '../TodoItem/TodoItem'
 import { FindTodoListDocument } from './TodoList.generated'
 
@@ -22,9 +22,6 @@ export const findTodoList = gql`
             ...TodoItem_TodoItem
           }
         }
-        tags {
-          ...TagBar_Tag
-        }
       }
       ... on FindTodoListError {
         message
@@ -32,7 +29,6 @@ export const findTodoList = gql`
     }
   }
   ${TodoItem.fragments.todoItem}
-  ${TagBar.fragments.tag}
 `
 
 const TodoList = ({ todoListId }: Props) => {

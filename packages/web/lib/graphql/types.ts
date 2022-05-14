@@ -75,7 +75,6 @@ export type FindTodoListOutput = FindTodoListSuccess | FindTodoListError
 export type FindTodoListSuccess = {
   __typename?: 'FindTodoListSuccess'
   todoList?: Maybe<TodoList>
-  tags: Array<Tag>
 }
 
 export type ListTagsOutput = {
@@ -206,15 +205,15 @@ export type Tag = {
 
 export type TodoItem = {
   __typename?: 'TodoItem'
-  content: Scalars['String']
-  createdAt: Scalars['DateTime']
-  deletedAt?: Maybe<Scalars['DateTime']>
-  dueDateTime?: Maybe<Scalars['DateTime']>
   id: Scalars['ID']
+  createdAt: Scalars['DateTime']
+  updatedAt: Scalars['DateTime']
+  deletedAt?: Maybe<Scalars['DateTime']>
+  content: Scalars['String']
   status: TodoStatus
   tags: Array<Tag>
+  dueDateTime?: Maybe<Scalars['DateTime']>
   todoList: TodoList
-  updatedAt: Scalars['DateTime']
 }
 
 export type TodoItemsError = {
@@ -237,18 +236,18 @@ export type TodoItemsSuccess = {
 
 export type TodoList = {
   __typename?: 'TodoList'
-  createdAt: Scalars['DateTime']
-  deletedAt?: Maybe<Scalars['DateTime']>
   id: Scalars['ID']
-  name: Scalars['String']
-  owners: Array<User>
-  todos: Array<TodoItem>
+  createdAt: Scalars['DateTime']
   updatedAt: Scalars['DateTime']
+  deletedAt?: Maybe<Scalars['DateTime']>
+  name: Scalars['String']
+  todos: Array<TodoItem>
+  owners: Array<User>
 }
 
 export enum TodoStatus {
-  Completed = 'COMPLETED',
   InProgress = 'IN_PROGRESS',
+  Completed = 'COMPLETED',
 }
 
 export type User = {
