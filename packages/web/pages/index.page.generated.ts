@@ -4,15 +4,19 @@ import * as Types from '../lib/graphql/types'
 
 export type IndexPageQueryVariables = Types.Exact<{ [key: string]: never }>
 
-export type IndexPageQuery = { __typename?: 'Query' } & {
+export type IndexPageQuery = {
+  __typename?: 'Query'
   me:
-    | ({ __typename?: 'MeSuccess' } & {
-        user: { __typename?: 'User' } & Pick<
-          Types.User,
-          'id' | 'email' | 'lastLoginAt'
-        >
-      })
-    | ({ __typename?: 'MeError' } & Pick<Types.MeError, 'message'>)
+    | { __typename?: 'MeError'; message: string }
+    | {
+        __typename?: 'MeSuccess'
+        user: {
+          __typename?: 'User'
+          id: string
+          email: string
+          lastLoginAt?: any | null
+        }
+      }
 }
 
 export const IndexPageDocument = {
