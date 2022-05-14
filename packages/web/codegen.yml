@@ -19,9 +19,9 @@ generates:
       extension: .generated.ts
       baseTypesPath: lib/graphql/types.ts
     plugins:
-      - typescript-operations
-      - typed-document-node:
+      - typescript-operations:
           dedupeFragments: true
+      - typed-document-node
 hooks:
   afterAllFileWrite:
     - prettier --write
