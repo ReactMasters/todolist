@@ -1,11 +1,11 @@
 import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core'
 
 import * as Types from '../../lib/graphql/types'
-
+import { TagBar_TagFragment } from '../TagBar/TagBar.generated'
 export type TodoItem_TodoItemFragment = { __typename?: 'TodoItem' } & Pick<
   Types.TodoItem,
   'id' | 'content' | 'status' | 'dueDateTime'
-> & { tags: Array<{ __typename?: 'Tag' } & Pick<Types.Tag, 'id' | 'name'>> }
+> & { tags: Array<{ __typename?: 'Tag' } & TagBar_TagFragment> }
 
 export const TodoItem_TodoItemFragmentDoc = {
   kind: 'Document',
@@ -30,8 +30,10 @@ export const TodoItem_TodoItemFragmentDoc = {
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                {
+                  kind: 'FragmentSpread',
+                  name: { kind: 'Name', value: 'TagBar_Tag' },
+                },
               ],
             },
           },

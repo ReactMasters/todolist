@@ -2,6 +2,27 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type TodoItem {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+  content: String!
+  status: TodoStatus!
+  tags: [Tag!]!
+  dueDateTime: DateTime
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+enum TodoStatus {
+  IN_PROGRESS
+  COMPLETED
+}
+
 type User {
   id: ID!
   createdAt: DateTime!
@@ -11,10 +32,15 @@ type User {
   lastLoginAt: DateTime
 }
 
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
+type TodoList {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+  name: String!
+  todos: [TodoItem!]!
+  owners: [User!]!
+}
 
 type Tag {
   id: ID!
@@ -110,6 +136,7 @@ union FindTodoListOutput = FindTodoListSuccess | FindTodoListError
 
 type FindTodoListSuccess {
   todoList: TodoList
+  tags: [Tag!]!
 }
 
 type FindTodoListError {
@@ -133,7 +160,9 @@ union SignupOutput = SignupSuccess | SignupError
 type SignupSuccess {
   user: User!
 
-  """JWT when create user success"""
+  """
+  JWT when create user success
+  """
   token: String!
   todoList: TodoList!
 }
@@ -143,10 +172,14 @@ type SignupError {
 }
 
 input SignupInput {
-  """user email"""
+  """
+  user email
+  """
   email: String!
 
-  """user password"""
+  """
+  user password
+  """
   password: String!
 }
 
@@ -161,10 +194,14 @@ type SigninError {
 }
 
 input SigninInput {
-  """user email"""
+  """
+  user email
+  """
   email: String!
 
-  """user password"""
+  """
+  user password
+  """
   password: String!
 }
 
