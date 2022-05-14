@@ -49,6 +49,10 @@
   font-size: 20px;
 }
 
+.dateLabel {
+  font-size: 15px;
+}
+
 .dayName {
   margin-left: auto;
 }
@@ -95,13 +99,17 @@
   }
 }
 
-.chip {
+.tag {
   border-radius: 5px;
-  height: 27px;
+  border-color: transparent;
   color: white;
+  height: 27px;
+  display: flex;
+  align-items: center;
 
-  .chipLabel {
+  .tagLabel {
     font-size: 12px;
+    margin-left: 5px;
   }
 
   .tagIcon {

@@ -7,7 +7,7 @@ import AddItem from '@web/components/AddItem'
 import TodoList from '@web/components/TodoList/TodoList'
 import { ROUTES, TOKEN_KEY } from '@web/lib/constant'
 import { Button } from 'antd'
-import AddTodoItem from 'components/AddTodoItem'
+import AddTodoItem from 'components/AddTodoItem/AddTodoItem'
 import Cookies from 'js-cookie'
 import { useCallback } from 'react'
 
@@ -61,8 +61,8 @@ const Index = () => {
       <h1>lastLoginAt : {data.me.user.lastLoginAt}</h1>
       <Button onClick={handleLogout}>로그아웃</Button>
       <AddItem />
-      <TodoList todoListId="1234" />
-      <AddTodoItem></AddTodoItem>
+      <TodoList />
+      <AddTodoItem />
     </div>
   )
 }

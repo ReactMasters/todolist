@@ -1,32 +1,15 @@
-import {
-  Add,
-  CalendarToday,
-  Cancel,
-  Event,
-  LocalOfferOutlined,
-  NextWeek,
-  Today,
-  TodayOutlined,
-} from '@mui/icons-material'
-import { DatePicker } from '@mui/lab'
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Chip,
-  colors,
-  Icon,
-  TextField,
-  Typography,
-} from '@mui/material'
-import { Box } from '@mui/system'
+import { PlusOutlined, TagOutlined, CalendarOutlined } from '@ant-design/icons'
 import { getDayFromToday, includeDate } from '@web/utils/dateUtil'
 import { genMockTags } from '@web/utils/mockUtil'
+import { Tag, Collapse, Typography, Input } from 'antd'
 import dayjs from 'dayjs'
-import React, { useEffect, useRef, useState } from 'react'
-import AddTodoHeading from './AddTodoHeading/AddTodoHeading'
+import React, { useEffect, useState } from 'react'
+
+import AddTodoHeading from '../AddTodoHeading/AddTodoHeading'
+import DatePicker from '../DatePicker'
+import tagColors from '../TagBar/tagColors'
+import TagOption from '../TagOption/TagOption'
 import styles from './AddTodoItem.module.scss'
-import TagOption from './TagOption/TagOption'
 
 enum AddTodoItemPage {
   TODO_TITLE,
@@ -38,19 +21,12 @@ const AddTodoItem = () => {
   const [taskTitle, setTaskTitle] = useState('')
   const [isAddingTask, setIsAddingTask] = useState(false)
   const [selectedDate, setSelectedDate] = useState(null)
-  const [datePickerDate, setDatePickerDate] = useState(null)
   const [finalSelectedDate, setFinalSelectedDate] = useState(null)
-  const datePickerRef = useRef<HTMLInputElement | null>(null)
+  const [datePickerOpen, setDatePickerOpen] = useState(false)
   const [currentPage, setCurrentPage] = useState(AddTodoItemPage.TODO_DATE)
   const [tags, setTags] = useState(genMockTags(5))
   const [selectedTags, setSelectedTags] = useState([])
   const [finalSelectedTags, setFinalSelectedTags] = useState([])
-
-  const tempRandomColors = useRef(
-    Object.keys(colors)
-      .filter((colorGroup) => colorGroup !== 'common')
-      .sort(() => Math.random() - 0.5)
-  ).current
 
   useEffect(() => {
     if (!isAddingTask) {
@@ -86,7 +62,6 @@ const AddTodoItem = () => {
 
   const resetDateValues = () => {
     setFinalSelectedDate(null)
-    setDatePickerDate(null)
     setSelectedDate(null)
   }
 
@@ -96,39 +71,28 @@ const AddTodoItem = () => {
     )
   }
 
-  const onToggleAccordion = (e, expanded) => {
-    setIsAddingTask(expanded)
+  const onToggleAccordion = (key) => {
+    setIsAddingTask(key === '1')
   }
 
   const renderTagChips = () => {
-    return finalSelectedTags.map((tag, index) => {
-      const chipStyle = {
-        backgroundColor:
-          colors[tempRandomColors[index % tempRandomColors.length]][100],
-      }
-      return (
-        <Chip
-          key={tag.name}
-          style={chipStyle}
-          className={styles.chip}
-          label={
-            <Typography className={styles.chipLabel}>{tag.name}</Typography>
-          }
-          deleteIcon={<Cancel className={styles.tagIcon} />}
-          onDelete={() => deleteTag(tag)}
-        />
-      )
-    })
+    return finalSelectedTags.map((tag, index) => (
+      <Tag
+        key={tag.name}
+        className={styles.tag}
+        color={tagColors[index % tagColors.length]}
+        closable
+        onClose={() => deleteTag(tag)}
+      >
+        <span>{tag.name}</span>
+      </Tag>
+    ))
   }
 
-  const renderDateOption = (
-    daysFromToday: number,
-    label: string,
-    IconComponent: typeof Icon
-  ) => {
+  const renderDateOption = (daysFromToday: number, label: string) => {
     const date = getDayFromToday(daysFromToday)
     return (
-      <Box
+      <div
         style={{
           background: date.isSame(selectedDate, 'day') ? 'lightpink' : 'white',
         }}
@@ -137,79 +101,61 @@ const AddTodoItem = () => {
         }}
         className={styles.dateOption}
       >
-        <IconComponent className={styles.dateIcon}></IconComponent>
-        <Typography variant="h6">{label}</Typography>
-        <Typography className={styles.dayName}>{date.format('ddd')}</Typography>
-      </Box>
+        <Typography.Text className={styles.dateLabel}>{label}</Typography.Text>
+        <span className={styles.dayName}>{date.format('ddd')}</span>
+      </div>
     )
   }
 
   const renderAddTaskContent = () => {
     if (currentPage === AddTodoItemPage.TODO_TITLE) {
       const formattedDate = dayjs(finalSelectedDate).format('ddd, MMM D')
-      const chipStyle = {
-        backgroundColor: colors[tempRandomColors[0]][100],
-      }
       const dateButton = finalSelectedDate ? (
-        <Chip
-          style={chipStyle}
-          className={styles.chip}
+        <Tag
+          color={tagColors[0]}
+          className={styles.tag}
           onClick={onClickCalendarIcon}
-          icon={<TodayOutlined className={styles.tagIcon} />}
-          label={
-            <Typography className={styles.chipLabel}>
-              Due {formattedDate}
-            </Typography>
-          }
-          deleteIcon={<Cancel className={styles.tagIcon} />}
-          onDelete={resetDateValues}
-        />
+          icon={<CalendarOutlined className={styles.tagIcon} />}
+          closable
+          onClose={resetDateValues}
+        >
+          <span className={styles.tagLabel}>Due {formattedDate}</span>
+        </Tag>
       ) : (
-        <Today className={styles.todayIcon} onClick={onClickCalendarIcon} />
+        <CalendarOutlined
+          className={styles.todayIcon}
+          onClick={onClickCalendarIcon}
+        />
       )
       return (
-        <Box className={styles.editorWrapper}>
-          <Add className={styles.gridPlus}></Add>
-          <TextField
+        <div className={styles.editorWrapper}>
+          <PlusOutlined className={styles.gridPlus} />
+          <Input
             className={`${styles.gridTitle}`}
             value={taskTitle}
             onChange={(e) => setTaskTitle(e.target.value)}
           />
-          <Box className={styles.gridFiller}></Box>
-          <Box className={styles.gridBtns}>
+          <div className={styles.gridFiller}></div>
+          <div className={styles.gridBtns}>
             {dateButton}
             {renderTagChips()}
-            <LocalOfferOutlined onClick={onClickTagIcon} />
-          </Box>
-        </Box>
+            <TagOutlined onClick={onClickTagIcon} />
+          </div>
+        </div>
       )
     }
 
     if (currentPage === AddTodoItemPage.TODO_DATE) {
-      const okButton = (
-        <Typography onClick={() => setSelectedDate(datePickerDate)}>
-          Ok
-        </Typography>
-      )
-      const cancelButton = (
-        <Typography onClick={() => setDatePickerDate(selectedDate)}>
-          Cancel
-        </Typography>
-      )
-
-      const renderInput = (params) => (
-        <TextField sx={{ display: 'none' }} {...params} />
-      )
-      const onPickDate = (newDate) => {
-        setDatePickerDate(newDate)
+      const openDatePicker = () => {
+        setDatePickerOpen((prev) => !prev)
       }
 
-      const openDatePicker = () => {
-        datePickerRef.current.click()
+      const onDatePickerChange = (date) => {
+        setSelectedDate(date)
       }
 
       return (
-        <Box className={`${styles.col} ${styles.selectDateWrapper}`}>
+        <div className={`${styles.col} ${styles.selectDateWrapper}`}>
           <AddTodoHeading
             title="Due"
             onClickRight={() => {
@@ -218,34 +164,39 @@ const AddTodoItem = () => {
             }}
             right="Done"
           />
-          {renderDateOption(0, 'Today', Today)}
-          {renderDateOption(1, 'Tomorrow', Event)}
-          {renderDateOption(7, 'Next Week', NextWeek)}
-          <Box
+          {renderDateOption(0, 'Today')}
+          {renderDateOption(1, 'Tomorrow')}
+          {renderDateOption(7, 'Next Week')}
+          <div
             style={{
               background: isCustomDateSelected ? 'lightpink' : 'white',
             }}
             onClick={openDatePicker}
             className={styles.dateOption}
           >
-            <CalendarToday className={styles.dateIcon}></CalendarToday>
-            <Typography variant="h6">{customDateString}</Typography>
-          </Box>
-          <DatePicker
-            inputRef={datePickerRef}
-            value={datePickerDate}
-            onChange={onPickDate}
-            okText={okButton}
-            cancelText={cancelButton}
-            renderInput={renderInput}
-          />
-        </Box>
+            <Typography.Text className={styles.dateLabel}>
+              {customDateString}
+            </Typography.Text>
+            <DatePicker
+              open={datePickerOpen}
+              onChange={onDatePickerChange}
+              style={{
+                position: 'relative',
+                left: '-10rem',
+                top: '-1rem',
+                visibility: 'hidden',
+                width: 0,
+                height: 0,
+              }}
+            />
+          </div>
+        </div>
       )
     }
 
     if (currentPage === AddTodoItemPage.TODO_TAG) {
       return (
-        <Box>
+        <div>
           <AddTodoHeading
             left="Edit"
             title="Tags"
@@ -256,7 +207,7 @@ const AddTodoItem = () => {
             right="Done"
           />
           {renderTags()}
-        </Box>
+        </div>
       )
     }
   }
@@ -264,12 +215,10 @@ const AddTodoItem = () => {
   const renderAccordionSummary = () => {
     if (!isAddingTask) {
       return (
-        <>
-          <Box className={styles.plusIcon}>
-            <Add></Add>
-          </Box>
-          <Typography className={styles.addTodoItemText}>Add a task</Typography>
-        </>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <PlusOutlined className={styles.plusIcon} />
+          <span className={styles.addTodoItemText}>Add a task</span>
+        </div>
       )
     }
   }
@@ -296,27 +245,30 @@ const AddTodoItem = () => {
           onClick={onClickTagOption}
           isActive={isActive}
           key={tag.name}
-          color={colors[tempRandomColors[index % tempRandomColors.length]][100]}
+          color={tagColors[index % tagColors.length]}
           name={tag.name}
-        ></TagOption>
+        />
       )
     })
   }
 
   return (
-    <Accordion
+    <Collapse
+      accordion
+      bordered={false}
       onChange={onToggleAccordion}
       className={`${styles.addTodoItem} ${
         isAddingTask ? styles.accordionActive : ''
       }`}
     >
-      <AccordionSummary className={styles.addTodoItemButton}>
-        {renderAccordionSummary()}
-      </AccordionSummary>
-      <AccordionDetails className={styles.addTodoItemContent}>
+      <Collapse.Panel
+        showArrow={false}
+        header={renderAccordionSummary()}
+        key="1"
+      >
         {renderAddTaskContent()}
-      </AccordionDetails>
-    </Accordion>
+      </Collapse.Panel>
+    </Collapse>
   )
 }
 

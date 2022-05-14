@@ -25,8 +25,8 @@ export type AddTagInput = {
 
 export type AddTagOutput = {
   __typename?: 'AddTagOutput'
-  success: Scalars['Boolean']
   message?: Maybe<Scalars['String']>
+  success: Scalars['Boolean']
   tag?: Maybe<Tag>
 }
 
@@ -36,13 +36,13 @@ export type AddTodoItemError = {
 }
 
 export type AddTodoItemInput = {
-  todoListId: Scalars['String']
   content: Scalars['String']
-  status?: Maybe<Scalars['String']>
   dueDateTime?: Maybe<Scalars['DateTime']>
+  status?: Maybe<Scalars['String']>
+  todoListId: Scalars['String']
 }
 
-export type AddTodoItemOutput = AddTodoItemSuccess | AddTodoItemError
+export type AddTodoItemOutput = AddTodoItemError | AddTodoItemSuccess
 
 export type AddTodoItemSuccess = {
   __typename?: 'AddTodoItemSuccess'
@@ -56,8 +56,8 @@ export type AddTodoListInput = {
 
 export type AddTodoListOutput = {
   __typename?: 'AddTodoListOutput'
-  success: Scalars['Boolean']
   message?: Maybe<Scalars['String']>
+  success: Scalars['Boolean']
   todoList: TodoList
 }
 
@@ -70,7 +70,7 @@ export type FindTodoListInput = {
   id: Scalars['String']
 }
 
-export type FindTodoListOutput = FindTodoListSuccess | FindTodoListError
+export type FindTodoListOutput = FindTodoListError | FindTodoListSuccess
 
 export type FindTodoListSuccess = {
   __typename?: 'FindTodoListSuccess'
@@ -79,8 +79,8 @@ export type FindTodoListSuccess = {
 
 export type ListTagsOutput = {
   __typename?: 'ListTagsOutput'
-  success: Scalars['Boolean']
   message?: Maybe<Scalars['String']>
+  success: Scalars['Boolean']
   tags: Array<Tag>
 }
 
@@ -89,7 +89,7 @@ export type MeError = {
   message: Scalars['String']
 }
 
-export type MeOutput = MeSuccess | MeError
+export type MeOutput = MeError | MeSuccess
 
 export type MeSuccess = {
   __typename?: 'MeSuccess'
@@ -98,19 +98,11 @@ export type MeSuccess = {
 
 export type Mutation = {
   __typename?: 'Mutation'
-  signup: SignupOutput
-  signin: SigninOutput
   addTag: AddTagOutput
   addTodoItem: AddTodoItemOutput
   addTodoList: AddTodoListOutput
-}
-
-export type MutationSignupArgs = {
-  signupInput: SignupInput
-}
-
-export type MutationSigninArgs = {
-  signinInput: SigninInput
+  signin: SigninOutput
+  signup: SignupOutput
 }
 
 export type MutationAddTagArgs = {
@@ -125,18 +117,30 @@ export type MutationAddTodoListArgs = {
   addTodoListInput: AddTodoListInput
 }
 
-export type Query = {
-  __typename?: 'Query'
-  me: MeOutput
-  users: Array<User>
-  user: User
-  listTags: ListTagsOutput
-  todoItems: TodoItemsOutput
-  todoItem?: Maybe<TodoItem>
-  findTodoList: FindTodoListOutput
+export type MutationSigninArgs = {
+  signinInput: SigninInput
 }
 
-export type QueryUserArgs = {
+export type MutationSignupArgs = {
+  signupInput: SignupInput
+}
+
+export type Query = {
+  __typename?: 'Query'
+  findTodoList: FindTodoListOutput
+  listTags: ListTagsOutput
+  me: MeOutput
+  todoItem?: Maybe<TodoItem>
+  todoItems: TodoItemsOutput
+  user: User
+  users: Array<User>
+}
+
+export type QueryFindTodoListArgs = {
+  findTodoListInput: FindTodoListInput
+}
+
+export type QueryTodoItemArgs = {
   id: Scalars['String']
 }
 
@@ -144,12 +148,8 @@ export type QueryTodoItemsArgs = {
   todoItemsInput: TodoItemsInput
 }
 
-export type QueryTodoItemArgs = {
+export type QueryUserArgs = {
   id: Scalars['String']
-}
-
-export type QueryFindTodoListArgs = {
-  findTodoListInput: FindTodoListInput
 }
 
 export type SigninError = {
@@ -164,7 +164,7 @@ export type SigninInput = {
   password: Scalars['String']
 }
 
-export type SigninOutput = SigninSuccess | SigninError
+export type SigninOutput = SigninError | SigninSuccess
 
 export type SigninSuccess = {
   __typename?: 'SigninSuccess'
@@ -183,24 +183,24 @@ export type SignupInput = {
   password: Scalars['String']
 }
 
-export type SignupOutput = SignupSuccess | SignupError
+export type SignupOutput = SignupError | SignupSuccess
 
 export type SignupSuccess = {
   __typename?: 'SignupSuccess'
-  user: User
+  todoList: TodoList
   /** JWT when create user success */
   token: Scalars['String']
-  todoList: TodoList
+  user: User
 }
 
 export type Tag = {
   __typename?: 'Tag'
-  id: Scalars['ID']
   createdAt: Scalars['DateTime']
-  updatedAt: Scalars['DateTime']
   deletedAt?: Maybe<Scalars['DateTime']>
+  id: Scalars['ID']
   name: Scalars['String']
   owner: User
+  updatedAt: Scalars['DateTime']
 }
 
 export type TodoItem = {
@@ -222,16 +222,16 @@ export type TodoItemsError = {
 }
 
 export type TodoItemsInput = {
-  todoListId: Scalars['ID']
   tagIds?: Maybe<Array<Scalars['ID']>>
+  todoListId: Scalars['ID']
 }
 
-export type TodoItemsOutput = TodoItemsSuccess | TodoItemsError
+export type TodoItemsOutput = TodoItemsError | TodoItemsSuccess
 
 export type TodoItemsSuccess = {
   __typename?: 'TodoItemsSuccess'
-  totalCount: Scalars['Int']
   items: Array<TodoItem>
+  totalCount: Scalars['Int']
 }
 
 export type TodoList = {
@@ -252,10 +252,10 @@ export enum TodoStatus {
 
 export type User = {
   __typename?: 'User'
-  id: Scalars['ID']
   createdAt: Scalars['DateTime']
-  updatedAt: Scalars['DateTime']
   deletedAt?: Maybe<Scalars['DateTime']>
   email: Scalars['String']
+  id: Scalars['ID']
   lastLoginAt?: Maybe<Scalars['DateTime']>
+  updatedAt: Scalars['DateTime']
 }

@@ -7,7 +7,8 @@ export type FindTodoListQueryVariables = Types.Exact<{
   input: Types.FindTodoListInput
 }>
 
-export type FindTodoListQuery = { __typename?: 'Query' } & {
+export type FindTodoListQuery = {
+  __typename?: 'Query'
   findTodoList:
     | ({ __typename?: 'FindTodoListSuccess' } & {
         todoList?: Types.Maybe<

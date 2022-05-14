@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react'
-import TagOption, { tagOptionColors } from './TagOption'
 import Color from 'color'
+
+import TagOption, { tagOptionColors } from './TagOption'
 
 describe('tests TagOptions component', () => {
   it('tests if TagOption renders without crashing', () => {

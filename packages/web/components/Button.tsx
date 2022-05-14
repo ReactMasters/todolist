@@ -1,5 +1,6 @@
 import classNames from 'classnames'
 import { ButtonHTMLAttributes, FC } from 'react'
+
 import styles from './Button.module.scss'
 interface ButtonProps
   extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'type'> {
