@@ -1,7 +1,6 @@
-import React, { useCallback, useState } from 'react'
-
 import { useReactiveVar } from '@apollo/client'
 import localStates from '@web/lib/apollo/localStates'
+import React, { useCallback, useState } from 'react'
 
 import styles from './AddItem.module.scss'
 

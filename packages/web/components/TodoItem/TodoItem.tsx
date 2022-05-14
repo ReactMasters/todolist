@@ -4,6 +4,7 @@ import { TodoStatus } from '@web/lib/graphql/types'
 import { Checkbox, Col, Row, Tag } from 'antd'
 import dayjs from 'dayjs'
 import { useEffect, useState } from 'react'
+
 import { TodoItem_TodoItemFragment } from './TodoItem.generated'
 import styles from './TodoItem.module.scss'
 

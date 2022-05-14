@@ -1,3 +1,4 @@
+const withAntdLess = require('next-plugin-antd-less')
 module.exports = {
   webpack(config, options) {
     return config
@@ -6,4 +7,9 @@ module.exports = {
   env: {
     GRAPHQL_URL: 'http://localhost:4000/graphql',
   },
+  ...withAntdLess({
+    lessVarsFilePath: './public/antd-custom.less',
+    lessVarsFilePathAppendToEndOfContent: true,
+    cssLoaderOptions: {},
+  }),
 }

@@ -1,6 +1,6 @@
-import { Typography } from '@mui/material'
-import { Box } from '@mui/system'
+import { Typography } from 'antd'
 import React from 'react'
+
 import styles from './TagOption.module.scss'
 
 type Props = {
@@ -50,12 +50,12 @@ const TagOption = ({ color, name, isActive, onClick = () => {} }: Props) => {
     fontSize: '15px',
   }
   return (
-    <Box onClick={onClick} className={styles.wrapper}>
-      <Box data-testid="checkbox" style={checkboxStyle}></Box>
-      <Typography data-testid="label" style={labelStyle}>
+    <div onClick={onClick} className={styles.wrapper}>
+      <div data-testid="checkbox" style={checkboxStyle}></div>
+      <Typography.Text data-testid="label" style={labelStyle}>
         {name}
-      </Typography>
-    </Box>
+      </Typography.Text>
+    </div>
   )
 }
 

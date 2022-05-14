@@ -1,5 +1,6 @@
-import { APP_TITLE } from '@web/lib/constant'
 import Head from 'next/head'
+
+import { APP_TITLE } from '@web/lib/constant'
 import React, {
   forwardRef,
   ForwardRefRenderFunction,
