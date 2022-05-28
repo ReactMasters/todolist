@@ -125,7 +125,7 @@ input FindTodoListInput {
 union MyTodoListsOutput = MyTodoListsSuccess | MyTodoListsError
 
 type MyTodoListsSuccess {
-  todoLists: [TodoList!]
+  todoLists: [TodoList!]!
 }
 
 type MyTodoListsError {

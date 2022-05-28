@@ -6,9 +6,7 @@ import { TodoList } from '../entities/todo-list.entity'
 
 @ObjectType()
 class MyTodoListsSuccess {
-  @Field(() => [TodoList], {
-    nullable: true,
-  })
+  @Field(() => [TodoList])
   todoLists: TodoList[]
 }
 
