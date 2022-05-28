@@ -1,5 +1,6 @@
 import { UseGuards } from '@nestjs/common'
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql'
+
 import { TagService } from 'src/tag/tag.service'
 import { User } from 'src/user/entities/user.entity'
 import { CurrentUser } from 'src/user/user.decorator'
@@ -9,6 +10,7 @@ import { AddTodoListInput } from './dto/add-todo-list.input'
 import { AddTodoListOutput } from './dto/add-todo-list.output'
 import { FindTodoListInput } from './dto/find-todo-list.input'
 import { FindTodoListOutput } from './dto/find-todo-list.output'
+import { MyTodoListsOutput } from './dto/my-todo-list.output'
 import { TodoList } from './entities/todo-list.entity'
 import { TodoListService } from './todo-list.service'
 
@@ -55,6 +57,19 @@ export class TodoListResolver {
         todoList,
         tags,
       }
+    } catch (err) {
+      return { message: err.message ?? err }
+    }
+  }
+
+  @UseGuards(UserGuard)
+  @Query(() => MyTodoListsOutput)
+  async myTodoLists(
+    @CurrentUser() user?: User
+  ): Promise<typeof MyTodoListsOutput> {
+    try {
+      const todoLists = await this.todoListService.getTodolistsByUserId(user.id)
+      return { todoLists }
     } catch (err) {
       return { message: err.message ?? err }
     }
