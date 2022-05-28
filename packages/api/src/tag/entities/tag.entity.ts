@@ -22,7 +22,7 @@ export class Tag extends BaseEntity {
 
   @Prop({
     type: mongoose.Schema.Types.ObjectId,
-    ref: TodoList.name,
+    ref: 'TodoList',
   })
   todoLists: TodoList[]
 }
