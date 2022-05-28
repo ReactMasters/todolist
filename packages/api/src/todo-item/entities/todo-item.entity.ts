@@ -7,7 +7,7 @@ import { Tag } from 'src/tag/entities/tag.entity'
 import { TodoStatus } from 'src/todo-item/dto/todo-status.enum'
 import { TodoList } from 'src/todo-list/entities/todo-list.entity'
 
-export type TodoDocument = TodoItem & mongoose.Document
+export type TodoItemDocument = TodoItem & mongoose.Document
 
 @ObjectType()
 @Schema({ toObject: { virtuals: true }, timestamps: true })

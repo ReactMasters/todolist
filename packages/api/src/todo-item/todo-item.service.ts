@@ -9,13 +9,13 @@ import { User } from 'src/user/entities/user.entity'
 import { AddTodoItemInput } from './dto/add-todo-item.input'
 import { TodoItemsInput } from './dto/todo-itmes.input'
 import { TodoItemsOutput } from './dto/todo-itmes.output'
-import { TodoDocument, TodoItem } from './entities/todo-item.entity'
+import { TodoItemDocument, TodoItem } from './entities/todo-item.entity'
 
 @Injectable()
 export class TodoItemService {
   constructor(
     @InjectModel(TodoItem.name)
-    private readonly todoItemModel: Model<TodoDocument>,
+    private readonly todoItemModel: Model<TodoItemDocument>,
     private readonly todoListService: TodoListService
   ) {}
 
@@ -42,12 +42,14 @@ export class TodoItemService {
     )
     return newTodoItem
   }
+
   async getTodoItems(
     input: TodoItemsInput,
     user: User
   ): Promise<typeof TodoItemsOutput> {
     const { cursor, size, tagIds, todoListId } = input
     // todo :  this.todolistmodel.find()
+    this.todoItemModel.find({})
     return {
       items: [],
       totalCount: 0,
