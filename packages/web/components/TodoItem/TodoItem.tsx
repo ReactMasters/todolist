@@ -5,6 +5,7 @@ import { Checkbox, Col, Row, Tag } from 'antd'
 import dayjs from 'dayjs'
 import { useEffect, useState } from 'react'
 
+import TagBar from '../TagBar/TagBar'
 import { TodoItem_TodoItemFragment } from './TodoItem.generated'
 import styles from './TodoItem.module.scss'
 
@@ -96,6 +97,7 @@ TodoItem.fragments = {
         ...TagBar_Tag
       }
     }
+    ${TagBar.fragments.tag}
   `,
 }
 

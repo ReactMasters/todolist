@@ -14,7 +14,7 @@ import { UserService } from './user.service'
 describe('UserResolver', () => {
   let resolver: UserResolver
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [
         ConfigModule.forRoot({

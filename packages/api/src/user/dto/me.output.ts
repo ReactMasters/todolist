@@ -1,5 +1,7 @@
 import { createUnionType, Field, ObjectType } from '@nestjs/graphql'
+
 import { BaseError } from 'src/base/error.dto'
+
 import { User } from '../entities/user.entity'
 
 @ObjectType()

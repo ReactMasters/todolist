@@ -1,7 +1,6 @@
 import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core'
 
 import * as Types from '../../lib/graphql/types'
-import { TagBar_TagFragmentDoc } from '../TagBar/TagBar.generated'
 import { TodoItem_TodoItemFragmentDoc } from '../TodoItem/TodoItem.generated'
 export type FindTodoListQueryVariables = Types.Exact<{
   input: Types.FindTodoListInput
@@ -25,7 +24,6 @@ export type FindTodoListQuery = {
             tags: Array<{ __typename?: 'Tag'; id: string; name: string }>
           }>
         } | null
-        tags: Array<{ __typename?: 'Tag'; id: string; name: string }>
       }
 }
 
@@ -109,19 +107,6 @@ export const FindTodoListDocument = {
                           ],
                         },
                       },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'tags' },
-                        selectionSet: {
-                          kind: 'SelectionSet',
-                          selections: [
-                            {
-                              kind: 'FragmentSpread',
-                              name: { kind: 'Name', value: 'TagBar_Tag' },
-                            },
-                          ],
-                        },
-                      },
                     ],
                   },
                 },
@@ -148,6 +133,5 @@ export const FindTodoListDocument = {
       },
     },
     ...TodoItem_TodoItemFragmentDoc.definitions,
-    ...TagBar_TagFragmentDoc.definitions,
   ],
 } as unknown as DocumentNode<FindTodoListQuery, FindTodoListQueryVariables>

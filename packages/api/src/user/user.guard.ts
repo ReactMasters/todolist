@@ -1,7 +1,9 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common'
 import { GqlExecutionContext } from '@nestjs/graphql'
+
 import { TOKEN_COOKEY_NAME } from 'src/constants'
 import { AppContext } from 'src/types'
+
 import { UserService } from './user.service'
 
 @Injectable()

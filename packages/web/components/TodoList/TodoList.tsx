@@ -22,9 +22,6 @@ export const findTodoList = gql`
             ...TodoItem_TodoItem
           }
         }
-        tags {
-          ...TagBar_Tag
-        }
       }
       ... on FindTodoListError {
         message
@@ -32,7 +29,6 @@ export const findTodoList = gql`
     }
   }
   ${TodoItem.fragments.todoItem}
-  ${TagBar.fragments.tag}
 `
 
 const TodoList = ({ todoListId }: Props) => {

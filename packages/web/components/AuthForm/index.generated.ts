@@ -6,25 +6,31 @@ export type SigninMutationVariables = Types.Exact<{
   signinInput: Types.SigninInput
 }>
 
-export type SigninMutation = { __typename?: 'Mutation' } & {
+export type SigninMutation = {
+  __typename?: 'Mutation'
   signin:
-    | ({ __typename?: 'SigninSuccess' } & Pick<Types.SigninSuccess, 'token'>)
-    | ({ __typename?: 'SigninError' } & Pick<Types.SigninError, 'message'>)
+    | { __typename?: 'SigninError'; message: string }
+    | { __typename?: 'SigninSuccess'; token: string }
 }
 
 export type SignUpMutationVariables = Types.Exact<{
   signUpInput: Types.SignupInput
 }>
 
-export type SignUpMutation = { __typename?: 'Mutation' } & {
+export type SignUpMutation = {
+  __typename?: 'Mutation'
   signup:
-    | ({ __typename?: 'SignupSuccess' } & Pick<Types.SignupSuccess, 'token'> & {
-          user: { __typename?: 'User' } & Pick<
-            Types.User,
-            'id' | 'email' | 'lastLoginAt'
-          >
-        })
-    | ({ __typename?: 'SignupError' } & Pick<Types.SignupError, 'message'>)
+    | { __typename?: 'SignupError'; message: string }
+    | {
+        __typename?: 'SignupSuccess'
+        token: string
+        user: {
+          __typename?: 'User'
+          id: string
+          email: string
+          lastLoginAt?: any | null
+        }
+      }
 }
 
 export const SigninDocument = {
