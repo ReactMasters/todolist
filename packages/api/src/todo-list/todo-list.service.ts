@@ -19,9 +19,10 @@ export class TodoListService {
   }
 
   async getTodolistsByUserId(userId: string): Promise<TodoList[]> {
-    return await this.TodoListModel.findOne({ owners: userId })
+    return await this.TodoListModel.find({ owners: userId })
       .populate('todos')
       .populate('owners')
+      .lean()
   }
 
   async findTodoList(id: string, ownerId: string): Promise<TodoList> {
