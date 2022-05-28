@@ -9,6 +9,7 @@ import { User } from 'src/user/entities/user.entity'
 import { AddTodoItemInput } from './dto/add-todo-item.input'
 import { TodoItemsInput } from './dto/todo-itmes.input'
 import { TodoItemsOutput } from './dto/todo-itmes.output'
+import { UpdateTodoItemInput } from './dto/update-todo-item.input'
 import { TodoDocument, TodoItem } from './entities/todo-item.entity'
 
 @Injectable()
@@ -24,7 +25,6 @@ export class TodoItemService {
       todoListId,
       content,
       status = TodoStatus.IN_PROGRESS,
-      tags = [],
       dueDateTime = null,
     }: AddTodoItemInput,
     ownerId
@@ -32,7 +32,7 @@ export class TodoItemService {
     const newTodoItem = await new this.todoItemModel({
       content,
       status,
-      tags,
+      tagIds: [],
       dueDateTime,
     }).save()
     await this.todoListService.addTodoItemToList(
@@ -42,6 +42,7 @@ export class TodoItemService {
     )
     return newTodoItem
   }
+
   async getTodoItems(
     input: TodoItemsInput,
     user: User
@@ -55,5 +56,27 @@ export class TodoItemService {
   }
   async getTodoItem(id: string): Promise<TodoItem> {
     return await this.todoItemModel.findById(id)
+  }
+
+  async updateTodoItem(
+    { id, update }: UpdateTodoItemInput,
+    ownerId
+  ): Promise<TodoItem> {
+    //TODO: Unit test for owner authorization
+    const updatedTodoItem = await this.todoItemModel
+      .findOneAndUpdate(
+        {
+          id,
+          todoList: {
+            owners: [ownerId],
+          },
+        },
+        update,
+        {
+          new: true, // Return UPDATED document
+        }
+      )
+      .exec()
+    return updatedTodoItem
   }
 }
