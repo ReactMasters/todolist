@@ -16,7 +16,7 @@ import { TodoItemService } from './todo-item.service'
 describe('TodoItemService', () => {
   let service: TodoListService
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [
         ConfigModule.forRoot({

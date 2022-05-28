@@ -1,8 +1,10 @@
+import { join } from 'path'
+
 import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
 import { GraphQLModule } from '@nestjs/graphql'
 import { MongooseModule } from '@nestjs/mongoose'
-import { join } from 'path'
+
 import { ALLOW_ORIGIN_REGEX } from './constants'
 import { TagModule } from './tag/tag.module'
 import { TodoItemModule } from './todo-item/todo-item.module'
