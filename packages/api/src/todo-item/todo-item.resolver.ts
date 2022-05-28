@@ -9,6 +9,8 @@ import { AddTodoItemInput } from './dto/add-todo-item.input'
 import { AddTodoItemOutput } from './dto/add-todo-item.output'
 import { TodoItemsInput } from './dto/todo-itmes.input'
 import { TodoItemsError, TodoItemsOutput } from './dto/todo-itmes.output'
+import { UpdateTodoItemInput } from './dto/update-todo-item.input'
+import { UpdateTodoItemOutput } from './dto/update-todo-item.output'
 import { TodoItem } from './entities/todo-item.entity'
 import { TodoItemService } from './todo-item.service'
 
@@ -60,6 +62,24 @@ export class TodoItemResolver {
     } catch (error) {
       // todo : logging errors
       return null
+    }
+  }
+
+  @Mutation(() => UpdateTodoItemOutput)
+  async updateTodoItem(
+    @Args('updateTodoItemInput') updateTodoItemInput: UpdateTodoItemInput,
+    @CurrentUser() user?: User
+  ): Promise<typeof UpdateTodoItemOutput> {
+    try {
+      const todoItem = await this.todoService.updateTodoItem(
+        updateTodoItemInput,
+        user?.id
+      )
+      return {
+        todoItem,
+      }
+    } catch (error) {
+      return { message: error?.message ?? '' }
     }
   }
 }
