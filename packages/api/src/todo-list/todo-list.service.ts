@@ -22,7 +22,6 @@ export class TodoListService {
     return await this.TodoListModel.find({ owners: userId })
       .populate('todos')
       .populate('owners')
-      .lean()
   }
 
   async findTodoList(id: string, ownerId: string): Promise<TodoList> {

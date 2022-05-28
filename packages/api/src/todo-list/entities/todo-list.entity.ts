@@ -9,7 +9,7 @@ import { User } from 'src/user/entities/user.entity'
 export type TodoListDocument = TodoList & mongoose.Document
 
 @ObjectType()
-@Schema()
+@Schema({ toObject: { virtuals: true }, timestamps: true })
 export class TodoList extends BaseEntity {
   @Field(() => String)
   @Prop()

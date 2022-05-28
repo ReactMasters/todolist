@@ -2,28 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type TodoItem {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  deletedAt: DateTime
-  content: String!
-  status: TodoStatus!
-  tags: [Tag!]!
-  dueDateTime: DateTime
-  todoList: TodoList!
-}
-
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
-
-enum TodoStatus {
-  IN_PROGRESS
-  COMPLETED
-}
-
 type User {
   id: ID!
   createdAt: DateTime!
@@ -33,15 +11,10 @@ type User {
   lastLoginAt: DateTime
 }
 
-type TodoList {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  deletedAt: DateTime
-  name: String!
-  todos: [TodoItem!]!
-  owners: [User!]!
-}
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
 
 type Tag {
   id: ID!
@@ -64,6 +37,33 @@ type ListTagsOutput {
   tags: [Tag!]!
 }
 
+type TodoItem {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+  content: String!
+  status: TodoStatus!
+  tags: [Tag!]!
+  dueDateTime: DateTime
+  todoList: TodoList!
+}
+
+enum TodoStatus {
+  IN_PROGRESS
+  COMPLETED
+}
+
+type TodoList {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+  name: String!
+  todos: [TodoItem!]!
+  owners: [User!]!
+}
+
 type AddTodoListOutput {
   success: Boolean!
   message: String
@@ -78,6 +78,7 @@ type Query {
   todoItems(todoItemsInput: TodoItemsInput!): TodoItemsOutput!
   todoItem(id: String!): TodoItem
   findTodoList(findTodoListInput: FindTodoListInput!): FindTodoListOutput!
+  myTodoLists: MyTodoListsOutput!
 }
 
 union MeOutput = MeSuccess | MeError
@@ -119,6 +120,16 @@ type FindTodoListError {
 
 input FindTodoListInput {
   id: String!
+}
+
+union MyTodoListsOutput = MyTodoListsSuccess | MyTodoListsError
+
+type MyTodoListsSuccess {
+  todoLists: [TodoList!]
+}
+
+type MyTodoListsError {
+  message: String!
 }
 
 type Mutation {
