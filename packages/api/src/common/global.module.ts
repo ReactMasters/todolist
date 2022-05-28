@@ -24,4 +24,4 @@ const AllSchemaModule = MongooseModule.forFeature([
   imports: [AllSchemaModule],
   exports: [AllSchemaModule],
 })
-export class DatabaseModule {}
+export class GlobalModule {}

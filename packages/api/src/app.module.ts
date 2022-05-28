@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
 import { MongooseModule } from '@nestjs/mongoose'
 
-import { DatabaseModule } from './common/database.module'
+import { GlobalModule } from './common/global.module'
 import { AppGraphQLModule } from './common/graphql.module'
 import { TagModule } from './tag/tag.module'
 import { TodoItemModule } from './todo-item/todo-item.module'
@@ -16,7 +16,7 @@ import { UserModule } from './user/user.module'
     }),
     MongooseModule.forRoot(process.env.MONGODB_URL),
     AppGraphQLModule.forRoot(),
-    DatabaseModule,
+    GlobalModule,
     UserModule,
     TagModule,
     TodoItemModule,
