@@ -6,5 +6,5 @@ export class AddTodoListInput {
   name: string
 
   @Field(() => [String])
-  owners: string[]
+  inviteeIds: string[]
 }

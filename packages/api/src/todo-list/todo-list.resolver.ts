@@ -21,12 +21,15 @@ export class TodoListResolver {
     private readonly tagService: TagService
   ) {}
 
+  @UseGuards(UserGuard)
   @Mutation(() => AddTodoListOutput)
   async addTodoList(
-    @Args('addTodoListInput') addTodoListInput: AddTodoListInput
+    @Args('addTodoListInput') { name, inviteeIds }: AddTodoListInput,
+    @CurrentUser() user?: User
   ): Promise<AddTodoListOutput> {
     try {
-      const todoList = await this.todoListService.addTodoList(addTodoListInput)
+      const ownerIds = [user.id, ...inviteeIds]
+      const todoList = await this.todoListService.addTodoList(name, ownerIds)
       return {
         success: true,
         todoList,

@@ -4,7 +4,6 @@ import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
 import { TodoStatus } from 'src/todo-item/dto/todo-status.enum'
 import { TodoListService } from 'src/todo-list/todo-list.service'
-import { User } from 'src/user/entities/user.entity'
 
 import { AddTodoItemInput } from './dto/add-todo-item.input'
 import { TodoItemsInput } from './dto/todo-itmes.input'
@@ -27,31 +26,28 @@ export class TodoItemService {
       tags = [],
       dueDateTime = null,
     }: AddTodoItemInput,
-    ownerId
+    userId: string
   ) {
+    const todoList = await this.todoListService.findTodoList(todoListId, userId)
+    if (!todoList) throw Error('Unauthorized')
+
     const newTodoItem = await new this.todoItemModel({
       content,
       status,
       tags,
       dueDateTime,
-    }).save()
-    await this.todoListService.addTodoItemToList(
       todoListId,
-      newTodoItem.id,
-      ownerId
-    )
+    }).save()
+
     return newTodoItem
   }
 
-  async getTodoItems(
-    input: TodoItemsInput,
-    user: User
-  ): Promise<typeof TodoItemsOutput> {
+  async getTodoItems(input: TodoItemsInput): Promise<typeof TodoItemsOutput> {
     const { cursor, size, tagIds, todoListId } = input
     // todo :  this.todolistmodel.find()
-    this.todoItemModel.find({})
+    const items = await this.todoItemModel.find({ todoListId })
     return {
-      items: [],
+      items,
       totalCount: 0,
     }
   }
