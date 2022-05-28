@@ -2,28 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type TodoItem {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  deletedAt: DateTime
-  content: String!
-  status: TodoStatus!
-  tags: [Tag!]!
-  dueDateTime: DateTime
-  todoList: TodoList!
-}
-
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
-
-enum TodoStatus {
-  IN_PROGRESS
-  COMPLETED
-}
-
 type User {
   id: ID!
   createdAt: DateTime!
@@ -33,15 +11,10 @@ type User {
   lastLoginAt: DateTime
 }
 
-type TodoList {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  deletedAt: DateTime
-  name: String!
-  todos: [TodoItem!]!
-  owners: [User!]!
-}
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
 
 type Tag {
   id: ID!
@@ -58,10 +31,37 @@ type AddTagOutput {
   tag: Tag
 }
 
-type ListTagsOutput {
+type TagsOutput {
   success: Boolean!
   message: String
   tags: [Tag!]!
+}
+
+type TodoItem {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+  content: String!
+  status: TodoStatus!
+  tags: [Tag!]!
+  dueDateTime: DateTime
+  todoList: TodoList!
+}
+
+enum TodoStatus {
+  IN_PROGRESS
+  COMPLETED
+}
+
+type TodoList {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+  name: String!
+  todos: [TodoItem!]!
+  owners: [User!]!
 }
 
 type AddTodoListOutput {
@@ -74,7 +74,7 @@ type Query {
   me: MeOutput!
   users: [User!]!
   user(id: String!): User!
-  listTags: ListTagsOutput!
+  tags: TagsOutput!
   todoItems(todoItemsInput: TodoItemsInput!): TodoItemsOutput!
   todoItem(id: String!): TodoItem
   findTodoList(findTodoListInput: FindTodoListInput!): FindTodoListOutput!
@@ -126,6 +126,7 @@ type Mutation {
   signin(signinInput: SigninInput!): SigninOutput!
   addTag(addTagInput: AddTagInput!): AddTagOutput!
   addTodoItem(addTodoItemInput: AddTodoItemInput!): AddTodoItemOutput!
+  updateTodoItem(updateTodoItemInput: UpdateTodoItemInput!): UpdateTodoItemOutput!
   addTodoList(addTodoListInput: AddTodoListInput!): AddTodoListOutput!
 }
 
@@ -187,6 +188,27 @@ input AddTodoItemInput {
   todoListId: String!
   content: String!
   status: String
+  dueDateTime: DateTime
+}
+
+union UpdateTodoItemOutput = UpdateTodoItemSuccess | UpdateTodoItemError
+
+type UpdateTodoItemSuccess {
+  todoItem: TodoItem!
+}
+
+type UpdateTodoItemError {
+  message: String!
+}
+
+input UpdateTodoItemInput {
+  id: String!
+  update: UpdateInput!
+}
+
+input UpdateInput {
+  content: String
+  tagIds: [ID]
   dueDateTime: DateTime
 }
 

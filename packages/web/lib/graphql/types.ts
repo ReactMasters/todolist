@@ -78,13 +78,6 @@ export type FindTodoListSuccess = {
   todoList?: Maybe<TodoList>
 }
 
-export type ListTagsOutput = {
-  __typename?: 'ListTagsOutput'
-  message?: Maybe<Scalars['String']>
-  success: Scalars['Boolean']
-  tags: Array<Tag>
-}
-
 export type MeError = {
   __typename?: 'MeError'
   message: Scalars['String']
@@ -104,6 +97,7 @@ export type Mutation = {
   addTodoList: AddTodoListOutput
   signin: SigninOutput
   signup: SignupOutput
+  updateTodoItem: UpdateTodoItemOutput
 }
 
 export type MutationAddTagArgs = {
@@ -126,11 +120,15 @@ export type MutationSignupArgs = {
   signupInput: SignupInput
 }
 
+export type MutationUpdateTodoItemArgs = {
+  updateTodoItemInput: UpdateTodoItemInput
+}
+
 export type Query = {
   __typename?: 'Query'
   findTodoList: FindTodoListOutput
-  listTags: ListTagsOutput
   me: MeOutput
+  tags: TagsOutput
   todoItem?: Maybe<TodoItem>
   todoItems: TodoItemsOutput
   user: User
@@ -204,6 +202,13 @@ export type Tag = {
   updatedAt: Scalars['DateTime']
 }
 
+export type TagsOutput = {
+  __typename?: 'TagsOutput'
+  message?: Maybe<Scalars['String']>
+  success: Scalars['Boolean']
+  tags: Array<Tag>
+}
+
 export type TodoItem = {
   __typename?: 'TodoItem'
   content: Scalars['String']
@@ -249,6 +254,29 @@ export type TodoList = {
 export enum TodoStatus {
   Completed = 'COMPLETED',
   InProgress = 'IN_PROGRESS',
+}
+
+export type UpdateInput = {
+  content?: Maybe<Scalars['String']>
+  dueDateTime?: Maybe<Scalars['DateTime']>
+  tagIds?: Maybe<Array<Maybe<Scalars['ID']>>>
+}
+
+export type UpdateTodoItemError = {
+  __typename?: 'UpdateTodoItemError'
+  message: Scalars['String']
+}
+
+export type UpdateTodoItemInput = {
+  id: Scalars['String']
+  update: UpdateInput
+}
+
+export type UpdateTodoItemOutput = UpdateTodoItemError | UpdateTodoItemSuccess
+
+export type UpdateTodoItemSuccess = {
+  __typename?: 'UpdateTodoItemSuccess'
+  todoItem: TodoItem
 }
 
 export type User = {
