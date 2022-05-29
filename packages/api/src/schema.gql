@@ -25,6 +25,33 @@ type Tag {
   owner: User!
 }
 
+type TodoList {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+  name: String!
+  todos: [TodoItem!]!
+  owners: [User!]!
+}
+
+type TodoItem {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+  content: String!
+  status: TodoStatus!
+  tags: [Tag!]!
+  dueDateTime: DateTime
+  todoList: TodoList!
+}
+
+enum TodoStatus {
+  IN_PROGRESS
+  COMPLETED
+}
+
 type AddTagOutput {
   success: Boolean!
   message: String
@@ -118,9 +145,7 @@ union SignupOutput = SignupSuccess | SignupError
 type SignupSuccess {
   user: User!
 
-  """
-  JWT when create user success
-  """
+  """JWT when create user success"""
   token: String!
   todoList: TodoList!
 }
@@ -130,14 +155,10 @@ type SignupError {
 }
 
 input SignupInput {
-  """
-  user email
-  """
+  """user email"""
   email: String!
 
-  """
-  user password
-  """
+  """user password"""
   password: String!
 }
 
@@ -152,14 +173,10 @@ type SigninError {
 }
 
 input SigninInput {
-  """
-  user email
-  """
+  """user email"""
   email: String!
 
-  """
-  user password
-  """
+  """user password"""
   password: String!
 }
 
