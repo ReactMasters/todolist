@@ -2,13 +2,9 @@ import { ConfigModule } from '@nestjs/config'
 import { MongooseModule } from '@nestjs/mongoose'
 import { Test, TestingModule } from '@nestjs/testing'
 
-import {
-  TodoList,
-  TodoListSchema,
-} from 'src/todo-list/entities/todo-list.entity'
+import { GlobalModule } from 'src/common/global.module'
 import { TodoListService } from 'src/todo-list/todo-list.service'
 
-import { User, UserSchema } from './entities/user.entity'
 import { UserResolver } from './user.resolver'
 import { UserService } from './user.service'
 describe('UserResolver', () => {
@@ -21,10 +17,7 @@ describe('UserResolver', () => {
           isGlobal: true,
         }),
         MongooseModule.forRoot(process.env.MONGODB_URL),
-        MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
-        MongooseModule.forFeature([
-          { name: TodoList.name, schema: TodoListSchema },
-        ]),
+        GlobalModule,
       ],
       providers: [UserResolver, UserService, TodoListService],
     }).compile()

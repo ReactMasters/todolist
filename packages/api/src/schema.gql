@@ -25,16 +25,14 @@ type Tag {
   owner: User!
 }
 
-type AddTagOutput {
-  success: Boolean!
-  message: String
-  tag: Tag
-}
-
-type ListTagsOutput {
-  success: Boolean!
-  message: String
-  tags: [Tag!]!
+type TodoList {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+  name: String!
+  todos: [TodoItem!]!
+  owners: [User!]!
 }
 
 type TodoItem {
@@ -54,14 +52,16 @@ enum TodoStatus {
   COMPLETED
 }
 
-type TodoList {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  deletedAt: DateTime
-  name: String!
-  todos: [TodoItem!]!
-  owners: [User!]!
+type AddTagOutput {
+  success: Boolean!
+  message: String
+  tag: Tag
+}
+
+type ListTagsOutput {
+  success: Boolean!
+  message: String
+  tags: [Tag!]!
 }
 
 type AddTodoListOutput {
@@ -203,5 +203,5 @@ input AddTodoItemInput {
 
 input AddTodoListInput {
   name: String!
-  owners: [String!]!
+  inviteeIds: [String!]!
 }

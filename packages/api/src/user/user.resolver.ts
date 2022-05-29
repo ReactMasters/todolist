@@ -1,7 +1,6 @@
 import { UseGuards } from '@nestjs/common'
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql'
 
-import { AddTodoListInput } from 'src/todo-list/dto/add-todo-list.input'
 import { TodoListService } from 'src/todo-list/todo-list.service'
 
 import { MeOutput } from './dto/me.output'
@@ -28,14 +27,11 @@ export class UserResolver {
   ): Promise<typeof SignupOutput> {
     try {
       const newUser = await this.userService.create(signupInput)
-      const defaultTodoListInput: AddTodoListInput = {
-        name: DEFAULT_TODO_LIST_NAME,
-        owners: [newUser.user.id],
-      }
-      const defaultTodoList = await this.todoListService.addTodoList(
-        defaultTodoListInput
-      )
 
+      const defaultTodoList = await this.todoListService.addTodoList(
+        DEFAULT_TODO_LIST_NAME,
+        [newUser.user.id]
+      )
       return {
         ...newUser,
         todoList: defaultTodoList,

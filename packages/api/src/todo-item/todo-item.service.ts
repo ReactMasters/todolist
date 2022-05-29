@@ -4,18 +4,17 @@ import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
 import { TodoStatus } from 'src/todo-item/dto/todo-status.enum'
 import { TodoListService } from 'src/todo-list/todo-list.service'
-import { User } from 'src/user/entities/user.entity'
 
 import { AddTodoItemInput } from './dto/add-todo-item.input'
 import { TodoItemsInput } from './dto/todo-itmes.input'
 import { TodoItemsOutput } from './dto/todo-itmes.output'
-import { TodoDocument, TodoItem } from './entities/todo-item.entity'
+import { TodoItemDocument, TodoItem } from './entities/todo-item.entity'
 
 @Injectable()
 export class TodoItemService {
   constructor(
     @InjectModel(TodoItem.name)
-    private readonly todoItemModel: Model<TodoDocument>,
+    private readonly todoItemModel: Model<TodoItemDocument>,
     private readonly todoListService: TodoListService
   ) {}
 
@@ -27,29 +26,28 @@ export class TodoItemService {
       tags = [],
       dueDateTime = null,
     }: AddTodoItemInput,
-    ownerId
+    userId: string
   ) {
+    const todoList = await this.todoListService.findTodoList(todoListId, userId)
+    if (!todoList) throw Error('Unauthorized')
+
     const newTodoItem = await new this.todoItemModel({
       content,
       status,
       tags,
       dueDateTime,
-    }).save()
-    await this.todoListService.addTodoItemToList(
       todoListId,
-      newTodoItem.id,
-      ownerId
-    )
+    }).save()
+
     return newTodoItem
   }
-  async getTodoItems(
-    input: TodoItemsInput,
-    user: User
-  ): Promise<typeof TodoItemsOutput> {
+
+  async getTodoItems(input: TodoItemsInput): Promise<typeof TodoItemsOutput> {
     const { cursor, size, tagIds, todoListId } = input
     // todo :  this.todolistmodel.find()
+    const items = await this.todoItemModel.find({ todoListId })
     return {
-      items: [],
+      items,
       totalCount: 0,
     }
   }

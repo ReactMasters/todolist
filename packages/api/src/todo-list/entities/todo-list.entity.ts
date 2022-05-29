@@ -16,9 +16,6 @@ export class TodoList extends BaseEntity {
   name: string
 
   @Field(() => [TodoItem])
-  @Prop({
-    type: [{ type: mongoose.Schema.Types.ObjectId, ref: TodoItem.name }],
-  })
   todos: TodoItem[]
 
   @Field(() => [User])

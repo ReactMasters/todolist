@@ -40,7 +40,7 @@ export class TodoItemResolver {
     try {
       // check isMine
       if (!user) throw Error('No authorized')
-      const result = await this.todoService.getTodoItems(todoItemsInput, user)
+      const result = await this.todoService.getTodoItems(todoItemsInput)
       return result
     } catch (error) {
       return { message: error?.message ?? '' } as TodoItemsError
